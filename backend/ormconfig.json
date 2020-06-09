@@ -1,0 +1,13 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "docker",
+  "database": "reactcycle",
+  "entities": ["dist/**/*.entity.js"],
+  "migrations": ["src/migration/**/*.ts"],
+  "cli": {
+    "migrationsDir": "src/migration"
+  }     
+}
