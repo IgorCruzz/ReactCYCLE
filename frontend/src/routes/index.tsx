@@ -17,16 +17,16 @@ export default function Routes () {
   return (
     <Router>
       <Switch>
-        <Route path="/home" component={Home} />
-        <Route path="/pecas" component={Part} />
-        <Route path="/bikes" component={Bike} />
-        <Route path="/equipamentos" component={Equipment} />
-        <Route path="/cadastro" component={Register} />
-        <Route path="/contato" component={Contact} />
-        <Route path="/carrinho" component={Cart} />
-        <Route path="/checkout" component={Checkout} />
-        <Route path="/finalizado" component={Payment} />
-        <Route path="/busca" component={SearchList} />
+        <Route exact path="/" component={Home} />
+        <Route exact={false} path="/pecas" component={Part} />
+        <Route exact={false} path="/bikes" component={Bike} />
+        <Route exact={false} path="/equipamentos" component={Equipment} />
+        <Route exact={false} path="/cadastro" component={Register} />
+        <Route exact={false} path="/contato" component={Contact} />
+        <Route exact={false} path="/carrinho" component={Cart} />
+        <Route exact={false} path="/checkout" component={Checkout} />
+        <Route exact={false} path="/finalizado" component={Payment} />
+        <Route exact={false} path="/busca" component={SearchList} />
       </Switch>
     </Router>
   )
