@@ -75,7 +75,7 @@ const Header: React.FC = () => {
 
         </NavBar>
 
-        <Link to="/home">
+        <Link to="/">
           <img id="coroa" src={coroa} alt="coroa" />
           <img id="logo" src={logo} alt="logo" />
         </Link>
