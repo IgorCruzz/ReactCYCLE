@@ -1,11 +1,12 @@
 import { all, call, takeLatest, put } from 'redux-saga/effects'
 import { RepositoriesTypes } from './types'
+import { AnyAction } from 'redux'
 import api from '../../../../services/api'
 import { toast } from 'react-toastify'
 
 import { signUpSuccess, signUpFailure } from './actions'
 
-export function * store (action: any) {
+export function * store (action: AnyAction) {
   try {
     yield call(api.post, 'users', action.payload.data)
 

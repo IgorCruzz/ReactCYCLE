@@ -107,6 +107,11 @@ export const Content = styled.div`
   }
 `
 export const NoProduct = styled.div`
+  @media(max-width: 400px){
+    display: flex;
+    text-align:center;
+  }
+
   width: 80%;
   height: 400px;
   padding: 20px;

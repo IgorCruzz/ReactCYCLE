@@ -3,10 +3,11 @@ import { Link, useHistory } from 'react-router-dom'
 import { FaSearch } from 'react-icons/fa'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { RiShoppingCartLine } from 'react-icons/ri'
+import { BsJustify } from 'react-icons/bs'
 import Login from '../../pages/SignIn'
 import logo from '../../assets/logo.png'
 import coroa from '../../assets/coroa.png'
-import { Container, Content, Bar, NavBar, Profile } from './styles'
+import { Container, Content, Bar, NavBar, Profile, Mobile, Main } from './styles'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../store/ducks/repositories/signIn/actions'
 import { searchRequest } from '../../store/ducks/repositories/search/actions'
@@ -30,6 +31,7 @@ const Header: React.FC = () => {
   const signed = useSelector((state: RootState) => state.signIn.signed)
   const profile = useSelector((state: RootState) => state.signIn.profile)
   const ProductCounter = useSelector((state: RootCart) => state.cart.cart)
+  const [main, setMain] = useState(false)
   const [search, setSearch] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
@@ -48,6 +50,26 @@ const Header: React.FC = () => {
       <Content>
 
         <NavBar>
+          <Mobile>
+            <button type="button" onClick={() => setMain(true)}><BsJustify size={35} color="#FFFFFF"/></button>
+
+            {main && (
+              <Main>
+                <button type="button" id="close" onClick={() => setMain(false)}>X</button>
+                <img src={logo} alt="logo"/>
+                <Link to="/equipamentos" onClick={() => setMain(false)}>Equipamentos</Link>
+                <Link to="/pecas" onClick={() => setMain(false)}>Peças</Link>
+                <Link to="/bikes" onClick={() => setMain(false)}>Bicicletas</Link>
+                <Link to="/contato" onClick={() => setMain(false)}>Contato</Link>
+                <button
+                  type="button"
+                  onClick={() => setOpen(true)}
+                >Entrar</button>
+                <Link to="/cadastro">Cadastrar</Link>
+              </Main>
+            )}
+
+          </Mobile>
 
           <main>
             <Link to="/equipamentos">Equipamentos</Link>
@@ -75,15 +97,9 @@ const Header: React.FC = () => {
 
         </NavBar>
 
-        <Link to="/">
-          <img id="coroa" src={coroa} alt="coroa" />
-          <img id="logo" src={logo} alt="logo" />
-        </Link>
-
       </Content>
       <Bar>
         <div>
-
           <input type="search"
             value={search}
             onChange={e => setSearch(e.target.value)} />
@@ -91,7 +107,7 @@ const Header: React.FC = () => {
         </div>
 
         <span>
-          <Link to="/carrinho">Ver Carrinho <RiShoppingCartLine size={60}/></Link>
+          <Link to="/carrinho"><p>Ver Carrinho</p><RiShoppingCartLine size={60}/></Link>
           {ProductCounter.length !== 0 ? (<strong>{ProductCounter.length}</strong>) : null }
         </span>
       </Bar>

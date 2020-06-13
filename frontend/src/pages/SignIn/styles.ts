@@ -10,7 +10,9 @@ const login = keyframes`
 `
 
 export const Container = styled.div`
+  border: 1px solid #777777;
   position: absolute;
+  z-index: 2;
   right: 40px;
   width: 300px;
   height: 240px;
@@ -18,8 +20,6 @@ export const Container = styled.div`
   background: #FFFFFF;
   border-radius: 14px;
   animation: ${login} 0.1s linear;
-
-
 
   form {
     display: flex;

@@ -1,20 +1,12 @@
 import React, { FunctionComponent } from 'react'
-import { RouteComponentProps } from '@reach/router'
-import { Route } from 'react-router-dom'
+import { Route, RouteProps } from 'react-router-dom'
 import Layout from '../pages/_layout/default'
 
-type Props = {
-  component: FunctionComponent
-  exact: boolean
-} & RouteComponentProps
-
-const RouteWrapper : FunctionComponent<Props> = ({
+const RouteWrapper : FunctionComponent<RouteProps> = ({
   component: Component,
-  exact,
   ...rest
 }: {
-  component: any,
-  exact: boolean
+  component?: any
 }) => {
   return (
     <Route {...rest} render={ props => <Layout> <Component {...props} /> </Layout> } />

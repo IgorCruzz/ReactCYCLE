@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Content } from './styles'
+import { Container, Content, Image } from './styles'
 import logo from '../../assets/logo.png'
 import dh from '../../assets/dh.png'
 
@@ -24,8 +24,10 @@ export const Footer: React.FC = () => {
             <p>Rua dr.oliveira, 819 - Teresópolis/RJ</p>
           </div>
         </article>
-        <img src={dh} alt="dh" />
-        <img src={logo} alt="logo" />
+        <Image>
+          <img src={dh} alt="dh" />
+          <img src={logo} alt="logo" />
+        </Image>
       </Content>
     </Container>
   )

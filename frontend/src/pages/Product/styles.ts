@@ -3,7 +3,7 @@ import { lighten } from 'polished'
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background: rgba(0 ,0 , 0, 0.5);
   position: fixed;
   top: 0;
@@ -24,6 +24,18 @@ const animate = keyframes`
 `
 
 export const Content = styled.div`
+ @media(max-width: 360px){
+      height: 100vh;
+    }
+  @media(max-width: 700px){
+    width: 100%;
+
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   padding: 20px;
   width: 800px;
   animation: ${animate} 0.1s linear;
@@ -44,10 +56,23 @@ export const Content = styled.div`
   }
 
   img {
+    @media(max-width: 360px){
+      height: 50px;
+      width: 50px;
+    }
+
+    @media(max-width: 900px){
+      margin-top: 20px;
+      width: 250px;
+    }
     width: 300px;
   }
 
   aside {
+    @media(max-width: 700px){
+      width: 100%;
+      margin-left: 0;
+    }
     margin-left: 35px;
     display: flex;
     flex-direction: column;
@@ -55,6 +80,9 @@ export const Content = styled.div`
 
     div {
       p {
+      @media(max-width: 700px){
+        text-align:center;
+      }
       font-size: 30px;
       margin-top: 20px;
       font-weight: bold;
@@ -66,10 +94,17 @@ export const Content = styled.div`
     }
 
     h1 {
+      @media(max-width: 700px){
+        margin: 15px;
+      }
       color: #D2691E;
     }
 
     button {
+      @media(max-width: 700px){
+        width: 100%;
+      }
+
       margin-top: 20px;
       width: 100%;
       padding: 10px;
@@ -94,6 +129,9 @@ export const Unavailable = styled.div`
   background: #B22222;
 `
 export const Available = styled.div`
+  @media(max-width: 700px){
+    margin: 10px;
+  }
   display: flex;
   color: green;
 `

@@ -1,9 +1,10 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects'
 import api from '../../../../services/api'
+import { AnyAction } from 'redux'
 import { RepositoriesTypes } from './types'
 import { signInFailure, signInSuccess } from './actions'
 
-export function * store (action: any) {
+export function * store (action: AnyAction) {
   try {
     const response = yield call(api.post, 'session', action.payload.data)
 

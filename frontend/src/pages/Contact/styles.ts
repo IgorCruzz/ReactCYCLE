@@ -29,6 +29,10 @@ export const Content = styled.div`
 
 
   form {
+    @media(max-width: 400px){
+      width: 100%;
+    }
+
     width: 50%;
     display: flex;
 

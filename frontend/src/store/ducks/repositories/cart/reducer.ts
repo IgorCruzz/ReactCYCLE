@@ -1,6 +1,6 @@
 import produce from 'immer'
-import { RepositoriesTypes } from './types'
-
+import { RepositoriesTypes, Cart } from './types'
+import { AnyAction } from 'redux'
 interface Teste {
   cart: any
 }
@@ -9,11 +9,11 @@ const INITIAL_VALUES: Teste = {
   cart: []
 }
 
-export default function CartA (state = INITIAL_VALUES, action: any) {
+export default function CartA (state = INITIAL_VALUES, action: AnyAction) {
   return produce(state, draft => {
     switch (action.type) {
       case RepositoriesTypes.ADD_PRODUCT: {
-        const productIndex = draft.cart.findIndex((product: any) => product.id === action.payload.data.id)
+        const productIndex = draft.cart.findIndex((product: Cart) => product.id === action.payload.data.id)
 
         if (productIndex >= 0) {
           draft.cart[productIndex].amount += 1
@@ -27,7 +27,7 @@ export default function CartA (state = INITIAL_VALUES, action: any) {
         break
       }
       case RepositoriesTypes.REMOVE_PRODUCT: {
-        const productIndex = draft.cart.findIndex((product: any) => product.id === action.payload.id)
+        const productIndex = draft.cart.findIndex((product: Cart) => product.id === action.payload.id)
 
         if (productIndex >= 0) {
           draft.cart.splice(productIndex, 1)
@@ -35,7 +35,7 @@ export default function CartA (state = INITIAL_VALUES, action: any) {
         break
       }
       case RepositoriesTypes.INCREMENT_AMOUNT: {
-        const productIndex = draft.cart.findIndex((product: any) => product.id === action.payload.id)
+        const productIndex = draft.cart.findIndex((product: Cart) => product.id === action.payload.id)
 
         if (draft.cart[productIndex].amount < draft.cart[productIndex].quantity) {
           draft.cart[productIndex].amount += 1
@@ -47,7 +47,7 @@ export default function CartA (state = INITIAL_VALUES, action: any) {
         break
       }
       case RepositoriesTypes.DECREMENT_AMOUNT: {
-        const productIndex = draft.cart.findIndex((product: any) => product.id === action.payload.id)
+        const productIndex = draft.cart.findIndex((product: Cart) => product.id === action.payload.id)
 
         if (draft.cart[productIndex].amount > 1) {
           draft.cart[productIndex].amount -= 1

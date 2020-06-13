@@ -42,6 +42,12 @@ export const Content = styled.div`
   }
 
   #tables {
+    @media(max-width: 700px){
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
     display: flex;
   }
 
@@ -89,11 +95,26 @@ export const Content = styled.div`
 `
 
 export const Title = styled.div`
+  @media(max-width: 700px){
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    small {
+      margin-top: 10px;
+      text-align: center;
+    }
+  }
+
   margin-bottom: 25px;
   display: flex;
   align-items: center;
 
   h4 {
+    @media(max-width: 400px){
+      border-right: 0;
+    }
     padding-right: 10px;
     border-right: 1px solid #777777;
   }
@@ -110,6 +131,11 @@ export const DataAccess = styled.div`
         }
 
     #tabela {
+      @media(max-width: 700px){
+          width: 100%;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
         grid-gap: 10px;
@@ -130,6 +156,9 @@ export const DataAccess = styled.div`
       }
 
       input {
+        @media(max-width: 700px){
+          width: 100%;
+        }
         width: 100%;
       }
 
@@ -149,7 +178,6 @@ export const AccessTypes = styled.div`
   }
 
   #teste {
-
     display: flex;
     align-items: center;
 
@@ -166,8 +194,11 @@ export const AccessTypes = styled.div`
 
 `
 export const PersonalData = styled.div`
-  width: 50%;
+  @media(max-width: 700px){
+    width: 100%;
+  }
 
+  width: 50%;
   background: ${background};
   padding: 20px;
   margin-right: 10px;
@@ -199,13 +230,17 @@ export const PersonalData = styled.div`
 `
 
 export const Address = styled.div`
+   @media(max-width: 700px){
+    width: 100%;
+    margin-top: 15px;
+  }
+
   width: 50%;
   background: ${background};
   padding: 20px;
 
   display: flex;
   flex-direction: column;
-
 
   label {
     font-size: 15px;

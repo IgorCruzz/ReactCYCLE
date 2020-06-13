@@ -2,10 +2,14 @@ import styled from 'styled-components'
 import { darken } from 'polished'
 
 export const Section = styled.div`
+  @media(max-width: 900px){
+    width: 100%;
+  }
+
   background:  #FFFFFF;
   display: flex;
   flex-direction: column;
-  width: 1000px;
+  width: 80%;
 `
 
 export const Image = styled.div`
@@ -22,23 +26,25 @@ export const Image = styled.div`
 `
 export const ProductGrid = styled.div`
   display: grid;
-  grid-template-columns:  repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns:  repeat(auto-fit, minmax(230px, 1fr));
   grid-gap: 20px;
   background: #FFFFFF;
-  width: 100%;
   padding: 20px;
 `
 
 export const ProductGridLarge = styled.div`
+
   display: grid;
   grid-template-columns:  repeat(auto-fit, minmax(350px, 1fr));
   grid-gap: 20px;
   background: #FFFFFF;
-  width: 100%;
+
   padding: 20px;
 `
 
 export const Product = styled.div`
+
+
   width: 250px;
 
   cursor: pointer;
@@ -79,9 +85,12 @@ export const Product = styled.div`
   `
 
 export const Search = styled.div`
+  @media(max-width: 900px){
+    display: none;
+  }
+
   width: 20%;
   margin-right: 30px;
-
 
   span {
     svg {
@@ -184,6 +193,10 @@ width: 100%;
 `
 
 export const WithoutProduct = styled.div`
+  @media(max-width: 400px){
+    text-align: center;
+  }
+
 display: flex;
 align-items: center;
 justify-content: center;
@@ -199,6 +212,9 @@ flex-direction: column;
   }
 `
 export const ProductLarge = styled.div`
+ @media(max-width: 400px){
+    width: 200px;
+  }
  width: 350px;
 
 cursor: pointer;

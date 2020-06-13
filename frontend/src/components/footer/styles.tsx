@@ -2,23 +2,33 @@ import styled from 'styled-components'
 import { darken } from 'polished'
 
 export const Container = styled.div`
+ @media(max-width: 400px){
+    display: flex;
+    flex-direction: column;
+
+  }
+
   width: 100%;
   background: #000000;
-  height: 200px;
   padding: 20px;
 `
 export const Content = styled.div`
+  @media(max-width: 850px){
+    display: flex;
+    flex-direction: column;
+  }
+
   display: flex;
   justify-content: space-between;
-    img {
-      height: 150px;
-      width: 240px;
-      margin-left: 100px;
-    }
+
+
 
     article {
+      @media(max-width: 500px){
+    flex-direction: column;
+  }
+
       display: flex;
-      width: 600px;
       justify-content: space-around;
 
   a {
@@ -59,3 +69,24 @@ export const Content = styled.div`
   }
     }
 `
+export const Image = styled.div`
+  display: flex;
+
+  @media(max-width: 500px){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 25px;
+  }
+
+  img {
+      @media(max-width: 500px){
+        margin: 10px 0;
+        height: 80px;
+        width: 150px;
+      }
+
+      height: 150px;
+      width: 240px;
+    }`
