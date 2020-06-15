@@ -69,11 +69,14 @@ export class ProductService {
     
     const productList = products.map(product => { 
       return {     
-        ...product,
-        avatar_url: `http://localhost:3333/file/${product.avatar_data.name}`      
-        }
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: product.quantity,
+        avatar_url: product.avatar_data.url 
+        }        
+    })    
         
-    })         
   
     return res.json(productList)
   }
