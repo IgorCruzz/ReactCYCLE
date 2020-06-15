@@ -15,8 +15,14 @@ const storageTypes ={
     destination: (req, file, cb) => {
       cb(null, resolve(__dirname, '..', '..', 'tmp', 'uploads'))
     },
-    filename: (req, file, cb) => {
-      cb(null, `${crypto.randomBytes(10).toString('Hex')}${extname(file.originalname)}`)
+    filename: (req, file: any, cb) => {
+      crypto.randomBytes(16, (err, hash) => {
+        file.key = `${hash.toString("hex")}-${file.originalname}`
+
+        cb(null, file.key)
+      })
+
+       
     }
   }),
   s3: multerS3({
@@ -25,7 +31,11 @@ const storageTypes ={
     contentType: multerS3.AUTO_CONTENT_TYPE,
     acl: 'public-read',
     key: (req, file, cb) => {
-      cb(null, `${crypto.randomBytes(10).toString('Hex')}${extname(file.originalname)}`)
+      crypto.randomBytes(16, (err, hash) => {
+        const fileName = `${hash.toString("hex")}-${file.originalname}`
+
+        cb(null, fileName)
+      })
     }
   })
 } 

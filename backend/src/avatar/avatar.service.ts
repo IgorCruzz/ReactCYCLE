@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository, getRepository } from 'typeorm'
+import { Repository } from 'typeorm'
 import { Avatar } from '../entities/avatar.entity'
 import { Response } from 'express'
-import {getConnection} from "typeorm";
+ 
 @Injectable()
 export class AvatarService {
   constructor(
@@ -13,7 +13,7 @@ export class AvatarService {
   
   async store(file: any, res: Response) { 
       
-    const { filename: name, size, mimetype } = file
+    const { originalname: name, size, mimetype, key, location: url = "" } = file
 
     if (size >= 1000000 ) {
       return res.status(400).json({ error: 'Escolha uma foto com tamanho máximo de 1mb' })
@@ -22,15 +22,15 @@ export class AvatarService {
     if(mimetype !== 'image/jpeg' && mimetype !== 'image/png') {
       return res.status(400).json({ error: 'Insira uma imagem em PNG ou JPEG' })
     }
-  
+   
     const avatar = await this.avatarRepository.save({
-      name
+      name,
+      url
     })   
  
-    return res.json({       
-        avatar,
-        url: `http://localhost:3333/file/${name}`      
-    })
+    return res.json(avatar)
+  
+ 
   }
 }
  

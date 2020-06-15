@@ -15,6 +15,9 @@ export class Avatar {
   @Column()
   name: string 
 
+  @Column()
+  url: string
+
   @CreateDateColumn()
   created_at: Date
 

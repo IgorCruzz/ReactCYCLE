@@ -28,9 +28,9 @@ export class ProductService {
   }
 
   async index(req: Request, res: Response): Promise<Response> {
- 
+   
     const { category, page, min, max } = req.query
- 
+    
     const products = await this.productRepository.find({         
       where: { 
         category,
@@ -43,13 +43,11 @@ export class ProductService {
 
     const productList = products.map(product => { 
       return {     
-        ...product,
-        avatar_url: `http://localhost:3333/file/${product.avatar_data.name}`      
-        }
-        
+        ...product          
+        }        
     })    
      
-     
+    
   
     return res.json(productList)
   }
