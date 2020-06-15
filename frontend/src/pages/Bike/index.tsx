@@ -22,7 +22,7 @@ interface Product {
   name: string,
   price: number,
   quantity: number,
-  avatar_url: string,
+  avatar_url: any,
 }
 
 const Home: React.FC = () => {
@@ -37,9 +37,8 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     async function loadProducts () {
-      api.get(`product?category=Bicicletas&page=${page}&min=${min}&max=${max}`).then(response => {
-        setProducts(response.data)
-      })
+      const response = await api.get<any>(`product?category=Bicicletas&page=${page}&min=${min}&max=${max}`)
+      setProducts(response.data)
     }
     loadProducts()
   }, [page, min, max])

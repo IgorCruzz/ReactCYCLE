@@ -20,9 +20,7 @@ const storageTypes ={
         file.key = `${hash.toString("hex")}-${file.originalname}`
 
         cb(null, file.key)
-      })
-
-       
+      })       
     }
   }),
   s3: multerS3({

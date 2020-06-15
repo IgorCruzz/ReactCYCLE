@@ -28,7 +28,7 @@ export class ProductService {
   }
 
   async index(req: Request, res: Response): Promise<Response> {
-   
+  
     const { category, page, min, max } = req.query
     
     const products = await this.productRepository.find({         
@@ -40,10 +40,15 @@ export class ProductService {
       take: 12,
       relations: ['avatar_data']      
     })
+   
 
     const productList = products.map(product => { 
       return {     
-        ...product          
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: product.quantity,
+        avatar_url: product.avatar_data.url 
         }        
     })    
      
