@@ -1,22 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { FaSearch } from 'react-icons/fa'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { RiShoppingCartLine } from 'react-icons/ri'
 import { BsJustify } from 'react-icons/bs'
 import Login from '../../pages/SignIn'
+import { FormHandles } from '@unform/core'
 import logo from '../../assets/logo.png'
-import coroa from '../../assets/coroa.png'
+import { Form } from '@unform/web'
+import { SignIn } from '../../store/ducks/repositories/signIn/types'
+import { Input } from '../input'
 import { Container, Content, Bar, NavBar, Profile, Mobile, Main } from './styles'
 import { useSelector, useDispatch } from 'react-redux'
-import { logout } from '../../store/ducks/repositories/signIn/actions'
+import { logout, signInRequest } from '../../store/ducks/repositories/signIn/actions'
 import { searchRequest } from '../../store/ducks/repositories/search/actions'
+import * as Yup from 'yup'
 
 interface RootState {
   signIn: {
     signed: boolean
     profile: any
   }
+}
+
+interface Errors {
+  [key: string]: string
 }
 
 interface RootCart {
@@ -32,9 +40,11 @@ const Header: React.FC = () => {
   const profile = useSelector((state: RootState) => state.signIn.profile)
   const ProductCounter = useSelector((state: RootCart) => state.cart.cart)
   const [main, setMain] = useState(false)
+  const [login, setLogin] = useState(false)
   const [search, setSearch] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
+  const formRef = useRef<FormHandles>(null)
 
   const handleSearch = () => {
     if (search === '') {
@@ -51,21 +61,21 @@ const Header: React.FC = () => {
 
         <NavBar>
           <Mobile>
-            <button type="button" onClick={() => setMain(true)}><BsJustify size={35} color="#FFFFFF"/></button>
+            <button type="button" id="hamburguer" onClick={() => setMain(true)}><BsJustify size={35} color="#FFFFFF"/></button>
+            <span>
+              <button type="button" onClick={() => setOpen(true)}>Entrar</button>
+              <Link to="/cadastro">Cadastrar</Link>
+            </span>
 
             {main && (
               <Main>
                 <button type="button" id="close" onClick={() => setMain(false)}>X</button>
                 <img src={logo} alt="logo"/>
+
                 <Link to="/equipamentos" onClick={() => setMain(false)}>Equipamentos</Link>
                 <Link to="/pecas" onClick={() => setMain(false)}>Peças</Link>
                 <Link to="/bikes" onClick={() => setMain(false)}>Bicicletas</Link>
                 <Link to="/contato" onClick={() => setMain(false)}>Contato</Link>
-                <button
-                  type="button"
-                  onClick={() => setOpen(true)}
-                >Entrar</button>
-                <Link to="/cadastro">Cadastrar</Link>
               </Main>
             )}
 
@@ -96,7 +106,9 @@ const Header: React.FC = () => {
           )}
 
         </NavBar>
-
+        <div id="logo">
+          <img src={logo} alt="logo" />
+        </div>
       </Content>
       <Bar>
         <div>

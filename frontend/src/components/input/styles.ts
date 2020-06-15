@@ -11,7 +11,6 @@ export const Content = styled.div`
 `
 
 export const ErrorMessage = styled.div`
-
     font-size: 0.7rem;
     color: #B22222;
   ,

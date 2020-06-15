@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-
-import banner from '../../assets/FUNDO.jpg'
+import { darken } from 'polished'
+import banner from '../../assets/FUNDO.png'
 
 export const Container = styled.div`
   width: 100%;
@@ -10,6 +10,7 @@ export const Container = styled.div`
 export const Content = styled.div`
   @media(max-width: 900px){
     height: 200px;
+    background: none;
   }
 
   background: url(${banner}) no-repeat;
@@ -17,6 +18,30 @@ export const Content = styled.div`
   position: relative;
   height: 92vh;
   width: 100%;
+
+  #logo {
+    @media(max-width: 900px){
+      justify-content: center;
+      height: 50%;
+    }
+
+
+    height: 80%;
+
+    display: flex;
+    align-items: center;
+
+    img {
+      @media(max-width: 900px){
+      width: 200px;
+      height: 90%;
+    }
+
+      margin-left: 10px;
+      width: 500px;
+      height: 300px;
+    }
+  }
 
   div {
     button {
@@ -90,11 +115,25 @@ export const Bar = styled.div`
 
     }
     strong {
+      @media(max-width: 900px){
+        background: #00008B;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        top: 2px;
+        right: 10px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
       color: #FFFFFF;
       position: absolute;
       top: 15px;
       right: 20px;
       font-size: 20px;
+
     }
   }
 
@@ -175,18 +214,30 @@ export const Profile = styled.div`
 export const Mobile = styled.span`
   display: none;
   @media(max-width: 900px){
+    background: rgba(30,144,255, 0.9);
+    width: 100%;
     display: flex;
+    justify-content: space-between;
+    border-radius: 30px;
+    align-items: center;
+
+    #hamburguer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+    }
   }
 `
 export const Main = styled.section`
   height: 100%;
   width: 100%;
-  background: rgba(30,144,255, 0.8);
+  background: rgba(30,144,255, 0.9);
   top: 0;
   left: 0;
   z-index: 4;
   position: fixed;
-  padding: 20px;
+
 
   display: flex;
   flex-direction: column;
@@ -197,6 +248,18 @@ export const Main = styled.section`
     width: 200px;
     height: 150px;
     margin-bottom: 45px;
+  }
+
+  a {
+    width: 100%;
+    height: 70px;
+    background: ${darken(0.1, '#1E90FF')};
+    border-top: 1px solid #1E90FF;
+    border-bottom: 1px solid #1E90FF;
+    margin: 15px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
   }
 
   #close {
