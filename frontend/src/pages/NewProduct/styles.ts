@@ -51,7 +51,9 @@ export const Content = styled.div`
     justify-content: center;
 
     #label {
-
+      @media(max-width: 450px){
+        width: 100%;
+      }
       margin-top: 25px;
       margin-left: 10px;
       display: flex;

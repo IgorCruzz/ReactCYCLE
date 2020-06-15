@@ -1,6 +1,6 @@
 import { createTransport } from 'nodemailer'
 import { resolve } from 'path'
-import * as nodemailerhbs from 'nodemailer-express-handlebars'
+import nodemailerhbs from 'nodemailer-express-handlebars'
 import { create } from 'express-handlebars'
  
 

@@ -25,7 +25,8 @@ const animate = keyframes`
 
 export const Content = styled.div`
  @media(max-width: 360px){
-      height: 100vh;
+      height: 100%;
+      padding: 20px;
     }
   @media(max-width: 700px){
     width: 100%;

@@ -40,9 +40,14 @@ export const Content = styled.div`
      margin: 10px;
    }
 
-  table {
+  #tableResponsive {
+    width: 100%;
+    overflow-x: auto;
+    border-spacing: 0;
+
+    table {
     margin: 25px;
-    width: 1000px;
+    width: 100%;
     font-size: 15px;
     border-collapse: collapse;
 
@@ -72,9 +77,14 @@ export const Content = styled.div`
 
 
           td {
-
             padding: 5px;
             div {
+              @media(max-width: 1100px){
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+              }
               width: 100px;
             }
             button {
@@ -105,6 +115,8 @@ export const Content = styled.div`
         }
       }
   }
+  }
+
 `
 export const NoProduct = styled.div`
   @media(max-width: 400px){

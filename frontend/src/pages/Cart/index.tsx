@@ -32,39 +32,41 @@ const Cart: React.FC = () => {
 
             <h1>Carrinho</h1>
 
-            <table>
-              <thead>
-                <tr>
-                  <th>Foto</th>
-                  <th>Produto</th>
-                  <th>Quantidade</th>
-                  <th>Preço</th>
-                  <th>Subtotal</th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product: any) => (
-                  <tr key={product.id}>
-                    <td>
-                      <img src={product.avatar_url} alt="img" />
-                    </td>
-                    <td>{product.name}</td>
-                    <td>
-                      <div>
-                        <button type="button" onClick={() => dispatch(decrementAmount(product.id))}><AiFillMinusCircle /></button>
-                        <input type="number" readOnly value={product.amount} />
-                        <button type="button" onClick={() => dispatch(incrementAmount(product.id))}><AiFillPlusCircle /></button>
-                      </div>
-                    </td>
-                    <td>{Number(product.price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</td>
-                    <td>{Number(product.amount * product.price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</td>
-                    <td> <button type="button"><AiFillCloseCircle size={30} color="#FF0000" onClick={() => dispatch(removeProduct(product.id))} /></button>  </td>
+            <div id="tableResponsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Foto</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                    <th>Subtotal</th>
+                    <th />
                   </tr>
-                ))}
+                </thead>
+                <tbody>
+                  {products.map((product: any) => (
+                    <tr key={product.id}>
+                      <td>
+                        <img src={product.avatar_url} alt="img" />
+                      </td>
+                      <td>{product.name}</td>
+                      <td>
+                        <div>
+                          <button type="button" onClick={() => dispatch(decrementAmount(product.id))}><AiFillMinusCircle /></button>
+                          <input type="number" readOnly value={product.amount} />
+                          <button type="button" onClick={() => dispatch(incrementAmount(product.id))}><AiFillPlusCircle /></button>
+                        </div>
+                      </td>
+                      <td>{Number(product.price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</td>
+                      <td>{Number(product.amount * product.price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</td>
+                      <td> <button type="button"><AiFillCloseCircle size={30} color="#FF0000" onClick={() => dispatch(removeProduct(product.id))} /></button>  </td>
+                    </tr>
+                  ))}
 
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
 
             <span>
               <strong>{products.reduce((sum: number, product: any) => sum + (Number(product.price) * product.amount), 0).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</strong>
