@@ -2,6 +2,10 @@ import styled from 'styled-components'
 import { lighten } from 'polished'
 
 export const Container = styled.div`
+  @media(max-width: 700px){
+    padding: 5px;
+  }
+
   width: 100%;
   padding: 40px;
   justify-content: center;
@@ -29,8 +33,8 @@ export const Content = styled.div`
 
 
   form {
-    @media(max-width: 400px){
-      width: 100%;
+    @media(max-width: 900px){
+      width: 80%;
     }
 
     width: 50%;
