@@ -34,7 +34,7 @@ const storageTypes ={
   imports: [
     TypeOrmModule.forFeature([Avatar]),
     MulterModule.register({   
-    storage: storageTypes["storage"]
+    storage: storageTypes["s3"]
   })],
   controllers: [AvatarController],
   providers: [AvatarService]
