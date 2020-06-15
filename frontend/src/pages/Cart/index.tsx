@@ -73,7 +73,7 @@ const Cart: React.FC = () => {
             </span>
 
             <div>
-              <Link to="/home">
+              <Link to="/">
                 <AiOutlineArrowLeft />
                       Continuar fazendo compra
               </Link>

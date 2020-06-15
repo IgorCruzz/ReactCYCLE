@@ -74,7 +74,7 @@ export const NewProduct: React.FC<Props> = ({ close, category } : Props) => {
     const response = await api.post('avatar', data)
 
     setUrl(response.data.url)
-    setFileField(response.data.avatar.id)
+    setFileField(response.data.id)
   }
 
   return (
