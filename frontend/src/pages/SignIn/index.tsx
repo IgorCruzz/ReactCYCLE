@@ -3,7 +3,7 @@ import { Form } from '@unform/web'
 import { Container } from './styles'
 import { FormHandles } from '@unform/core'
 import { Input } from '../../components/input'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { signInRequest } from '../../store/ducks/repositories/signIn/actions'
 import { SignIn } from '../../store/ducks/repositories/signIn/types'
 import * as Yup from 'yup'
@@ -12,10 +12,17 @@ interface Errors {
   [key: string]: string
 }
 
+interface RootState {
+  signIn: {
+    signed: boolean
+    profile: any
+  }
+}
+
 const Login: React.FC = () => {
   const dispatch = useDispatch()
   const formRef = useRef<FormHandles>(null)
-
+  const signed = useSelector((state: RootState) => state.signIn.signed)
   const handeSubmit = async (data: SignIn[]) => {
     try {
       const schema = Yup.object().shape({
@@ -39,7 +46,7 @@ const Login: React.FC = () => {
   }
 
   return (
-    <Container>
+    <Container signed={signed}>
       <Form onSubmit={handeSubmit} ref={formRef}>
         <label htmlFor="email">E-mail: </label>
         <Input name="email" id="email" type="email" />

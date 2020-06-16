@@ -221,6 +221,17 @@ export const Mobile = styled.span`
     border-radius: 30px;
     align-items: center;
 
+    strong {
+      color: #FFFFFF;
+      font-size: 18px;
+      margin-right: 15px;
+    }
+
+    button {
+      margin-right: 10px;
+      margin-top: 5px;
+    }
+
     #hamburguer {
       display: flex;
       align-items: center;

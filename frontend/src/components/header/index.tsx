@@ -7,14 +7,10 @@ import { BsJustify } from 'react-icons/bs'
 import Login from '../../pages/SignIn'
 import { FormHandles } from '@unform/core'
 import logo from '../../assets/logo.png'
-import { Form } from '@unform/web'
-import { SignIn } from '../../store/ducks/repositories/signIn/types'
-import { Input } from '../input'
 import { Container, Content, Bar, NavBar, Profile, Mobile, Main } from './styles'
 import { useSelector, useDispatch } from 'react-redux'
-import { logout, signInRequest } from '../../store/ducks/repositories/signIn/actions'
+import { logout } from '../../store/ducks/repositories/signIn/actions'
 import { searchRequest } from '../../store/ducks/repositories/search/actions'
-import * as Yup from 'yup'
 
 interface RootState {
   signIn: {
@@ -58,13 +54,23 @@ const Header: React.FC = () => {
   return (
     <Container>
       <Content>
-
+        {open && < Login />}
         <NavBar>
           <Mobile>
             <button type="button" id="hamburguer" onClick={() => setMain(true)}><BsJustify size={35} color="#FFFFFF"/></button>
-            <span>
-              <button type="button" onClick={() => setOpen(true)}>Entrar</button>
-              <Link to="/cadastro">Cadastrar</Link>
+            <span>{!signed
+              ? (
+                <>
+                  <button type="button" onClick={() => setOpen(true)}>Entrar</button>
+                  <Link to="/cadastro">Cadastrar</Link>
+                </>
+              ) : (
+                <>
+                  <strong>Olá, {profile.name}</strong>
+                  <button type="button" onClick={() => dispatch(logout())}><AiOutlineLogout /></button>
+                </>
+              )
+            }
             </span>
 
             {main && (
@@ -93,7 +99,7 @@ const Header: React.FC = () => {
                 type="button"
                 onClick={() => setOpen(true)}
               >Entrar</button>
-              {open && < Login />}
+
               <Link to="/cadastro">Cadastrar</Link>
             </div>
           )}
