@@ -10,6 +10,10 @@ export const Container = styled.div`
 
 `
 export const Content = styled.div`
+  @media(max-width: 1100px){
+    flex-direction: column;
+  }
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -23,7 +27,7 @@ export const Content = styled.div`
 
     button {
       width: 100%;
-      background: #0000FF;
+      background: #00BFFF;
       border: 0;
       color: #FFFFFF;
       font-weight: bold;
@@ -31,7 +35,7 @@ export const Content = styled.div`
       border-radius: 15px;
 
       &:hover {
-        background: ${lighten(0.1, '#0000FF')};
+        background: ${lighten(0.1, '#00BFFF')};
     }
     }
 

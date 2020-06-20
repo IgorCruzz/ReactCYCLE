@@ -19,6 +19,10 @@ export const Content = styled.div`
   }
 
   h1 {
+    @media(max-width: 700px){
+      text-align: center;
+    }
+
     color: #008000;
   }
 `

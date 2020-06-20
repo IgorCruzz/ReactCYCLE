@@ -27,7 +27,7 @@ export const Content = styled.div`
   }
 
   button {
-    background: #000000;
+    background: #00BFFF;
     color: #FFFFFF;
     font-weight: bold;
     border: 0;
@@ -119,7 +119,7 @@ export const Content = styled.div`
 
 `
 export const NoProduct = styled.div`
-  @media(max-width: 400px){
+  @media(max-width: 750px){
     display: flex;
     text-align:center;
   }

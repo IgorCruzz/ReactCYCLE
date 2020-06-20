@@ -43,10 +43,8 @@ export const ProductGridLarge = styled.div`
 `
 
 export const Product = styled.div`
-
-
   width: 250px;
-
+  justify-self: center;
   cursor: pointer;
   display: flex;
   flex-direction: column;

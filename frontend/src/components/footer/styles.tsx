@@ -28,6 +28,7 @@ export const Content = styled.div`
     flex-direction: column;
   }
 
+      width: 90%;
       display: flex;
       justify-content: space-around;
 
@@ -84,9 +85,9 @@ export const Image = styled.div`
       @media(max-width: 500px){
         margin: 10px 0;
         height: 80px;
-        width: 150px;
+        width: 80px;
       }
-
+      margin: 0 15px;
       height: 150px;
-      width: 240px;
+      width: 150px;
     }`

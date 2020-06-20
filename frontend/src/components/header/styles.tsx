@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { darken } from 'polished'
-import banner from '../../assets/FUNDO.png'
+import banner from '../../assets/FUNDO.jpg'
+import banner2 from '../../assets/fundo2.png'
 
 export const Container = styled.div`
   width: 100%;
@@ -9,8 +10,9 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   @media(max-width: 900px){
-    height: 200px;
-    background: none;
+    height: 300px;
+    background: url(${banner2}) no-repeat;
+     background-size: cover;
   }
 
   background: url(${banner}) no-repeat;
@@ -19,12 +21,23 @@ export const Content = styled.div`
   height: 92vh;
   width: 100%;
 
+  #auth{
+    @media(max-width: 900px){
+      display: none;
+    }
+    background: #00BFFF;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+  }
+
   #logo {
     @media(max-width: 900px){
       justify-content: center;
-      height: 50%;
+      height: 70%;
     }
-
 
     height: 80%;
 
@@ -33,13 +46,13 @@ export const Content = styled.div`
 
     img {
       @media(max-width: 900px){
-      width: 200px;
-      height: 90%;
+      width: 120px;
+      height: 120px;
     }
 
-      margin-left: 10px;
-      width: 500px;
-      height: 300px;
+      margin-left: 20px;
+      width: 400px;
+      height: 400px;
     }
   }
 
@@ -59,7 +72,7 @@ export const Content = styled.div`
       font-weight: bold;
 
       &:hover {
-        color: #00BFFF;;
+        color: ${darken(0.1, '#00BFFF')};
       }
     }
   }
@@ -68,6 +81,9 @@ export const Content = styled.div`
     @media(max-width: 900px){
       display: none;
     }
+    background: #00BFFF;
+    border-radius: 10px;
+    padding: 10px;
     a {
       text-decoration: none;
       color: #FFFFFF;
@@ -201,6 +217,11 @@ export const NavBar = styled.div`
 `
 export const Profile = styled.div`
   display: flex;
+  background: #00BFFF;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 10px;
 
   p {
     color: #FFFFFF;
@@ -208,6 +229,9 @@ export const Profile = styled.div`
   }
 
   button {
+    display:flex;
+    align-items: center;
+    justify-content: center;
     margin-left: 25px;
   }
 `
@@ -220,6 +244,43 @@ export const Mobile = styled.span`
     justify-content: space-between;
     border-radius: 30px;
     align-items: center;
+
+    p {
+        color: #FFFFFF;
+      }
+
+    #search {
+      width: 100%;
+      margin: 20px 0;
+      padding: 10px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+
+
+      input {
+        padding-left: 15px;
+        height: 50px;
+        color: #FFFFFF;
+        border: 1px solid #777777;
+        background: #1C1C1C;
+        width: 90%;
+        border-radius: 10px;
+
+      }
+
+      button {
+        top: 19px;
+        right: 45px;
+        position: absolute;
+        margin-left: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
 
     strong {
       color: #FFFFFF;
@@ -243,7 +304,7 @@ export const Mobile = styled.span`
 export const Main = styled.section`
   height: 100%;
   width: 100%;
-  background: rgba(30,144,255, 0.9);
+  background: rgba(0,0,0, 0.9);
   top: 0;
   left: 0;
   z-index: 4;

@@ -2,14 +2,16 @@ export enum RepositoriesTypes {
   SIGNUP_REQUEST = '@auth/SIGN_UP_REQUEST',
   SIGNUP_FALIURE = '@auth/SIGN_UP_FAILURE',
   SIGNUP_SUCCESS = '@auth/SIGN_UP_SUCCESS',
+  REQUEST_DATA = '@auth/REQUEST_DATA',
+  REQUEST_ADDRESS = '@auth/REQUEST_ADDRESS'
 }
 
-export interface SignUp {
-  name: string
+export interface Data {
+  name?: string
 
-  email: string
+  email?: string
 
-  password: string
+  password?: string
 
   cpf?: string
 
@@ -19,26 +21,66 @@ export interface SignUp {
 
   companyName?: string
 
-  phone: string
+  phone?: string
 
-  gender: string
+  gender?: string
 
-  birth: number
+  birth?: number
+}
 
-  cep: string
+export interface Address {
+  cep?: string
 
-  address: string
+  address?: string
 
-  number: number
+  number?: number
 
-  complement: string
+  complement?: string
 
-  referency: string
+  referency?: string
 
-  neighborhood: string
+  neighborhood?: string
 
-  city: string
+  city?: string
 
-  state: string
+  state?: string
+}
+
+export interface SignUp {
+  name?: string
+
+  email?: string
+
+  password?: string
+
+  cpf?: string
+
+  cnpj?: string
+
+  stateRegistration?: string
+
+  companyName?: string
+
+  phone?: string
+
+  gender?: string
+
+  birth?: number
+
+  cep?: string
+
+  address?: string
+
+  number?: number
+
+  complement?: string
+
+  referency?: string
+
+  neighborhood?: string
+
+  city?: string
+
+  state?: string
 
 }

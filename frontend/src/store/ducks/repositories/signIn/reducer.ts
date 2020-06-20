@@ -17,6 +17,7 @@ export default function signIn (state = INITIAL_VALUES, action: AnyAction) {
       }
       case RepositoriesTypes.LOGOUT: {
         draft.signed = false
+        draft.profile = []
         break
       }
       default:

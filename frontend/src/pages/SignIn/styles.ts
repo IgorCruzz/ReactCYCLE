@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 
 const login = keyframes`
   from {
@@ -10,7 +10,8 @@ const login = keyframes`
 `
 
 interface Props {
-  readonly signed: Boolean
+  open?: boolean
+  close?: boolean
 }
 
 export const Container = styled.div<Props>`
@@ -18,18 +19,25 @@ export const Container = styled.div<Props>`
     width: 100%;
     right: 0;
   }
-  display: ${props => props.signed ? 'none' : 'block'};
+  display: ${props => props.open ? 'block' : 'none'};
+  ${props => props.close && css` display: none`};
   border: 1px solid #777777;
   position: absolute;
   z-index: 2;
-  top: 50px;
+  top: 70px;
   right: 40px;
   width: 300px;
-  height: 240px;
   padding: 20px;
   background: #FFFFFF;
   border-radius: 14px;
   animation: ${login} 0.1s linear;
+
+  #cancel {
+      margin-top: 10px;
+      color: #000000;
+      width: 100%;
+      font-size: 15px;
+    }
 
   form {
     display: flex;
@@ -37,10 +45,12 @@ export const Container = styled.div<Props>`
 
     #button {
       margin-top: 22px;
-      background: #000000;
+      background: #00BFFF;
       font-size: 19px;
       padding: 6px 0;
     }
+
+
 
     label {
       font-size: 18px;

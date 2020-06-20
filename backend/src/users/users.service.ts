@@ -21,7 +21,7 @@ export class UsersService {
   
   async store(req: Request, res: Response): Promise<Response> {
     const schema = Yup.object().shape({
-      name: Yup.string().required().min(5).max(10),
+      name: Yup.string().required().min(5),
       email: Yup.string().email().required(),
       password: Yup.string().required().min(7)
     })

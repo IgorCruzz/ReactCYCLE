@@ -1,6 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Form } from '@unform/web'
 import { Container } from './styles'
+import { RouteComponentProps } from '@reach/router'
 import { FormHandles } from '@unform/core'
 import { Input } from '../../components/input'
 import { useSelector, useDispatch } from 'react-redux'
@@ -19,10 +20,16 @@ interface RootState {
   }
 }
 
-const Login: React.FC = () => {
+interface Props extends RouteComponentProps {
+  open?: boolean
+  close?: () => void
+}
+
+const Login: React.FC<Props> = ({ open, close }: Props) => {
   const dispatch = useDispatch()
   const formRef = useRef<FormHandles>(null)
   const signed = useSelector((state: RootState) => state.signIn.signed)
+
   const handeSubmit = async (data: SignIn[]) => {
     try {
       const schema = Yup.object().shape({
@@ -46,7 +53,7 @@ const Login: React.FC = () => {
   }
 
   return (
-    <Container signed={signed}>
+    <Container open={open}>
       <Form onSubmit={handeSubmit} ref={formRef}>
         <label htmlFor="email">E-mail: </label>
         <Input name="email" id="email" type="email" />
@@ -56,6 +63,7 @@ const Login: React.FC = () => {
 
         <button type="submit" id="button">Entrar</button>
       </Form>
+      <button type="button" id="cancel" onClick={close}>Cancelar</button>
     </Container>
   )
 }

@@ -77,14 +77,14 @@ export const Content = styled.div`
       width: 150px;
       align-self: flex-end;
       border: 0;
-      background: #000000;
+      background: #00BFFF;
       color: #FFFFFF;
       font-weight: bold;
       text-align: center;
       padding: 15px;
 
       &:hover {
-        background: ${lighten(0.1, '#000000')};
+        background: ${lighten(0.1, '#00BFFF')};
       }
 
       svg {

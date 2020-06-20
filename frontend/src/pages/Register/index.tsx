@@ -54,6 +54,8 @@ const Register: React.FC = () => {
       })
 
       await schema.validate(data, { abortEarly: false })
+
+      dispatch(signUpRequest(data))
     } catch (err) {
       const validationErrors: Errors = {}
 
@@ -64,7 +66,6 @@ const Register: React.FC = () => {
         formRef.current?.setErrors(validationErrors)
       }
     }
-    dispatch(signUpRequest(data))
   }
 
   return (
@@ -131,7 +132,7 @@ const Register: React.FC = () => {
 
             <div>
               <div id="teste">
-                <Input type="radio" id="cpf" name="data" value="pessoa fisica" onClick={ () => setCpf(false)} />
+                <Input type="radio" id="cpf" name="data" value="pessoa fisica" onClick={ () => setCpf(false)} checked/>
                 <label htmlFor="cpf">Pessoa Física</label>
               </div>
 

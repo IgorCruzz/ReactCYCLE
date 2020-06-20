@@ -33,6 +33,8 @@ export const Contact: React.FC = () => {
       })
 
       await schema.validate(data, { abortEarly: false })
+
+      dispatch(contactRequest(data))
     } catch (err) {
       const validationErrors: Errors = {}
 
@@ -43,7 +45,6 @@ export const Contact: React.FC = () => {
         formRef.current?.setErrors(validationErrors)
       }
     }
-    dispatch(contactRequest(data))
   }
 
   return (

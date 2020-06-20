@@ -46,6 +46,14 @@ export const NewProduct: React.FC<Props> = ({ close, category } : Props) => {
         quantity,
         category
       }, { abortEarly: false })
+
+      dispatch(createProductRequest({
+        name,
+        price: valueField,
+        quantity,
+        category,
+        avatar: fileField
+      }))
     } catch (err) {
       const validationErrors: Errors = {}
 
@@ -56,13 +64,6 @@ export const NewProduct: React.FC<Props> = ({ close, category } : Props) => {
         formRef.current?.setErrors(validationErrors)
       }
     }
-    dispatch(createProductRequest({
-      name,
-      price: valueField,
-      quantity,
-      category,
-      avatar: fileField
-    }))
   }
 
   const handleChange = async (e: any) => {

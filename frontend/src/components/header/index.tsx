@@ -31,7 +31,6 @@ interface RootCart {
 }
 
 const Header: React.FC = () => {
-  const [open, setOpen] = useState(false)
   const signed = useSelector((state: RootState) => state.signIn.signed)
   const profile = useSelector((state: RootState) => state.signIn.profile)
   const ProductCounter = useSelector((state: RootCart) => state.cart.cart)
@@ -54,14 +53,14 @@ const Header: React.FC = () => {
   return (
     <Container>
       <Content>
-        {open && < Login />}
+        {!signed && <Login open={login} close={() => setLogin(false)} />}
         <NavBar>
           <Mobile>
             <button type="button" id="hamburguer" onClick={() => setMain(true)}><BsJustify size={35} color="#FFFFFF"/></button>
             <span>{!signed
               ? (
                 <>
-                  <button type="button" onClick={() => setOpen(true)}>Entrar</button>
+                  <button type="button" onClick={() => setLogin(true)}>Entrar</button>
                   <Link to="/cadastro">Cadastrar</Link>
                 </>
               ) : (
@@ -76,7 +75,23 @@ const Header: React.FC = () => {
             {main && (
               <Main>
                 <button type="button" id="close" onClick={() => setMain(false)}>X</button>
-                <img src={logo} alt="logo"/>
+                {profile.length !== 0 ? (
+                  <p>Olá, {profile.name}</p>
+                )
+                  : (
+                    <p>Olá, visitante</p>
+                  )
+                }
+                <span id="search">
+                  <input type="search"
+                    value={search}
+                    placeholder="Encontre o produto ideal"
+                    onChange={e => setSearch(e.target.value)} />
+                  <button type="button" onClick={() => {
+                    handleSearch()
+                    setMain(false)
+                  }}><FaSearch color="#1E90FF" size={20}/></button>
+                </span>
 
                 <Link to="/equipamentos" onClick={() => setMain(false)}>Equipamentos</Link>
                 <Link to="/pecas" onClick={() => setMain(false)}>Peças</Link>
@@ -94,10 +109,10 @@ const Header: React.FC = () => {
             <Link to="/contato">Contato</Link>
           </main>
           {!signed && (
-            <div>
+            <div id="auth">
               <button
                 type="button"
-                onClick={() => setOpen(true)}
+                onClick={() => setLogin(true)}
               >Entrar</button>
 
               <Link to="/cadastro">Cadastrar</Link>

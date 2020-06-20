@@ -69,7 +69,7 @@ const Cart: React.FC = () => {
             </div>
 
             <span>
-              <strong>{products.reduce((sum: number, product: any) => sum + (Number(product.price) * product.amount), 0).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</strong>
+              <strong>Total: {products.reduce((sum: number, product: any) => sum + (Number(product.price) * product.amount), 0).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</strong>
             </span>
 
             <div>
@@ -77,7 +77,7 @@ const Cart: React.FC = () => {
                 <AiOutlineArrowLeft />
                       Continuar fazendo compra
               </Link>
-              <button type="button" onClick={() => history.push('/checkout')}>Continuar</button>
+              <button type="button" onClick={() => history.push('/cliente')}>Continuar</button>
             </div>
 
           </Content>
