@@ -40,7 +40,7 @@ export const Content = styled.div`
     }
 
     height: 80%;
-
+    justify-content: center;
     display: flex;
     align-items: center;
 
@@ -53,6 +53,10 @@ export const Content = styled.div`
       margin-left: 20px;
       width: 400px;
       height: 400px;
+
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 
@@ -81,14 +85,24 @@ export const Content = styled.div`
     @media(max-width: 900px){
       display: none;
     }
-    background: #00BFFF;
+    height: 40px;
     border-radius: 10px;
-    padding: 10px;
+    display: flex;
+    align-items: center;
+
+    background: #1E90FF;
     a {
+      padding: 10px;
       text-decoration: none;
       color: #FFFFFF;
       margin: 0 15px;
       font-weight: bold;
+
+      &:hover {
+        border-radius: 20px;
+        background: #00BFFF;
+        color: #FFFFFF;
+      }
     }
   }
 `
@@ -155,18 +169,19 @@ export const Bar = styled.div`
 
   div {
     display: flex;
-    justify-content: center;
-    width: 50%;
+    justify-content: start;
+    width: 80%;
+
 
     input {
     @media(max-width: 900px){
-      max-width: 900px;
+      max-width: 90%;
     }
 
     border-radius: 10px 0 0 20px;
     background: #FFFFFF;
     width: 100%;
-    max-width: 600px;
+    max-width: 60%;
     border: 0;
     height: 40px;
     padding-left: 15px;
@@ -205,13 +220,19 @@ export const Bar = styled.div`
 `
 
 export const NavBar = styled.div`
+  @media(max-width: 900px){
+    background: none;
+  }
+
   padding: 20px;
   display: flex;
   justify-content: space-between;
+  background: #00BFFF;
 
   div{
     @media(max-width: 900px){
       display: none;
+
     }
   }
 `
@@ -233,6 +254,7 @@ export const Profile = styled.div`
     align-items: center;
     justify-content: center;
     margin-left: 25px;
+
   }
 `
 export const Mobile = styled.span`

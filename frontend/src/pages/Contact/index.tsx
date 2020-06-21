@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Form } from '@unform/web'
 import * as Yup from 'yup'
 import { Input, TextArea, PhoneInput } from '../../components/input'
@@ -22,6 +22,11 @@ interface formData {
 export const Contact: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    window.scrollTo(0, 600)
+  }, [])
+
   const handleSubmit = async (data: formData) => {
     try {
       const schema = Yup.object().shape({

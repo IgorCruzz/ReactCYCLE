@@ -1,33 +1,21 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 import { Container, Content } from './styles'
-import ImageGallery from 'react-image-gallery'
-import img1 from '../../assets/BN1.png'
-import img2 from '../../assets/BN2.png'
-import img3 from '../../assets/BN3.png'
-
-const images = [
-  {
-    original: img1,
-    thumbnail: img1
-  },
-  {
-    original: img2,
-    thumbnail: img2
-
-  },
-  {
-    original: img3,
-    thumbnail: img3
-
-  }
-]
+import frete from '../../assets/FRETE.png'
+import bikes from '../../assets/BN1.png'
+import parts from '../../assets/BN2.png'
+import equipments from '../../assets/BN3.png'
 
 const Home: React.FC = () => {
   return (
     <Container>
       <Content>
-        <ImageGallery items={images}/>
+        <img src={frete} alt="frete" />
+
+        <Link to="/bikes"><img src={bikes} alt="bikes" /></Link>
+        <Link to="/pecas"><img src={parts} alt="parts" /></Link>
+        <Link to="/equipamentos"><img src={equipments} alt="equipments" /></Link>
+
       </Content>
     </Container>
   )

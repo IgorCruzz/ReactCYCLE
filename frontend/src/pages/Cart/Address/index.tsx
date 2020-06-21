@@ -50,7 +50,7 @@ const Client: React.FC = () => {
     <Container>
       <Content>
         <strong>Cadastrar endereço</strong>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} ref={formRef}>
           <label htmlFor="cep">CEP</label>
           <Input name="cep" />
 
@@ -78,7 +78,7 @@ const Client: React.FC = () => {
           <button type="submit">Continuar</button>
 
         </Form>
-        <Link to="/"><AiOutlineArrowLeft /> Voltar</Link>
+        <Link to="/cliente"><AiOutlineArrowLeft /> Voltar</Link>
       </Content>
     </Container>
   )

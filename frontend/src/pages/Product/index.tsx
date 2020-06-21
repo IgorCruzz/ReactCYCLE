@@ -1,7 +1,7 @@
 import React from 'react'
 import { RouteComponentProps } from '@reach/router'
 import { Container, Content, Available, Unavailable } from './styles'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addProct } from '../../store/ducks/repositories/cart/actions'
 import { useHistory } from 'react-router-dom'
 import { BsCheck, BsX } from 'react-icons/bs'

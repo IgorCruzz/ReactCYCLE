@@ -5,7 +5,6 @@ import api from '../../../../services/api'
 import { toast } from 'react-toastify'
 import { signUpSuccess, signUpFailure } from './actions'
 import history from '../../../../services/history'
-
 export function * store (action: AnyAction) {
   try {
     yield call(api.post, 'users', action.payload.data)
@@ -22,7 +21,6 @@ export function * create (action: AnyAction) {
   try {
     yield call(api.post, 'users', action.payload.address)
     toast.success('Conta criada com sucesso!!!')
-
     history.push('/checkout')
   } catch (err) {
     toast.error('Erro ao criar a conta')

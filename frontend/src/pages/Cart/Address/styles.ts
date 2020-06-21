@@ -8,6 +8,10 @@ export const Container = styled.div`
   padding: 50px;
 `
 export const Content = styled.div`
+  @media(max-width: 900px){
+    width: 100%;
+  }
+
   width: 50%;
 
   a {

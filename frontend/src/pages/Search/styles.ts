@@ -38,6 +38,11 @@ export const Image = styled.div`
 
 
   img {
+    @media(max-width: 600px){
+      border-radius: 40px 0 40px 0;
+      width: 90%;
+    }
+
     width: 70%;
     align-self: center;
     border-radius: 70px 0 70px 0;
@@ -94,6 +99,10 @@ export const ProductList = styled.div`
   }
   `
 export const NoFound = styled.div`
+  @media(max-width: 450px){
+    text-align: center;
+  }
+
   display: flex;
   align-items: center;
   flex-direction: column;

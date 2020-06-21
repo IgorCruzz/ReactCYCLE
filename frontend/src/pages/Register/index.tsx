@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { AiOutlineMail, AiOutlineUser, AiOutlineLoading } from 'react-icons/ai'
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { BsFillPeopleFill } from 'react-icons/bs'
@@ -28,13 +28,17 @@ const Register: React.FC = () => {
   const [cpf, setCpf] = useState(false)
   const loading = useSelector((state: RootState) => state.auth.loading)
 
+  useEffect(() => {
+    window.scrollTo(0, 600)
+  }, [])
+
   const handleSubmit = async (data : SignUp[]) => {
     try {
       const schema = Yup.object().shape({
         email: Yup.string().email('Insira um e-mail válido').required('Campo obrigatório'),
-        confirmEmail: Yup.string().email('Insira um e-mail válido').required('Campo obrigatório'),
+        confirmEmail: Yup.string().oneOf([Yup.ref('email')], 'Os emails não se correspondem').required('Campo obrigatório'),
         password: Yup.string().min(6, 'A senha precisa ter 6 ou mais caracteres').required('Campo obrigatório'),
-        confirmPassword: Yup.string().required('Campo obrigatório'),
+        confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'As senhas não se correspondem').required('Campo obrigatório'),
         name: Yup.string().min(4, 'O nome precisa ter 4 ou mais caracteres').required('Campo obrigatório'),
         cpf: Yup.string(),
         cnpj: Yup.string(),
@@ -132,12 +136,10 @@ const Register: React.FC = () => {
 
             <div>
               <div id="teste">
-                <Input type="radio" id="cpf" name="data" value="pessoa fisica" onClick={ () => setCpf(false)} checked/>
+                <input type="radio" id="cpf" name="data" onClick={ () => setCpf(false)} defaultChecked />
                 <label htmlFor="cpf">Pessoa Física</label>
-              </div>
 
-              <div id="teste">
-                <Input type="radio" name="data" value="pessoa juridica" onClick={ () => setCpf(true)}/>
+                <input type="radio" id="cnpj" name="data" onClick={ () => setCpf(true)} />
                 <label htmlFor="cnpj">Pessoa Jurídica</label>
               </div>
             </div>

@@ -8,6 +8,9 @@ export const Container = styled.div`
   justify-content: center;
 `
 export const Content = styled.div`
+  @media(max-width: 500px){
+    width: 100%;
+  }
 
   width: 80%;
   padding: 20px;
@@ -19,6 +22,7 @@ export const Content = styled.div`
   div {
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     a {
     text-decoration: none;

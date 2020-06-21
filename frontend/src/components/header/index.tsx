@@ -1,11 +1,10 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { FaSearch } from 'react-icons/fa'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { RiShoppingCartLine } from 'react-icons/ri'
 import { BsJustify } from 'react-icons/bs'
 import Login from '../../pages/SignIn'
-import { FormHandles } from '@unform/core'
 import logo from '../../assets/logo.png'
 import { Container, Content, Bar, NavBar, Profile, Mobile, Main } from './styles'
 import { useSelector, useDispatch } from 'react-redux'
@@ -39,7 +38,6 @@ const Header: React.FC = () => {
   const [search, setSearch] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
-  const formRef = useRef<FormHandles>(null)
 
   const handleSearch = () => {
     if (search === '') {
@@ -128,12 +126,14 @@ const Header: React.FC = () => {
 
         </NavBar>
         <div id="logo">
-          <img src={logo} alt="logo" />
+          <Link to="/"><img src={logo} alt="logo" /></Link>
+
         </div>
       </Content>
       <Bar>
         <div>
           <input type="search"
+            placeholder="Encontre o produto ideal"
             value={search}
             onChange={e => setSearch(e.target.value)} />
           <button type="button" onClick={handleSearch}><FaSearch color="#FFFFFF" size={20}/></button>

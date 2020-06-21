@@ -9,6 +9,7 @@ export function * store (action: AnyAction) {
     const response = yield call(api.post, 'session', action.payload.data)
 
     const user = yield call(api.get, `users/${response.data.id}`)
+    console.log(user)
 
     yield put(signInSuccess(user.data))
   } catch (erro) {

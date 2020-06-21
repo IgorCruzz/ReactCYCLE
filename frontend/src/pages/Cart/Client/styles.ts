@@ -22,6 +22,42 @@ export const Content = styled.div`
     padding: 20px;
     font-size: 15px;
 
+
+
+    #email {
+      @media(max-width: 400px){
+        flex-direction: column;
+      }
+      align-items: center;
+      display: flex;
+
+     span {
+      @media(max-width: 400px){
+         width: 100%;
+       }
+        width: 50%;
+        margin-left: 2px;
+      }
+    }
+
+    #password {
+      @media(max-width: 400px){
+        flex-direction: column;
+      }
+
+      align-items: center;
+      display: flex;
+
+     span {
+       @media(max-width: 400px){
+         width: 100%;
+       }
+        width: 50%;
+        margin-left: 2px;
+      }
+
+    }
+
     #cnpj {
       @media(max-width: 1200px){
         flex-direction: column;

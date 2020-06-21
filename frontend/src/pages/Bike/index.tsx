@@ -30,10 +30,14 @@ const Home: React.FC = () => {
   const [openProduct, setOpenProduct] = useState(false)
   const [products, setProducts] = useState<Product[]>([])
   const [product, setProduct] = useState({ id: 1, avatar_url: '', name: '', price: 0, quantity: 0 })
-  const signed = useSelector((state: rootState) => state.signIn.signed)
+  const profile = useSelector((state: any) => state.signIn.profile)
   const [page, setPage] = useState(1)
   const [min, setMin] = useState(0)
-  const [max, setMax] = useState(999999)
+  const [max, setMax] = useState(999999999999)
+
+  useEffect(() => {
+    window.scrollTo(0, 600)
+  }, [])
 
   useEffect(() => {
     async function loadProducts () {
@@ -48,7 +52,7 @@ const Home: React.FC = () => {
       {open && <NewProduct close={() => setOpen(false)} category="Bicicletas" />}
       {openProduct && <ModalProduct product={product} close={() => setOpenProduct(false)}/>}
       <Search>
-        {signed && (
+        {profile.administrator && (
           <span>
             <button type="button" onClick={ () => setOpen(true)}>
               <AiOutlinePlusSquare />

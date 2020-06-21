@@ -10,11 +10,6 @@ import NewProduct from '../NewProduct'
 import ModalProduct from '../Product'
 import { useSelector } from 'react-redux'
 import api from '../../services/api'
-interface rootState {
-  signIn: {
-    signed: boolean
-  }
-}
 
 interface Product {
   id: number,
@@ -31,9 +26,13 @@ const Equipment: React.FC = () => {
   const [product, setProduct] = useState({ id: 1, avatar_url: '', name: '', price: 0, quantity: 0 })
   const [page, setPage] = useState(1)
   const [min, setMin] = useState(0)
-  const [max, setMax] = useState(999999)
+  const [max, setMax] = useState(999999999999)
 
-  const signed = useSelector((state: rootState) => state.signIn.signed)
+  const profile = useSelector((state: any) => state.signIn.profile)
+
+  useEffect(() => {
+    window.scrollTo(0, 600)
+  }, [])
 
   useEffect(() => {
     async function loadProducts () {
@@ -50,7 +49,7 @@ const Equipment: React.FC = () => {
       {open && <NewProduct close={() => setOpen(false)} category="Equipamentos"/>}
       {openProduct && <ModalProduct product={product} close={() => setOpenProduct(false)}/>}
       <Search>
-        {signed && (
+        {profile.administrator && (
           <span>
             <button type="button" onClick={ () => setOpen(true)}>
               <AiOutlinePlusSquare />

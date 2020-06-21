@@ -12,6 +12,26 @@ interface Props {
 }
 type InputProps = JSX.IntrinsicElements['input'] & Props;
 
+export const Radio: React.FC<InputProps> = ({ name, ...rest }: Props) => {
+  const inputRef = useRef<HTMLInputElement>(null)
+  const { fieldName, registerField, error } = useField(name)
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      path: 'value',
+      ref: inputRef.current
+    })
+  }, [fieldName, registerField])
+
+  return (
+    <Content>
+      <input type="radio" {...rest} id={error ? 'error' : fieldName} />
+      {error && <ErrorMessage>{error}</ErrorMessage> }
+    </Content>
+  )
+}
+
 export const Input: React.FC<InputProps> = ({ name, ...rest } : Props) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const { fieldName, defaultValue = '', registerField, error } = useField(name)

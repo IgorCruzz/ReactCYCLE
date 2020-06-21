@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AiFillPlusCircle, AiFillMinusCircle, AiOutlineArrowLeft, AiFillCloseCircle } from 'react-icons/ai'
 import { FaRegSadTear } from 'react-icons/fa'
 import { Container, Content, NoProduct } from './styles'
@@ -12,10 +12,21 @@ interface rootState {
   }
 }
 
+interface signedState {
+  signIn: {
+    signed: boolean
+  }
+}
+
 const Cart: React.FC = () => {
   const products = useSelector((state: rootState) => state.cart.cart)
+  const signed = useSelector((state: signedState) => state.signIn.signed)
   const dispatch = useDispatch()
   const history = useHistory()
+
+  useEffect(() => {
+    window.scrollTo(0, 600)
+  }, [])
 
   return (
     <Container>
@@ -77,7 +88,10 @@ const Cart: React.FC = () => {
                 <AiOutlineArrowLeft />
                       Continuar fazendo compra
               </Link>
-              <button type="button" onClick={() => history.push('/cliente')}>Continuar</button>
+              <button type="button" onClick={() => {
+                signed ? history.push('/checkout')
+                  : history.push('/cliente')
+              }}>Continuar</button>
             </div>
 
           </Content>

@@ -1,23 +1,16 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { Form } from '@unform/web'
 import { Container } from './styles'
 import { RouteComponentProps } from '@reach/router'
 import { FormHandles } from '@unform/core'
 import { Input } from '../../components/input'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { signInRequest } from '../../store/ducks/repositories/signIn/actions'
 import { SignIn } from '../../store/ducks/repositories/signIn/types'
 import * as Yup from 'yup'
 
 interface Errors {
   [key: string]: string
-}
-
-interface RootState {
-  signIn: {
-    signed: boolean
-    profile: any
-  }
 }
 
 interface Props extends RouteComponentProps {
@@ -28,7 +21,6 @@ interface Props extends RouteComponentProps {
 const Login: React.FC<Props> = ({ open, close }: Props) => {
   const dispatch = useDispatch()
   const formRef = useRef<FormHandles>(null)
-  const signed = useSelector((state: RootState) => state.signIn.signed)
 
   const handeSubmit = async (data: SignIn[]) => {
     try {
@@ -38,18 +30,18 @@ const Login: React.FC<Props> = ({ open, close }: Props) => {
       })
 
       await schema.validate(data, { abortEarly: false })
+
+      dispatch(signInRequest(data))
     } catch (err) {
       const validationErrors: Errors = {}
 
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach(error => {
-          validationErrors[err.path] = error.message
+          validationErrors[error.path] = error.message
         })
         formRef.current?.setErrors(validationErrors)
       }
     }
-
-    dispatch(signInRequest(data))
   }
 
   return (

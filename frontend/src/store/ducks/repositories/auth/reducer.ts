@@ -32,7 +32,6 @@ export default function auth (state = INITIAL_VALUES, action: AnyAction) {
           ...action.payload.address
         }
         action.payload.address = data
-        console.log(action.payload.address)
 
         draft.user = data
         break

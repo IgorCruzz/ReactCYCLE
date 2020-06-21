@@ -19,6 +19,10 @@ export const Image = styled.div`
 
 
   img {
+    @media(max-width: 700px){
+      border-radius: 40px 0 40px 0;
+    }
+
     width: 100%;
     border-radius: 70px 0 70px 0;
   }

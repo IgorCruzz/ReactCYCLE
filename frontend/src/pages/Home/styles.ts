@@ -18,7 +18,13 @@ export const Content = styled.div`
 
   img {
     width: 100%;
+    margin: 20px 0;
+  }
 
+  a {
+    &:hover {
+      opacity: 0.7;
+    }
   }
 
 

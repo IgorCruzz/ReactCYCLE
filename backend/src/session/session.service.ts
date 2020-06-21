@@ -28,11 +28,7 @@ export class SessionService {
 
     if(!comparePassword) {
       return res.status(400).json({ error: 'A senha está incorreta'})
-    }
-
-    if(!user.active) {
-      return res.status(400).json({ error: 'Ative sua conta para poder começar a usa-la'})
-    }
+    }    
 
     const payload = { 
       sub: user.id

@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react'
+import * as Yup from 'yup'
 import { Form } from '@unform/web'
 import { useHistory } from 'react-router-dom'
 import { FormHandles } from '@unform/core'
-import { Input, CpfInput, Select, CnpjInput, BirthInput } from '../../../components/input'
+import { Input, CpfInput, Select, CnpjInput, BirthInput, PhoneInput, Radio } from '../../../components/input'
 import { Container, Content } from './styles'
 import { useDispatch } from 'react-redux'
 import { requestData } from '../../../store/ducks/repositories/auth/actions'
 import { Data } from '../../../store/ducks/repositories/auth/types'
-import * as Yup from 'yup'
 
 interface Errors {
   [key: string]: string
@@ -23,9 +23,9 @@ const Client: React.FC = () => {
     try {
       const schema = Yup.object().shape({
         email: Yup.string().email('Insira um e-mail válido').required('Campo obrigatório'),
-        confirmEmail: Yup.string().email('Insira um e-mail válido').required('Campo obrigatório'),
+        confirmEmail: Yup.string().oneOf([Yup.ref('email')], 'Os e-mails não se correspondem').required('Campo obrigatório'),
         password: Yup.string().min(6, 'A senha precisa ter 6 ou mais caracteres').required('Campo obrigatório'),
-        confirmPassword: Yup.string().required('Campo obrigatório'),
+        confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'As senhas não se correspondem').required('Campo obrigatório'),
         name: Yup.string().min(4, 'O nome precisa ter 4 ou mais caracteres').required('Campo obrigatório'),
         cpf: Yup.string(),
         cnpj: Yup.string(),
@@ -38,8 +38,8 @@ const Client: React.FC = () => {
 
       await schema.validate(data, { abortEarly: false })
 
-      history.push('/endereco')
       dispatch(requestData(data))
+      history.push('/endereco')
     } catch (err) {
       const validationErrors: Errors = {}
 
@@ -47,9 +47,8 @@ const Client: React.FC = () => {
         err.inner.forEach(error => {
           validationErrors[error.path] = error.message
         })
+
         formRef.current?.setErrors(validationErrors)
-        alert('errpr')
-        console.log(validationErrors)
       }
     }
   }
@@ -58,26 +57,41 @@ const Client: React.FC = () => {
     <Container>
       <Content>
         <strong>Seus Dados</strong>
-        <Form onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit}>
           <div id="radio">
-            <Input type="radio" id="cpf" name="data" value="pessoa fisica" onClick={ () => setCpf(false)} checked />
+            <input type="radio" id="cpf" name="data" onClick={ () => setCpf(false)} defaultChecked />
             <label htmlFor="cpf">Pessoa Física</label>
 
-            <Input type="radio" name="data" value="pessoa juridica" onClick={ () => setCpf(true)}/>
+            <input type="radio" id="cnpj" name="data" onClick={ () => setCpf(true)} />
             <label htmlFor="cnpj">Pessoa Jurídica</label>
           </div>
 
           <label htmlFor="name">Nome completo: </label>
           <Input name="name" />
 
-          <label htmlFor="email">Email: </label>
-          <Input name="email" />
+          <div id="email">
+            <span>
+              <label htmlFor="email">Email: </label>
+              <Input name="email" />
+            </span>
 
-          <label htmlFor="Password">Crie uma senha</label>
-          <Input name="password" type="password" />
+            <span>
+              <label htmlFor="email">Confirmar email: </label>
+              <Input name="confirmEmail" />
+            </span>
+          </div>
 
-          <label htmlFor="confirmPassword">Confirmar senha</label>
-          <Input name="confirmPassword" type="password" />
+          <div id="password">
+            <span>
+              <label htmlFor="Password">Crie uma senha</label>
+              <Input name="password" type="password" />
+            </span>
+
+            <span>
+              <label htmlFor="confirmPassword">Confirmar senha</label>
+              <Input name="confirmPassword" type="password" />
+            </span>
+          </div>
 
           <div id="checkCpf">
             {!cpf && (
@@ -101,7 +115,7 @@ const Client: React.FC = () => {
 
             <span>
               <label htmlFor="phone">Celular: </label>
-              <Input name="phone" />
+              <PhoneInput name="phone" />
             </span>
           </div>
 
