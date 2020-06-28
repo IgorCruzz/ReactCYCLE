@@ -49,9 +49,8 @@ export const ModalProduct: React.FC<Props> = ({ close, product }: Props) => {
           <ReactImageMagnify {...{
             smallImage: {
               isFluidWidth: false,
-              src: product.avatar_url,
-              width: 400,
-              height: 400
+              src: product.avatar_url
+
             },
             largeImage: {
               src: product.avatar_url,

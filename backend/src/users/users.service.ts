@@ -57,9 +57,7 @@ export class UsersService {
 
   async index(req: Request, res: Response): Promise<Response> {
     
-    const users = await this.usersRepositoy.find()
-
-   
+    const users = await this.usersRepositoy.find() 
 
     return res.json(users)
   }

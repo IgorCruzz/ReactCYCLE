@@ -22,6 +22,7 @@
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
   },
   "dependencies": {
+    "@jest-mock/express": "^1.1.4",
     "@nestjs-modules/mailer": "^1.5.0",
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
@@ -36,8 +37,10 @@
     "@types/nodemailer": "^6.4.0",
     "@types/yup": "^0.28.3",
     "aws-sdk": "^2.696.0",
+    "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
     "bee-queue": "^1.2.3",
+    "date-fns": "^2.14.0",
     "express-handlebars": "^4.0.4",
     "handlebars": "^4.7.6",
     "multer": "^1.4.2",

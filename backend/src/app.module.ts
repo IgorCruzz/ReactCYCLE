@@ -7,6 +7,7 @@ import { AvatarModule } from './avatar/avatar.module'
 import { TokenModule } from './token/token.module';
 import { ProductModule } from './product/product.module';
 import { ContactModule } from './contact/contact.module';
+ 
 
 
 @Module({

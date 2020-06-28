@@ -25,12 +25,11 @@ const animate = keyframes`
 
 export const Content = styled.div`
  @media(max-width: 360px){
-      height: 100%;
       padding: 20px;
+      width: 100%;
     }
   @media(max-width: 700px){
     width: 100%;
-
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -57,16 +56,13 @@ export const Content = styled.div`
   }
 
   img {
-    @media(max-width: 360px){
-      height: 50px;
-      width: 50px;
-    }
-
     @media(max-width: 900px){
       margin-top: 20px;
-      width: 250px;
+      height: 200px;
+      width: 100%;
     }
-    width: 300px;
+    height: 400px;
+    width: 400px;
   }
 
   aside {
@@ -104,6 +100,7 @@ export const Content = styled.div`
     button {
       @media(max-width: 700px){
         width: 100%;
+        margin-top: 5px;
       }
 
       margin-top: 20px;

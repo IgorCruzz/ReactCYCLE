@@ -31,6 +31,7 @@ const Home: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([])
   const [product, setProduct] = useState({ id: 1, avatar_url: '', name: '', price: 0, quantity: 0 })
   const profile = useSelector((state: any) => state.signIn.profile)
+  const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(1)
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(999999999999)
@@ -42,7 +43,9 @@ const Home: React.FC = () => {
   useEffect(() => {
     async function loadProducts () {
       const response = await api.get<any>(`product?category=Bicicletas&page=${page}&min=${min}&max=${max}`)
+      setLoading(true)
       setProducts(response.data)
+      setLoading(false)
     }
     loadProducts()
   }, [page, min, max])
