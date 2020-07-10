@@ -34,7 +34,8 @@ const Bike: React.FC = () => {
 
   useEffect(() => {
     async function loadProducts () {
-      const response = await api.get(`product?category=Bicicletas&page=${page}&min=${min}&max=${max}`) 
+      const response = await api.get(`product?category=Bicicletas&page=${page}&min=${min}&max=${max}`)
+      console.log(response.data) 
       setProducts(response.data) 
     }
     loadProducts()
@@ -60,8 +61,8 @@ const Bike: React.FC = () => {
           <strong>Categorias</strong>
 
           <div>
-            <Link href="/pecas"><a>Peças</a></Link>
-            <Link href="/equipamentos"><a>Equipamentos</a></Link>
+            <Link href="/parts"><a>Peças</a></Link>
+            <Link href="/equipments"><a>Equipamentos</a></Link>
             <Link href="/bikes"><a>Bicicletas</a></Link>
           </div>
 

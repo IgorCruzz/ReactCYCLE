@@ -13,7 +13,13 @@ import api from '../../services/api'
 interface Props extends RouteComponentProps { 
   product: {
     id: number,
-    avatar_url: string,
+    avatar_data: {
+      created_at: string
+      id: number
+      name: string
+      updated_at: string
+      url: string
+    },
     name: string,
     price: number,
     quantity: number
@@ -39,7 +45,7 @@ export const getStaticPaths: GetStaticPaths  = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const product = await api.get(`/product/${params.product}`)
+  const product = await api.get(`/product/${params.product}`) 
 
   return {
     props: {
@@ -50,14 +56,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const Product: React.FC<Props> = ({ product }) => {
   const dispatch = useDispatch()
-  const router = useRouter()
-   
+  const router = useRouter()   
 
- const productData = { id: product.id, avatar_url: product.avatar_url, name: product.name, price: product.price, quantity: product.quantity }
+  const productData = { id: product.id, avatar_url: product.avatar_data.url, name: product.name, price: product.price, quantity: product.quantity }
+
+  useEffect(() => {
+    console.log(product)
+  }, [])
 
   const handleCart = () => {
     dispatch(addProct(productData))
-    router.push('/carrinho')
+    router.push('/cart')
   }
 
   return (
@@ -67,11 +76,11 @@ export const Product: React.FC<Props> = ({ product }) => {
           <ReactImageMagnify {...{
             smallImage: {
               isFluidWidth: false,
-              src: product.avatar_url
+              src: product.avatar_data.url
 
             },
             largeImage: {
-              src: product.avatar_url,
+              src: product.avatar_data.url,
               width: 500,
               height: 500
             }

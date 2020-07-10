@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link' 
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { AiOutlinePlusSquare } from 'react-icons/ai'
 import { FaRegSadTear } from 'react-icons/fa'
 import { GrPrevious, GrNext } from 'react-icons/gr'  
@@ -19,13 +20,12 @@ interface Product {
 }
 
 const Equipment: React.FC = () => {
-  const [open, setOpen] = useState(false)
-  const [openProduct, setOpenProduct] = useState(false)
-  const [products, setProducts] = useState<Product[]>([])
-  const [product, setProduct] = useState({ id: 1, avatar_url: '', name: '', price: 0, quantity: 0 })
+  const [open, setOpen] = useState(false) 
+  const [products, setProducts] = useState<Product[]>([]) 
   const [page, setPage] = useState(1)
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(999999999999)
+  const router = useRouter()
 
   const profile = useSelector((state: any) => state.signIn.profile)
 
@@ -63,8 +63,8 @@ const Equipment: React.FC = () => {
           <strong>Categorias</strong>
 
           <div>
-            <Link href="/pecas"><a>Peças</a></Link>
-            <Link href="/equipamentos"><a>Equipamentos</a></Link>
+            <Link href="/parts"><a>Peças</a></Link>
+            <Link href="/equipments"><a>Equipamentos</a></Link>
             <Link href="/bikes"><a>Bicicletas</a></Link>
           </div>
 
@@ -129,8 +129,7 @@ const Equipment: React.FC = () => {
             {products?.map(product => (
 
               <Product key={product.id} onClick={() => {
-                setProduct({ id: product.id, avatar_url: product.avatar_url, name: product.name, price: product.price, quantity: product.quantity })
-                setOpenProduct(true)
+                router.push(`/product/${product.id}`) 
               }}>
 
                 <div >
