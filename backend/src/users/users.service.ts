@@ -1,13 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository, getRepository } from 'typeorm'
+import { Repository, UpdateResult } from 'typeorm'
 import { User } from '../entities/user.entity'
-import { Token } from '../entities/token.entity'
-import { Request, Response} from 'express'
+import { Token } from '../entities/token.entity' 
 import * as Yup from 'yup'
 import { hashSync } from 'bcrypt'
 import RegisterMail from '../jobs/RegisterMail'
 import * as crypto from 'crypto'
+import { IUserDTO } from './users.dto';
  
 
 @Injectable()
@@ -19,29 +19,35 @@ export class UsersService {
     private tokenRepository: Repository<Token>
   ) {}
   
-  async store(req: Request, res: Response): Promise<Response> {
+  async store(user: any): Promise<IUserDTO> {
     const schema = Yup.object().shape({
       name: Yup.string().required().min(5),
       email: Yup.string().email().required(),
       password: Yup.string().required().min(7)
     })
 
-    if(! await schema.isValid(req.body)) {
-      return res.status(400).json({ error: 'Erro na validação'})
+    if(! await schema.isValid(user)) {
+      throw new HttpException({
+        status: HttpStatus.BAD_REQUEST,
+        error: 'Erro na validação'
+      }, HttpStatus.BAD_REQUEST)      
     }     
 
-    const { email, password } = req.body
+    const { email, password } = user
 
     const findUser = await this.usersRepositoy.findOne({ where: { email }})
 
     if(findUser) {
-      return res.status(400).json({ error: 'Este e-mail já está cadastrado no sistema'})
+      throw new HttpException({
+        status: HttpStatus.BAD_REQUEST,
+        error: 'Este e-mail já está cadastrado no sistema'   
+      }, HttpStatus.BAD_REQUEST)     
     }
 
     const hashPassword = hashSync(password, 8)
 
-    const user = await this.usersRepositoy.save({
-      ...req.body,
+    const userData = await this.usersRepositoy.save({
+      ...user,
       password: hashPassword
     })
  
@@ -52,46 +58,43 @@ export class UsersService {
  
     await RegisterMail.handle(token)
     
-    return res.json(user)
+    return userData 
   }
 
-  async index(req: Request, res: Response): Promise<Response> {
+  async index(): Promise<IUserDTO[]> {
     
     const users = await this.usersRepositoy.find() 
 
-    return res.json(users)
+    return users
   }
 
-  async show(req: Request, res: Response): Promise<Response>{
-    const { id } = req.params
+  async show(id: number): Promise<IUserDTO>{
 
-    const user = await this.usersRepositoy.findOne({ where: { id: id }})
-    return res.json(user)
+    const user = await this.usersRepositoy.findOne({ where: { id }})
+    return user
   }
 
-  async delete(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params
+  async delete(id: number): Promise<void> { 
 
     await this.usersRepositoy.delete(id)
-
-    return res.json()
   }
 
-  async update(req: Request, res: Response): Promise<Response> {
+  async update(id: number, user: IUserDTO): Promise<UpdateResult> {
     const schema = Yup.object().shape({
       name: Yup.string().min(5),
       email: Yup.string().email(),
       password: Yup.string().min(6)
     })
 
-    if(! await schema.isValid(req.body)) {
-      return res.status(400).json({ error: 'Erro na validação'})
-    }
+    if(! await schema.isValid(user)) {
+      throw new HttpException({
+        status: HttpStatus.BAD_REQUEST,
+        error: 'Erro na validação'
+      }, HttpStatus.BAD_REQUEST)    
+    } 
 
-    const { id } = req.params
+    const userData = await this.usersRepositoy.update(id, user)
 
-    const user = await this.usersRepositoy.update(id, req.body)
-
-    return res.json(user)
+    return userData
   }
 }

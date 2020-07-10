@@ -49,16 +49,10 @@ describe('ContactService', () => {
       const { res } = getMockRes()
 
       await service.store(req, res) 
-      expect(repo.save).toBeCalledTimes(1)
-      expect(repo.save).toBeCalledWith({
-        name: "igor",
-        email: "igorskt2009@gmail.com",
-        phone: "27411760",
-        order: "48848",
-        message: "mensagem"   
 
-      })
-      expect(res.json).toBeCalled()
+      expect(repo.save).toBeCalledWith(req.body)
+      expect(repo.save).toBeCalledTimes(1)
+    
     })
      
    })

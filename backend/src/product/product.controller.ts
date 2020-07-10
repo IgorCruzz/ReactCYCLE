@@ -1,23 +1,33 @@
-import { Controller, Post, Req, Res, Get } from '@nestjs/common';
-import { Request, Response } from 'express'
+import { Controller, Post, Get, Body, Param, Query } from '@nestjs/common'; 
 import { ProductService } from './product.service';
+import { ProductDTO } from './product.dto';
 
 @Controller('product')
 export class ProductController {
   constructor(private productService: ProductService) {}
 
   @Post()
-  store(@Req() req: Request, @Res() res: Response): Promise<Response> {
-    return this.productService.store(req, res)
+  store(@Body() product: ProductDTO): Promise<ProductDTO> {
+    return this.productService.store(product)
   }
 
   @Get()
-  index(@Req() req: Request, @Res() res: Response): Promise<Response> {
-    return this.productService.index(req, res)
+  index(@Param() paramData: {
+    category?: string, 
+    page?: number, 
+    min?: number,
+    max?: number 
+  }  ): Promise<ProductDTO> {
+    return this.productService.index(paramData)
+  }
+
+  @Get('/:id')
+  async showOne(@Param() product: string): Promise<ProductDTO[]> {
+    return this.productService.showOne(product)
   }
 
   @Get('/busca')
-  show(@Req() req: Request, @Res() res: Response): Promise<Response> {
-    return this.productService.show(req, res)
+  show(@Query() name: string): Promise<ProductDTO[]> {
+    return this.productService.show(name)
   }
 }

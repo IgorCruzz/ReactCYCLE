@@ -1,14 +1,14 @@
-import { Controller, Post, Req, Res, Get, UseGuards } from '@nestjs/common';
-import { Request, Response } from 'express'
+import { Controller, Post, Body } from '@nestjs/common';
+import { LoginDTO } from './session.dto'
 import { SessionService } from './session.service';
-import { JwtAuthGuard } from './jwt-auth.guard'
+ 
 
 @Controller('session')
 export class SessionController {
   constructor(private sessionService: SessionService){}
 
   @Post()
-  store(@Req() req: Request, @Res() res: Response): Promise<Response> {
-    return this.sessionService.store(req, res)
+  store(@Body() login: LoginDTO): Promise<LoginDTO> {
+    return this.sessionService.store(login)
   }  
 }

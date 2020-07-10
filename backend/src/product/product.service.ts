@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm'
 import { Product } from '../entities/product.entity';
-import { Repository, Between, Like } from 'typeorm';
-import { Request, Response } from 'express'
+import { Repository, Between, Like } from 'typeorm'; 
 import * as Yup from 'yup'
+import { ProductDTO } from './product.dto';
 
 @Injectable()
 export class ProductService {
@@ -12,25 +12,39 @@ export class ProductService {
     private productRepository: Repository<Product>
   ) {}
 
-  async store(req: Request, res: Response): Promise<Response> {
+  async store(contact: ProductDTO): Promise<ProductDTO> {
     const schema = Yup.object().shape({
       name: Yup.string().min(5).required(),
       price: Yup.number().positive().required(),
       quantity: Yup.number().positive().required()
     })
 
-    if(! await schema.isValid(req.body)){
-      return res.status(400).json({ error: 'Erro na validação'})     
+    if(! await schema.isValid(contact)){
+      throw new HttpException({
+        statis: HttpStatus.BAD_REQUEST,
+        error: 'Erro na validação'
+      }, HttpStatus.BAD_REQUEST)
+       
     }
 
-    const product = await this.productRepository.save(req.body)
-    return res.json(product)   
-  }
+    const product = await this.productRepository.save(contact)
+    return product  
+  } 
 
-  async index(req: Request, res: Response): Promise<Response> {
+  async index(paramData: {
+    category?: string, 
+    page?: number, 
+    min?: number,
+    max?: number 
+  }): Promise<any> {
   
-    const { category, page, min, max } = req.query
-    
+    const { category, page, min, max } = paramData
+
+    if(!category){
+      const products = await this.productRepository.find()
+      return products
+    }    
+
     const products = await this.productRepository.find({         
       where: { 
         category,
@@ -39,8 +53,7 @@ export class ProductService {
       skip: (Number(page) - 1) * 12,      
       take: 12,
       relations: ['avatar_data']      
-    })
-   
+    })   
 
     const productList = products.map(product => { 
       return {     
@@ -51,14 +64,11 @@ export class ProductService {
         avatar_url: product.avatar_data.url 
         }        
     })    
-     
-    
   
-    return res.json(productList)
+    return productList
   }
 
-  async show(req: Request, res: Response): Promise<Response> {
-    const { name } = req.query
+  async show(name: string): Promise<ProductDTO[]> { 
 
     const products = await this.productRepository.find({         
       where: { 
@@ -75,9 +85,16 @@ export class ProductService {
         quantity: product.quantity,
         avatar_url: product.avatar_data.url 
         }        
-    })    
-        
+    })        
   
-    return res.json(productList)
+    return productList
+  }
+
+  async showOne(product: string): Promise<ProductDTO[]> {    
+    const productData = await this.productRepository.find({
+      where: { product },
+      relations: ['avatar_data']
+    })
+    return productData
   }
 } 

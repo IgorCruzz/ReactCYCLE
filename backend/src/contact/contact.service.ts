@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Contact  } from '../entities/contact.entity'
-import { Request, Response } from 'express'
-
+import { ContactDTO } from './contact.dto'
 
 @Injectable()
 export class ContactService {
@@ -12,10 +11,9 @@ export class ContactService {
     private contactRepository: Repository<Contact>
   ){}
 
-  async store(req: Request, res: Response): Promise<Response> {
-
-    const contact = await this.contactRepository.save(req.body)
-    return res.json(contact)
+  async store(contact: ContactDTO): Promise<ContactDTO> {
+    const contactData = await this.contactRepository.save(contact)
+    return contactData
   }
 }
 

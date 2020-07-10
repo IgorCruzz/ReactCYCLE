@@ -1,35 +1,35 @@
-import { Controller, Get, Req, Res, Post, Delete, Put, UseGuards } from '@nestjs/common';
-import { Request, Response } from 'express'
+import { Controller, Get, Post, Delete, Put, Body, Param } from '@nestjs/common'; 
 import { UsersService } from './users.service'
-
+import { IUserDTO } from './users.dto';
+import { UpdateResult } from 'typeorm';
 
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService){}
 
   @Post()
-  store(@Req() req: Request, @Res() res: Response): Promise<Response> {
-    return this.usersService.store(req, res)
+  store(@Body() user: IUserDTO): Promise<IUserDTO> {
+    return this.usersService.store(user)
   }
 
   @Get()
-  index(@Req() req: Request, @Res() res: Response): Promise<Response> {
-    return this.usersService.index(req, res)
+  index(): Promise<IUserDTO[]> {
+    return this.usersService.index()
   }
 
   @Get(':id')
-  show(@Req() req: Request, @Res() res: Response): Promise<Response> {
-    return this.usersService.show(req, res)
+  show(@Param() id: number): Promise<IUserDTO> {
+    return this.usersService.show(id)
   }
 
   @Delete(':id')
-  delete(@Req() req: Request, @Res() res: Response): Promise<Response> {
-    return this.usersService.delete(req, res)
+  delete(@Param() id: number): Promise<void> {
+    return this.usersService.delete(id)
   }
 
   @Put(':id')
-  update(@Req() req: Request, @Res() res: Response): Promise<Response>{
-    return this.usersService.update(req, res)
+  update(@Param() id: number, @Body() user: IUserDTO): Promise<UpdateResult>{
+    return this.usersService.update(id, user)
   }
 }
  
