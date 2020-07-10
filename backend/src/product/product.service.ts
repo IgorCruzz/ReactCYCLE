@@ -27,7 +27,12 @@ export class ProductService {
        
     }
 
-    const product = await this.productRepository.save(contact)
+    const { name, ...rest } = contact
+
+    const product = await this.productRepository.save({      
+      name: name.toLowerCase(),
+	    ...rest
+    })
     return product  
   } 
 
@@ -39,12 +44,12 @@ export class ProductService {
   }): Promise<any> {
   
     const { category, page, min, max } = paramData
-
+   
     if(!category){
-      const products = await this.productRepository.find()
+      const products = await this.productRepository.find()    
       return products
-    }    
-
+    }     
+ 
     const products = await this.productRepository.find({         
       where: { 
         category,
@@ -64,6 +69,7 @@ export class ProductService {
         avatar_url: product.avatar_data.url 
         }        
     })    
+
   
     return productList
   }
@@ -90,9 +96,10 @@ export class ProductService {
     return productList
   }
 
-  async showOne(product: string): Promise<ProductDTO[]> {    
+  async showOne(product: { id: number}): Promise<ProductDTO[]> {  
+    const { id } = product
     const productData = await this.productRepository.find({
-      where: { product },
+      where: { id },
       relations: ['avatar_data']
     })
     return productData

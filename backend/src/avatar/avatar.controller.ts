@@ -10,7 +10,7 @@ export class AvatarController {
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))
-  store(@UploadedFile() file, @Res() res: Response, ): Promise<Response> {
+  store(@UploadedFile() file, @Res() res: Response): Promise<Response> {
    return this.avatarService.store(file, res)
   }
 }

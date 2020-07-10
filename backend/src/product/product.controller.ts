@@ -12,7 +12,7 @@ export class ProductController {
   }
 
   @Get()
-  index(@Param() paramData: {
+  index(@Query() paramData: {
     category?: string, 
     page?: number, 
     min?: number,
@@ -22,7 +22,7 @@ export class ProductController {
   }
 
   @Get('/:id')
-  async showOne(@Param() product: string): Promise<ProductDTO[]> {
+  showOne(@Param() product: { id: number}): Promise<ProductDTO[]> {
     return this.productService.showOne(product)
   }
 

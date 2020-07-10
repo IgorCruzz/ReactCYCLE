@@ -9,7 +9,8 @@ import {
 
 
 @Entity()
-export class User { 
+export class User {   
+
   @PrimaryGeneratedColumn()
   id: number
 

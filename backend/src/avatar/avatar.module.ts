@@ -17,7 +17,7 @@ const storageTypes ={
     },
     filename: (req, file: any, cb) => {
       crypto.randomBytes(16, (err, hash) => {
-        file.key = `${hash.toString("hex")}-${file.originalname}`
+        file.key = `${crypto.randomBytes(10).toString('Hex')}${extname(file.originalname)}`
 
         cb(null, file.key)
       })       
@@ -42,7 +42,7 @@ const storageTypes ={
   imports: [
     TypeOrmModule.forFeature([Avatar]),
     MulterModule.register({   
-    storage: storageTypes["s3"]
+    storage: storageTypes["storage"]
   })],
   controllers: [AvatarController],
   providers: [AvatarService]

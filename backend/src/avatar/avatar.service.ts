@@ -25,7 +25,7 @@ export class AvatarService {
    
     const avatar = await this.avatarRepository.save({
       name,
-      url
+      url: url === '' ? `http://localhost:3333/file/${key}` : url
     })   
  
     return res.json(avatar)

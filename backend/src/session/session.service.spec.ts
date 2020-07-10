@@ -6,8 +6,8 @@ import { User  } from '../entities/user.entity'
 import { JwtStrategy } from './jwt.strategy'
 import { JwtModule } from '@nestjs/jwt'
 import { jwtConstants } from './constants'
-import { getMockRes, getMockReq } from '@jest-mock/express'
-import { PlaylistRepositoryFake } from './UserRepositoryFake'
+import { HttpException } from '@nestjs/common';
+ 
 
 const Usuario = new User({  
   id: 1,
@@ -35,7 +35,9 @@ describe('SessionService', () => {
         SessionService,
         {
           provide: getRepositoryToken(User),
-          useClass: PlaylistRepositoryFake
+          useValue: {
+            findOne: jest.fn().mockReturnValue(Usuario)
+          }
         }       
       ],
     }).compile();
@@ -49,11 +51,9 @@ describe('SessionService', () => {
   });
 
   describe('Session', () => {      
-    it('check if user has already exits', async () => { 
-        const req = getMockReq()
-        const { res } = getMockRes()
-
-        await service.store(req, res)
+    it('check if user has already exits', async () => {      
+      expect.assertions(1)
+      return service.store({ email: 'igorskt@go.com', password: '13456'}).then(data => expect(data).toBeTruthy())    
     })  
   })
 });
