@@ -5,12 +5,11 @@ import  { Repository  } from 'typeorm'
 import { User } from '../entities/user.entity'
 import { JwtStrategy } from './jwt.strategy'
 import { JwtModule } from '@nestjs/jwt'
-import { jwtConstants } from './constants' 
-import { HttpException } from '@nestjs/common';
+import { jwtConstants } from './constants'  
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
 
-const Usuario = new User({ 
+const userMock = new User({ 
   id: 1,
   name: 'nome de usuario',
   email: 'izone@gmail.com', 
@@ -21,8 +20,6 @@ const Usuario = new User({
 describe('SessionService', () => {
   let service: SessionService; 
   let repo: Repository<User>
-  let jwtService: JwtService
-
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -38,15 +35,14 @@ describe('SessionService', () => {
         {
           provide: getRepositoryToken(User),
           useValue: {
-            findOne: jest.fn().mockResolvedValue(Usuario)
+            findOne: jest.fn().mockResolvedValue(userMock)
           }
         }       
       ],
     }).compile();
 
     service = module.get<SessionService>(SessionService); 
-    repo = module.get<Repository<User>>(getRepositoryToken(User))
-    jwtService = module.get<JwtService>(JwtService)
+    repo = module.get<Repository<User>>(getRepositoryToken(User)) 
   });
 
   it('should be defined', () => {
@@ -55,7 +51,7 @@ describe('SessionService', () => {
 
   describe('Session', () => { 
     it('should be possible to log in', async () => {
-       expect(await service.store({ email: Usuario.email, password: '123456789' }))
+       expect(await service.store({ email: userMock.email, password: '123456789' }))
        .toHaveProperty(
          'id', 
          'email',         
@@ -74,7 +70,7 @@ describe('SessionService', () => {
 
     it('throw an error if password is not correct', async () => {
       try {
-        await service.store({ email: Usuario.email, password: 'WRONG PASSWORD'})
+        await service.store({ email: userMock.email, password: 'WRONG PASSWORD'})
       } catch (err){
         expect(err.message).toEqual('Http Exception')
       }

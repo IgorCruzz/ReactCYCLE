@@ -1,11 +1,11 @@
  
 
 <p align="center">
-  <img src="https://github.com/IgorCruzz/ReactCYCLE/blob/master/frontend/src/assets/logo.png" width="440" height="440" alt="logo" style="margin-left = 50%" />
+  <img src="https://github.com/IgorCruzz/ReactCYCLE/blob/master/frontend/assets/logo.png" width="440" height="440" alt="logo" style="margin-left = 50%" />
 </p>
  <hr />
  
- Site: https://react-cycle.herokuapp.com
+ 
  
  <hr />
  
