@@ -2,24 +2,26 @@ import { Test, TestingModule } from '@nestjs/testing';
 import {  getRepositoryToken  } from '@nestjs/typeorm'
 import { SessionService } from './session.service'; 
 import  { Repository  } from 'typeorm'
-import { User  } from '../entities/user.entity'
+import { User } from '../entities/user.entity'
 import { JwtStrategy } from './jwt.strategy'
 import { JwtModule } from '@nestjs/jwt'
-import { jwtConstants } from './constants'
+import { jwtConstants } from './constants' 
 import { HttpException } from '@nestjs/common';
- 
+import { JwtService } from '@nestjs/jwt'
+import * as bcrypt from 'bcrypt'
 
-const Usuario = new User({  
+const Usuario = new User({ 
   id: 1,
   name: 'nome de usuario',
-  email: 'email@gmail.com', 
-  password: '123456789',  
+  email: 'izone@gmail.com', 
+  password: bcrypt.hashSync('123456789', 8),  
 })
  
 
 describe('SessionService', () => {
   let service: SessionService; 
   let repo: Repository<User>
+  let jwtService: JwtService
 
 
   beforeEach(async () => {
@@ -36,7 +38,7 @@ describe('SessionService', () => {
         {
           provide: getRepositoryToken(User),
           useValue: {
-            findOne: jest.fn().mockReturnValue(Usuario)
+            findOne: jest.fn().mockResolvedValue(Usuario)
           }
         }       
       ],
@@ -44,16 +46,40 @@ describe('SessionService', () => {
 
     service = module.get<SessionService>(SessionService); 
     repo = module.get<Repository<User>>(getRepositoryToken(User))
+    jwtService = module.get<JwtService>(JwtService)
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
-  describe('Session', () => {      
-    it('check if user has already exits', async () => {      
-      expect.assertions(1)
-      return service.store({ email: 'igorskt@go.com', password: '13456'}).then(data => expect(data).toBeTruthy())    
-    })  
+  describe('Session', () => { 
+    it('should be possible to log in', async () => {
+       expect(await service.store({ email: Usuario.email, password: '123456789' }))
+       .toHaveProperty(
+         'id', 
+         'email',         
+        )
+    })
+
+    it('trhow an erro if user does not exists', async () => {
+      try {
+        jest.spyOn(repo, 'findOne').mockResolvedValue(undefined)      
+        await service.store({ email: 'any@gmail.com', password: '12345679'})
+        
+      } catch (err){
+        expect(err.message).toEqual('Http Exception')
+      }
+    })
+
+    it('throw an error if password is not correct', async () => {
+      try {
+        await service.store({ email: Usuario.email, password: 'WRONG PASSWORD'})
+      } catch (err){
+        expect(err.message).toEqual('Http Exception')
+      }
+    })
+     
+     
   })
 });

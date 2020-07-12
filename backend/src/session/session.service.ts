@@ -15,9 +15,9 @@ export class SessionService {
   ) {} 
 
   async store(login: LoginDTO): Promise<LoginDTO> {
-    const { email, password } = login
+    const { email, password } = login 
 
-    const user = await this.usersRepository.findOne({ where: { email }})    
+    const user = await this.usersRepository.findOne({ email })    
    
     if(!user){    
       throw new HttpException({
