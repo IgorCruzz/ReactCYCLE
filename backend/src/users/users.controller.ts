@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Delete, Put, Body, Param } from '@nestjs/common'; 
 import { UsersService } from './users.service'
-import { IUserDTO } from './users.dto';
+import { IUserDTO, IUserUpdateDTO } from './users.dto';
 import { UpdateResult, DeleteResult } from 'typeorm';
 
 @Controller('users')
@@ -28,7 +28,7 @@ export class UsersController {
   }
 
   @Put(':id')
-  update(@Param() id: number, @Body() user: IUserDTO): Promise<UpdateResult>{
+  update(@Param() id: number, @Body() user: IUserUpdateDTO): Promise<UpdateResult>{
     return this.usersService.update(id, user)
   }
 }

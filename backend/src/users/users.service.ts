@@ -7,7 +7,7 @@ import * as Yup from 'yup'
 import { hashSync } from 'bcrypt'
 import RegisterMail from '../jobs/RegisterMail'
 import * as crypto from 'crypto'
-import { IUserDTO } from './users.dto';
+import { IUserDTO, IUserUpdateDTO } from './users.dto';
  
 
 @Injectable()
@@ -35,7 +35,7 @@ export class UsersService {
 
     const { email, password } = user
 
-    const findUser = await this.usersRepositoy.findOne({ where: { email }})
+    const findUser = await this.usersRepositoy.findOne({ email })
 
     if(findUser) {
       throw new HttpException({
@@ -78,7 +78,7 @@ export class UsersService {
     return await this.usersRepositoy.delete(id)
   }
 
-  async update(id: number, user: IUserDTO): Promise<UpdateResult> {
+  async update(id: number, user: IUserUpdateDTO): Promise<UpdateResult> {
     const schema = Yup.object().shape({
       name: Yup.string().min(5),
       email: Yup.string().email(),

@@ -20,6 +20,26 @@ const userMock2 = new User({
   password: bcrypt.hashSync('123456789', 8),  
 })
 
+const newUser = new User(
+  { 
+    name: "isscruz",
+    email: "dsdwdws@gmail.com",
+    password: "123456789",
+    cpf: '17518591878',
+    phone: '99999999999',
+    gender: "masculino",
+    birth: 09031993,
+    cep: '2545455',
+    address: "rua dr oliveira",
+    number: 819,
+    complement: "fundos",
+    referency: "em frente a um escadao",
+    neighborhood: "barra do imbui",
+    city: "teresopolis",
+    state: "RJ" 
+  }
+)
+
 const manyUsers = [userMock, userMock2]
  
 
@@ -36,9 +56,9 @@ describe('UsersService', () => {
         useValue: {
           findOne: jest.fn().mockResolvedValue(userMock),
           delete: jest.fn().mockReturnValue(true),
-          save: jest.fn(),
+          save: jest.fn().mockReturnValue(newUser),
           find: jest.fn().mockResolvedValue(manyUsers),
-          update: jest.fn()
+          update: jest.fn().mockReturnValue(true)
         }
       },
     {
@@ -68,8 +88,32 @@ describe('UsersService', () => {
       expect(await service.index()).toEqual(manyUsers)        
     })
 
-    it('delete an user', async () => {
+    it('should be delete an user', async () => {
       expect(await service.delete(1)).toBe(true)
+    })
+
+    it('should be update an user data', async () => {
+      expect(await service.update(1, { email: 'ladygaga@gmail.com'})).toBe(true)
+    })
+
+    it('should be create an user', async () => {
+      expect(await service.store({ 
+        name: "isscruz",
+        email: "dsdwdws@gmail.com",
+        password: "123456789",
+        cpf: 17518591878,
+        phone: 99999999999,
+        gender: "masculino",
+        birth: "09031993",
+        cep: 2545455,
+        address: "rua dr oliveira",
+        number: 819,
+        complement: "fundos",
+        referency: "em frente a um escadao",
+        neighborhood: "barra do imbui",
+        city: "teresopolis",
+        state: "RJ" 
+      })).toEqual(newUser)
     })
   })
 });
