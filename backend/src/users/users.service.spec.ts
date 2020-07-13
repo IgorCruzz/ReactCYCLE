@@ -5,30 +5,31 @@ import { Repository } from 'typeorm'
 import { User } from '../entities/user.entity'
 import { Token } from '../entities/token.entity'
 import * as bcrypt from 'bcrypt'
+import * as crypto from 'crypto'
 
 const userMock = new User({ 
   id: 1,
-  name: 'nome de usuario',
-  email: 'izone@gmail.com', 
+  name: 'user one',
+  email: 'userone@gmail.com', 
   password: bcrypt.hashSync('123456789', 8),  
 })
 
 const userMock2 = new User({ 
   id: 2,
-  name: 'nome de usuario',
-  email: 'izone@gmail.com', 
+  name: 'user two',
+  email: 'usertwo@gmail.com', 
   password: bcrypt.hashSync('123456789', 8),  
 })
 
 const newUser = new User(
   { 
-    name: "isscruz",
-    email: "dsdwdws@gmail.com",
+    name: "new user",
+    email: "newuser@gmail.com",
     password: "123456789",
     cpf: '17518591878',
     phone: '99999999999',
     gender: "masculino",
-    birth: 09031993,
+    birth: 19031993,
     cep: '2545455',
     address: "rua dr oliveira",
     number: 819,
@@ -64,7 +65,7 @@ describe('UsersService', () => {
     {
       provide: getRepositoryToken(Token),
       useValue: {
-        save: jest.fn()
+        save: jest.fn() 
       }
     }],
     }).compile();
@@ -92,28 +93,55 @@ describe('UsersService', () => {
       expect(await service.delete(1)).toBe(true)
     })
 
-    it('should be update an user data', async () => {
-      expect(await service.update(1, { email: 'ladygaga@gmail.com'})).toBe(true)
+    describe('update', () => {
+      it('should be update an user data', async () => {
+        expect(await service.update(1, { email: 'email@gmail.com'})).toBeTruthy()
+      })
+      
+      it('throw an error if email has been incorrect format', async () => {
+        try {
+          await service.update(1, { email: 'incorrectEmail'}) 
+        } catch (err){
+          expect(err.message).toEqual('Http Exception')
+        }        
+      })
+
+      it('throw an error if password has less than 6 characters', async () => {
+        try {
+          await service.update(1, { password: '123 '})
+        } catch(err){
+          expect(err.message).toEqual('Http Exception')
+        }
+      })
+
+      it('throw an error is username has less than 5 characters', async () => {
+        try {
+          await service.update(1, { name: 'name'})
+        } catch (err){
+          expect(err.message).toEqual('Http Exception')
+        }
+      })
+
+    })
+    
+
+    describe('store', () => {
+      it('should be create an user', async () => {
+        jest.spyOn(userRepo, 'findOne').mockResolvedValue(undefined)        
+  
+        expect(await service.store(newUser)).toEqual(newUser)
+      })
+
+      it('throw an error if already exists an user with email that passed on request', async () => {
+        try { 
+          await service.store(userMock)
+        } catch(err){
+          expect(err.message).toEqual('Http Exception')
+        }
+      })
+
     })
 
-    it('should be create an user', async () => {
-      expect(await service.store({ 
-        name: "isscruz",
-        email: "dsdwdws@gmail.com",
-        password: "123456789",
-        cpf: 17518591878,
-        phone: 99999999999,
-        gender: "masculino",
-        birth: "09031993",
-        cep: 2545455,
-        address: "rua dr oliveira",
-        number: 819,
-        complement: "fundos",
-        referency: "em frente a um escadao",
-        neighborhood: "barra do imbui",
-        city: "teresopolis",
-        state: "RJ" 
-      })).toEqual(newUser)
-    })
+  
   })
 });

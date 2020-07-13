@@ -54,17 +54,22 @@ describe('SessionService', () => {
 
   describe('Session', () => { 
     it('should be possible to log in', async () => {  
-      expect.assertions(1); 
+ 
+      const repoSpy = jest.spyOn(repo, 'findOne')
+
       expect(await service.store({ email: userMock.email, password: '123456789' }))
-      .toContainKeys(['id', 'email', 'password', 'token'])   
+      .toContainKeys(['id', 'email', 'password', 'token'])  
+      expect(repoSpy).toBeCalledTimes(1)
+      expect(repoSpy).toBeCalledWith({ email: userMock.email})
       })  
     
 
-    it('trhow an erro if user does not exists', async () => {
+    it('trhow an error if user does not exists', async () => {
       expect.assertions(1);
-      try {
-        jest.spyOn(repo, 'findOne').mockResolvedValue(undefined)      
+      try {       
+        const repoSpy = jest.spyOn(repo, 'findOne').mockResolvedValue(undefined)      
         await service.store({ email: 'any@gmail.com', password: '12345679'})
+        expect(repoSpy).toBeCalledWith({ email: 'any@gmail.com'})
         
       } catch (err){
         expect(err.message).toEqual('Http Exception')
@@ -74,7 +79,9 @@ describe('SessionService', () => {
     it('throw an error if password is not correct', async () => {
       expect.assertions(1);
       try {
+        const repoSpy = jest.spyOn(repo, 'findOne')
         await service.store({ email: userMock.email, password: 'WRONG PASSWORD'})
+        expect(repoSpy).toBeCalledWith({ email: userMock.email})
       } catch (err){
         expect(err.message).toEqual('Http Exception')
       }

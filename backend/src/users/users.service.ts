@@ -50,11 +50,14 @@ export class UsersService {
       ...user,
       password: hashPassword
     })
+
  
     const token =  await this.tokenRepository.save({
       user_id: user.id,
       token: crypto.randomBytes(16).toString('hex')
     })
+
+    console.log(token)
  
     await RegisterMail.handle(token)
     
@@ -88,7 +91,7 @@ export class UsersService {
     if(! await schema.isValid(user)) {
       throw new HttpException({
         status: HttpStatus.BAD_REQUEST,
-        error: 'Erro na validação'
+        error: 'Validation Error'
       }, HttpStatus.BAD_REQUEST)    
     } 
 
