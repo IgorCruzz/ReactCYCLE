@@ -55,9 +55,9 @@ describe('SessionService', () => {
     it('should be possible to log in', async () => {  
       expect.assertions(1); 
       expect(await service.store({ email: userMock.email, password: '123456789' }))
-      .toContain('id') 
+   
       })  
-    })
+    
 
     it('trhow an erro if user does not exists', async () => {
       expect.assertions(1);
