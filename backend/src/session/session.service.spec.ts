@@ -1,3 +1,4 @@
+import 'jest-extended';
 import { Test, TestingModule } from '@nestjs/testing';
 import {  getRepositoryToken  } from '@nestjs/typeorm'
 import { SessionService } from './session.service'; 
@@ -55,7 +56,7 @@ describe('SessionService', () => {
     it('should be possible to log in', async () => {  
       expect.assertions(1); 
       expect(await service.store({ email: userMock.email, password: '123456789' }))
-   
+      .toContainKeys(['id', 'email', 'password', 'token'])   
       })  
     
 
