@@ -219,7 +219,7 @@ describe('UsersService', () => {
         }
       })
       
-      it('throw an error if any request body is incorrect', async () => {
+      it('throw an error if the request body has empty values', async () => {
         try {
           await service.store( 
             { 

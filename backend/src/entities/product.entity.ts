@@ -9,7 +9,7 @@ import { Avatar } from './avatar.entity'
 
  @Entity()
  export class Product{ 
-  /*
+  
    constructor({
      id,
      name,
@@ -29,7 +29,7 @@ import { Avatar } from './avatar.entity'
      this.created_at = created_at || new Date(),
      this.updated_at = updated_at || new Date()
    }
-   */
+ 
 
    @PrimaryColumn()   
    id: number

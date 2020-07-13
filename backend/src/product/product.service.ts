@@ -46,7 +46,7 @@ export class ProductService {
     const { category, page, min, max } = paramData
    
     if(!category){
-      const products = await this.productRepository.find()    
+      const products = await this.productRepository.find()     
       return products
     }     
  
@@ -74,7 +74,7 @@ export class ProductService {
     return productList
   }
 
-  async show(name: string): Promise<ProductDTO[]> { 
+  async show(name: string): Promise<any[]> { 
 
     const products = await this.productRepository.find({         
       where: { 
