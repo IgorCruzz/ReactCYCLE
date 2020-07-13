@@ -11,14 +11,38 @@ const userMock = new User({
   id: 1,
   name: 'user one',
   email: 'userone@gmail.com', 
-  password: bcrypt.hashSync('123456789', 8),  
+  password: bcrypt.hashSync('123456789', 8),
+  cpf: '17518591878',
+  phone: '99999999999',
+  gender: "masculino",
+  birth: 19031993,
+  cep: '2545455',
+  address: "rua dr oliveira",
+  number: 819,
+  complement: "fundos",
+  referency: "em frente a um escadao",
+  neighborhood: "barra do imbui",
+  city: "teresopolis",
+  state: "RJ"   
 })
 
 const userMock2 = new User({ 
   id: 2,
   name: 'user two',
   email: 'usertwo@gmail.com', 
-  password: bcrypt.hashSync('123456789', 8),  
+  password: bcrypt.hashSync('123456789', 8),
+  cpf: '17518591878',
+  phone: '99999999999',
+  gender: "masculino",
+  birth: 19031993,
+  cep: '2545455',
+  address: "rua dr oliveira",
+  number: 819,
+  complement: "fundos",
+  referency: "em frente a um escadao",
+  neighborhood: "barra do imbui",
+  city: "teresopolis",
+  state: "RJ"   
 })
 
 const newUser = new User(
@@ -79,19 +103,31 @@ describe('UsersService', () => {
     expect(service).toBeDefined();
   });
 
-  describe('findOne', () => {
+  describe('show', () => {
 
     it('should be possible to get an user', async () => {
       expect(await service.show(userMock.id)).toEqual(userMock)        
     })
 
+  })
+
+  describe('index', () => {
+    
     it('should be possible to get all user', async () => {
       expect(await service.index()).toEqual(manyUsers)        
     })
 
+  })
+
+  describe('delete', () => {
+
     it('should be delete an user', async () => {
       expect(await service.delete(1)).toBe(true)
     })
+
+  })
+
+   
 
     describe('update', () => {
       it('should be update an user data', async () => {
@@ -129,7 +165,26 @@ describe('UsersService', () => {
       it('should be create an user', async () => {
         jest.spyOn(userRepo, 'findOne').mockResolvedValue(undefined)        
   
-        expect(await service.store(newUser)).toEqual(newUser)
+        expect(await service.store({ 
+          id: 1,
+          name: 'user one',
+          email: 'userone@gmail.com', 
+          confirmEmail: 'userone@gmail.com',
+          password: '123456789',
+          confirmPassword: '123456789',
+          cpf: '17518591878',
+          phone: '99999999999',
+          gender: "masculino",
+          birth: 19031993,
+          cep: '2545455',
+          address: "rua dr oliveira",
+          number: 819,
+          complement: "fundos",
+          referency: "em frente a um escadao",
+          neighborhood: "barra do imbui",
+          city: "teresopolis",
+          state: "RJ"   
+        })).toEqual(newUser)
       })
 
       it('throw an error if already exists an user with email that passed on request', async () => {
@@ -139,9 +194,36 @@ describe('UsersService', () => {
           expect(err.message).toEqual('Http Exception')
         }
       })
+      
+      it('throw an error if any request body is incorrect', async () => {
+        try {
+          await service.store( 
+            { 
+              name: "",
+              email: "",
+              password: "",
+              cpf: '',
+              phone: '',
+              gender: "",
+              birth: NaN,
+              cep: '',
+              address: "",
+              number: NaN,
+              complement: "",
+              referency: "",
+              neighborhood: "",
+              city: "",
+              state: "" 
+            }
+           )
+        } catch(err){
+          expect(err.message).toEqual('Http Exception')
+        }
+
+      })  
 
     })
 
   
-  })
+ 
 });
