@@ -22,7 +22,14 @@ const product1 = new Product(
      name: 'PRODUCT NAME',
      price: 54,
      quantity: 10,
-     avatar: '',
+     avatar: 1,
+     avatar_data: {
+      id: 1, 
+      name: 'avatarName', 
+      url: 'http://localhost:3333/file/avatarName',
+      created_at: Date,
+      updated_at: Date,
+     },
      category: 'category'  
   }
 )
@@ -33,7 +40,15 @@ const product2 = new Product(
      name: 'PRODUCT NAME',
      price: 54,
      quantity: 10,
-     avatar: '',
+     avatar: 2,
+     avatar_data: {
+      id: 2, 
+      name: 'avatarName', 
+      url: 'http://localhost:3333/file/avatarName',
+      created_at: Date,
+      updated_at: Date,
+
+     },
      category: 'category'  
   }
 )

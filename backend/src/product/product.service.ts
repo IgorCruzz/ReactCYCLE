@@ -59,6 +59,7 @@ export class ProductService {
       take: 12,
       relations: ['avatar_data']      
     })   
+    console.log(products)
 
     const productList = products.map(product => { 
       return {     
