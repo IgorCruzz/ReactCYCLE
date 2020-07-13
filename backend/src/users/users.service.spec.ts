@@ -65,8 +65,7 @@ const newUser = new User(
   }
 )
 
-const manyUsers = [userMock, userMock2]
- 
+const manyUsers = [userMock, userMock2] 
 
 describe('UsersService', () => {
   let service: UsersService;
