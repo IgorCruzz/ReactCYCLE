@@ -1,6 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository, UpdateResult } from 'typeorm'
+import { Repository, UpdateResult, DeleteResult } from 'typeorm'
 import { User } from '../entities/user.entity'
 import { Token } from '../entities/token.entity' 
 import * as Yup from 'yup'
@@ -64,19 +64,18 @@ export class UsersService {
   async index(): Promise<IUserDTO[]> {
     
     const users = await this.usersRepositoy.find() 
+ 
 
     return users
   }
 
   async show(id: number): Promise<IUserDTO>{
-
-    const user = await this.usersRepositoy.findOne({ where: { id }})
+    const user = await this.usersRepositoy.findOne({ id })
     return user
   }
 
-  async delete(id: number): Promise<void> { 
-
-    await this.usersRepositoy.delete(id)
+  async delete(id: number): Promise<DeleteResult> { 
+    return await this.usersRepositoy.delete(id)
   }
 
   async update(id: number, user: IUserDTO): Promise<UpdateResult> {

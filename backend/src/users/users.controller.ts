@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Delete, Put, Body, Param } from '@nestjs/common'; 
 import { UsersService } from './users.service'
 import { IUserDTO } from './users.dto';
-import { UpdateResult } from 'typeorm';
+import { UpdateResult, DeleteResult } from 'typeorm';
 
 @Controller('users')
 export class UsersController {
@@ -23,7 +23,7 @@ export class UsersController {
   }
 
   @Delete(':id')
-  delete(@Param() id: number): Promise<void> {
+  delete(@Param() id: number): Promise<DeleteResult> {
     return this.usersService.delete(id)
   }
 
