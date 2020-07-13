@@ -185,10 +185,30 @@ describe('UsersService', () => {
           state: "RJ"   
         })).toEqual(newUser)
       })
+    
 
       it('throw an error if already exists an user with email that passed on request', async () => {
         try { 
-          await service.store(userMock)
+          await service.store({ 
+            id: 1,
+            name: 'user one',
+            email: 'userone@gmail.com', 
+            confirmEmail: 'userone@gmail.com',
+            password: '123456789',
+            confirmPassword: '123456789',
+            cpf: '17518591878',
+            phone: '99999999999',
+            gender: "masculino",
+            birth: 19031993,
+            cep: '2545455',
+            address: "rua dr oliveira",
+            number: 819,
+            complement: "fundos",
+            referency: "em frente a um escadao",
+            neighborhood: "barra do imbui",
+            city: "teresopolis",
+            state: "RJ"   
+          })
         } catch(err){
           expect(err.message).toEqual('Http Exception')
         }
