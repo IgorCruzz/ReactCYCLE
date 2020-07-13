@@ -20,6 +20,7 @@ const userMock = new User({
 describe('SessionService', () => {
   let service: SessionService; 
   let repo: Repository<User>
+  let jwtService: JwtService
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -43,6 +44,7 @@ describe('SessionService', () => {
 
     service = module.get<SessionService>(SessionService); 
     repo = module.get<Repository<User>>(getRepositoryToken(User)) 
+    jwtService = module.get<JwtService>(JwtService)
   });
 
   it('should be defined', () => {
@@ -50,15 +52,15 @@ describe('SessionService', () => {
   });
 
   describe('Session', () => { 
-    it('should be possible to log in', async () => {
-       expect(await service.store({ email: userMock.email, password: '123456789' }))
-       .toHaveProperty(
-         'id', 
-         'email',         
-        )
+    it('should be possible to log in', async () => {  
+      expect.assertions(1); 
+      expect(await service.store({ email: userMock.email, password: '123456789' }))
+      .toContain('id') 
+      })  
     })
 
     it('trhow an erro if user does not exists', async () => {
+      expect.assertions(1);
       try {
         jest.spyOn(repo, 'findOne').mockResolvedValue(undefined)      
         await service.store({ email: 'any@gmail.com', password: '12345679'})
@@ -69,6 +71,7 @@ describe('SessionService', () => {
     })
 
     it('throw an error if password is not correct', async () => {
+      expect.assertions(1);
       try {
         await service.store({ email: userMock.email, password: 'WRONG PASSWORD'})
       } catch (err){
