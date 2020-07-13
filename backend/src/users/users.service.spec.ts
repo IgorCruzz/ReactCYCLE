@@ -131,9 +131,7 @@ describe('UsersService', () => {
       expect(await service.delete(1)).toBe(true)
     })
 
-  })
-
-   
+  })   
 
     describe('update', () => {
       it('should be update an user data', async () => {

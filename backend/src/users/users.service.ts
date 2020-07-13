@@ -72,9 +72,7 @@ export class UsersService {
     const token =  await this.tokenRepository.save({
       user_id: user.id,
       token: crypto.randomBytes(16).toString('hex')
-    })
-
-    console.log(token)
+    }) 
  
     await RegisterMail.handle(token)
     
