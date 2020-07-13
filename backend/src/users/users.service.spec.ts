@@ -67,6 +67,13 @@ const newUser = new User(
 
 const manyUsers = [userMock, userMock2] 
 
+const token = new Token(
+  1,
+  crypto.randomBytes(16).toString('hex'),
+  new Date,
+  new Date
+)
+
 describe('UsersService', () => {
   let service: UsersService;
   let userRepo: Repository<User>
@@ -88,7 +95,7 @@ describe('UsersService', () => {
     {
       provide: getRepositoryToken(Token),
       useValue: {
-        save: jest.fn() 
+        save: jest.fn().mockReturnValue(token)
       }
     }],
     }).compile();
