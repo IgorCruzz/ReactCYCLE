@@ -21,9 +21,26 @@ export class UsersService {
   
   async store(user: any): Promise<IUserDTO> {
     const schema = Yup.object().shape({
-      name: Yup.string().required().min(5),
-      email: Yup.string().email().required(),
-      password: Yup.string().required().min(7)
+        email: Yup.string().email().required(),
+        confirmEmail: Yup.string().oneOf([Yup.ref('email')], 'Os emails não se correspondem').required(),
+        password: Yup.string().min(6).required(),
+        confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'As senhas não se correspondem').required(),
+        name: Yup.string().min(4).required(),
+        cpf: Yup.string(),
+        cnpj: Yup.string(),
+        stateRegistration: Yup.string(),
+        companyName: Yup.string(),
+        phone: Yup.number().required() ,
+        gender: Yup.string().required(),
+        birth: Yup.string().required().typeError(),
+        cep: Yup.string().required().typeError(),
+        address: Yup.string().required(),
+        number: Yup.number().required().typeError(),
+        complement: Yup.string().required(),
+        referency: Yup.string().required(),
+        neighborhood: Yup.string().required(),
+        city: Yup.string().required(),
+        state: Yup.string().required()
     })
 
     if(! await schema.isValid(user)) {

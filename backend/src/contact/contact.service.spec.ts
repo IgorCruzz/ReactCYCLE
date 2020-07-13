@@ -5,8 +5,8 @@ import { Contact } from '../entities/contact.entity'
 
 const contact = new Contact(
       1,
-     'igor',
-     'igor@gmail.com',
+     'username',
+     'email@gmail.com',
      '123456798',
      '123',
      'message',
