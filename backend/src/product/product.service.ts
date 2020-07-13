@@ -96,12 +96,12 @@ export class ProductService {
     return productList
   }
 
-  async showOne(product: { id: number}): Promise<ProductDTO[]> {  
+  async showOne(product: { id: number}): Promise<ProductDTO> {  
     const { id } = product
-    const productData = await this.productRepository.find({
+    const productData = await this.productRepository.findOne({
       where: { id },
       relations: ['avatar_data']
-    })
+    }) 
     return productData
   }
 } 

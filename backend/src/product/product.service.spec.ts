@@ -52,7 +52,8 @@ describe('ProductService', () => {
         provide: getRepositoryToken(Product),
         useValue: {
           find: jest.fn().mockResolvedValue(productList),
-          save: jest.fn().mockReturnValue(newProduct)
+          save: jest.fn().mockReturnValue(newProduct),
+          findOne: jest.fn().mockResolvedValue(product1)
         }
       }],
     }).compile();
@@ -99,8 +100,24 @@ describe('ProductService', () => {
       it('should be able to list all product of an specific category', async () => {
         expect(await service.index({category: 'category' ,page: 1, min: 1, max: 999})).toEqual(productList)
       })
+    }) 
+
+    
+    describe('ShowOne', () => {
+      it('should be able to show one product', async () => {      
+        const repoSpy = jest.spyOn(repo, 'findOne')
+        expect(await service.showOne({ id: 1})).toBe(product1)
+        expect(repoSpy).toBeCalledTimes(1)
+      })
     })
 
-     
+    describe('Show', () => {
+      it('should be able to search certain product', async () => {
+        const repoSpy = jest.spyOn(repo, 'find')
+
+        expect(await service.show('PRODUCT NAME')).toBe(product1)
+        expect(repoSpy).toBeCalledTimes(1)
+      })
+    })
   })
 });
