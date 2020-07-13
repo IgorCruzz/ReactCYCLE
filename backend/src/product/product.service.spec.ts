@@ -22,38 +22,48 @@ const product1 = new Product(
      name: 'PRODUCT NAME',
      price: 54,
      quantity: 10,
-     avatar: 1,
-     avatar_data: {
-      id: 1, 
-      name: 'avatarName', 
-      url: 'http://localhost:3333/file/avatarName',
-      created_at: Date,
-      updated_at: Date,
-     },
+     avatar: 1,   
      category: 'category'  
   }
 )
+
+const productExtends = {
+  ...product1,
+    avatar_data: {
+    id: 1, 
+    name: 'avatarName', 
+    url: 'http://localhost:3333/file/avatarName',
+    created_at: new Date(),
+    updated_at: new Date(),
+   }
+
+}
 
 const product2 = new Product(
   {
      id: 2,
-     name: 'PRODUCT NAME',
+     name: 'PRODUCT NAME2',
      price: 54,
      quantity: 10,
-     avatar: 2,
-     avatar_data: {
-      id: 2, 
-      name: 'avatarName', 
-      url: 'http://localhost:3333/file/avatarName',
-      created_at: Date,
-      updated_at: Date,
-
-     },
+     avatar: 2,      
      category: 'category'  
   }
 )
 
-const productList =  [product1, product2]
+const productExtends2 = {
+  ...product2,
+    avatar_data: {
+    id: 2, 
+    name: 'avatarName', 
+    url: 'http://localhost:3333/file/avatarName',
+    created_at: new Date(),
+    updated_at: new Date(),
+   }
+
+}
+
+const list = [product1, product2]
+const productList =  [productExtends, productExtends2]
  
 
 describe('ProductService', () => {
@@ -68,7 +78,7 @@ describe('ProductService', () => {
         useValue: {
           find: jest.fn().mockResolvedValue(productList),
           save: jest.fn().mockReturnValue(newProduct),
-          findOne: jest.fn().mockResolvedValue(product1)
+          findOne: jest.fn().mockResolvedValue(productExtends)
         }
       }],
     }).compile();
@@ -109,11 +119,24 @@ describe('ProductService', () => {
 
     describe('Index', () => {
       it('should be  able to list all products', async () => {
-        expect(await service.index({page: 1, min: 1, max: 999})).toEqual(productList)
+        expect(await service.index({page: 1, min: 1, max: 999})).toEqual(productList)           
       })
 
       it('should be able to list all product of an specific category', async () => {
-        expect(await service.index({category: 'category' ,page: 1, min: 1, max: 999})).toEqual(productList)
+        expect(await service.index({category: 'category' ,page: 1, min: 1, max: 999})).toEqual([{
+          id: productExtends.id,
+          name: productExtends.name,
+          price: productExtends.price,
+          quantity: productExtends.quantity,
+          avatar_url: productExtends.avatar_data.url
+        },     
+        {
+          id: productExtends2.id,
+          name: productExtends2.name,
+          price: productExtends2.price,
+          quantity: productExtends2.quantity,
+          avatar_url: productExtends2.avatar_data.url        
+      }])
       })
     }) 
 
@@ -121,7 +144,7 @@ describe('ProductService', () => {
     describe('ShowOne', () => {
       it('should be able to show one product', async () => {      
         const repoSpy = jest.spyOn(repo, 'findOne')
-        expect(await service.showOne({ id: 1})).toBe(product1)
+        expect(await service.showOne({ id: 1})).toEqual(productExtends)
         expect(repoSpy).toBeCalledTimes(1)
       })
     })
@@ -130,7 +153,21 @@ describe('ProductService', () => {
       it('should be able to search certain product', async () => {
         const repoSpy = jest.spyOn(repo, 'find')
 
-        expect(await service.show('PRODUCT NAME')).toBe(product1)
+        expect(await service.show('PRODUCT'))
+        .toEqual([{
+        avatar_url: "http://localhost:3333/file/avatarName",
+        id: 1,
+        name: "PRODUCT NAME", 
+        price: 54,
+        quantity: 10
+      }, 
+      {
+        avatar_url: "http://localhost:3333/file/avatarName", 
+        id: 2, 
+        name: "PRODUCT NAME2", 
+        price: 54,
+        quantity: 10}
+      ])
         expect(repoSpy).toBeCalledTimes(1)
       })
     })

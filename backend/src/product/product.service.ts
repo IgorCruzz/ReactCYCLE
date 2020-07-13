@@ -59,7 +59,7 @@ export class ProductService {
       take: 12,
       relations: ['avatar_data']      
     })   
-    console.log(products)
+ 
 
     const productList = products.map(product => { 
       return {     
@@ -69,9 +69,7 @@ export class ProductService {
         quantity: product.quantity,
         avatar_url: product.avatar_data.url 
         }        
-    })    
-
-  
+    })   
     return productList
   }
 
@@ -103,6 +101,7 @@ export class ProductService {
       where: { id },
       relations: ['avatar_data']
     }) 
+ 
     return productData
   }
 } 
