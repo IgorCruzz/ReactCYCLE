@@ -2,60 +2,41 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ProductService } from './product.service';
 import { getRepositoryToken } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { Product } from '../entities/product.entity'
+import { Product } from '../entities/product.entity' 
 
+const avatar =  {
+  id: 1,
+  name: 'IMAGE',
+  url: 'http//test.com/IMAGE'
+}
 
-const newProduct = new Product( 
-  1,
-  'PRODUCT NAME',
-  54,
-  10,
-  1,
-  'category' 
-)
-
-const product1 = new Product(  
-  1,
-  'PRODUCT NAME',
-  54,
-  10,
-  1,   
-  'category'  
-)
-
-const product2 = new Product(   
-  2,
-  'PRODUCT NAME2',
-  54,
-  10,
-  2  
-)
+const newProduct = {
+  id: 1,
+  name: 'PRODUCT NAME',
+  price: 54,
+  quantity: 10, 
+  category: 'category', 
+}
 
 const productExtends = {
-  ...product1,
-    avatar_data: {
-    id: 1, 
-    name: 'avatarName', 
-    url: 'http://localhost:3333/file/avatarName',
-    created_at: new Date(),
-    updated_at: new Date(),
-   }
-
+  id: 1,
+  name: 'PRODUCT NAME',
+  price: 54,
+  quantity: 10,
+  avatar: avatar.id,   
+  category: 'category', 
+  avatar_data: avatar
 }
 
 const productExtends2 = {
-  ...product2,
-    avatar_data: {
-    id: 2, 
-    name: 'avatarName', 
-    url: 'http://localhost:3333/file/avatarName',
-    created_at: new Date(),
-    updated_at: new Date(),
-   }
-}
- 
-const productList =  [productExtends, productExtends2]
- 
+  id: 2,
+  name: 'PRODUCT NAME2',
+  price: 54,
+  quantity: 10,
+  avatar: 2,
+  category: 'category',
+  avatar_data: avatar   
+} 
 
 describe('ProductService', () => {
   let service: ProductService;
@@ -67,7 +48,7 @@ describe('ProductService', () => {
       {
         provide: getRepositoryToken(Product),
         useValue: {
-          find: jest.fn().mockResolvedValue(productList),
+          find: jest.fn().mockResolvedValue([productExtends, productExtends2]),
           save: jest.fn().mockReturnValue(newProduct),
           findOne: jest.fn().mockResolvedValue(productExtends)
         }
@@ -80,6 +61,7 @@ describe('ProductService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+ 
   });
 
   describe('Product', () => {
@@ -110,7 +92,7 @@ describe('ProductService', () => {
 
     describe('Index', () => {
       it('should be  able to list all products', async () => {
-        expect(await service.index()).toEqual(productList)           
+        expect(await service.index()).toEqual([productExtends, productExtends2])           
       })
 
       it('should be able to list all product of an specific category', async () => {
@@ -146,14 +128,14 @@ describe('ProductService', () => {
 
         expect(await service.show('PRODUCT'))
         .toEqual([{
-        avatar_url: "http://localhost:3333/file/avatarName",
+        avatar_url: "http//test.com/IMAGE",
         id: 1,
         name: "PRODUCT NAME", 
         price: 54,
         quantity: 10
       }, 
       {
-        avatar_url: "http://localhost:3333/file/avatarName", 
+        avatar_url: "http//test.com/IMAGE", 
         id: 2, 
         name: "PRODUCT NAME2", 
         price: 54,

@@ -67,12 +67,12 @@ const newUser = new User(
 
 const manyUsers = [userMock, userMock2] 
 
-const token = new Token(
-  1,
-  crypto.randomBytes(16).toString('hex'),
-  new Date,
-  new Date
-)
+const token = new Token({
+  user_id: 1,
+  token: crypto.randomBytes(16).toString('hex'),
+  created_at: new Date(),
+  updated_at: new Date()
+})
 
 describe('UsersService', () => {
   let service: UsersService;

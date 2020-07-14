@@ -9,30 +9,6 @@ import { Avatar } from './avatar.entity'
 
  @Entity()
  export class Product{ 
-  
-   constructor(
-     id?: number,
-     name?: string,
-     price?: number,
-     quantity?: number,
-     avatar?: number,
-     avatar_data?: Avatar,
-     category?: string,
-     created_at?: Date,
-     updated_at?: Date
-   ) {
-     this.id = id || NaN,
-     this.name = name || '',
-     this.quantity = quantity || NaN,
-     this.price = price || NaN,
-     this.avatar = avatar || NaN
-     this.category = category || '',
-     this.created_at = created_at || new Date(),
-     this.updated_at = updated_at || new Date(),
-     this.avatar_data = avatar_data || { id: NaN, name: '', url: '', created_at: new Date(), updated_at: new Date()}
-   }
- 
-
    @PrimaryColumn()   
    id: number
 
@@ -46,9 +22,9 @@ import { Avatar } from './avatar.entity'
    quantity: number
 
    @Column()
-   avatar: number
-
-   @OneToOne(() => Avatar)
+   avatar: number   
+ 
+   @OneToOne/* istanbul ignore next */(() => Avatar) 
    @JoinColumn({ name: 'avatar'})
    avatar_data: Avatar
 

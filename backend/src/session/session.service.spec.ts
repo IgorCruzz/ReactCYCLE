@@ -9,12 +9,12 @@ import { JwtModule } from '@nestjs/jwt'
 import { jwtConstants } from './constants' 
 import * as bcrypt from 'bcrypt'
 
-const userMock = new User({ 
+const userMock = { 
   id: 1,
   name: 'nome de usuario',
   email: 'izone@gmail.com', 
   password: bcrypt.hashSync('123456789', 8),  
-})
+}
 
 describe('SessionService', () => {
   let service: SessionService; 

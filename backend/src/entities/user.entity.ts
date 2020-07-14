@@ -10,58 +10,6 @@ import {
 
 @Entity()
 export class User {   
-
-  constructor(user?: {
-    id?: number,
-    name?: string,
-    email?: string, 
-    password?: string,
-    cpf?: string,
-    cnpj?: string,
-    stateRegistration?: string,
-    companyName?: string, 
-    phone?: string,
-    gender?: string,
-    birth?: number,
-    cep?: string,
-    address?: string,
-    number?: number,
-    complement?: string,
-    referency?: string,
-    neighborhood?: string,
-    city?: string,
-    state?: string,
-    active?: boolean,
-    administrator?: boolean,
-    created_at?: Date, 
-    updated_at?: Date, 
-    }  
-    ){
-      this.id = user?.id || 1
-      this.name = user?.name || ''
-      this.email = user?.email || '' 
-      this.password = user?.password || ''
-      this.cpf  = user?.cpf || ''
-      this.cnpj = user?.cnpj || ''
-      this.stateRegistration = user?.stateRegistration || ''
-      this.companyName = user?.companyName || '' 
-      this.phone = user?.phone || ''
-      this.gender = user?.gender || ''
-      this.birth = user?.birth || NaN
-      this.cep = user?.cep || ''
-      this.address = user?.address || ''
-      this.number = user?.number || NaN
-      this.complement = user?.complement || ''
-      this.referency = user?.referency || ''
-      this.neighborhood = user?.neighborhood || ''
-      this.city = user?.city || ''
-      this.state = user?.state || ''
-      this.active = user?.active || false
-      this.administrator = user?.administrator || false
-      this.created_at = user?.created_at|| new Date() 
-      this.updated_at = user?.updated_at || new Date()
-    }
-
   @PrimaryGeneratedColumn()
   id: number
 

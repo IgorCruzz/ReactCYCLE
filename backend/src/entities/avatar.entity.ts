@@ -7,8 +7,7 @@ import {
  } from 'typeorm'
 
 @Entity()
-export class Avatar {
- 
+export class Avatar { 
   @PrimaryGeneratedColumn()
   id: number
   

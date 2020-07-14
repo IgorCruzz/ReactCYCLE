@@ -54,6 +54,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4",
     "typeorm": "^0.2.24",
+    "typeorm-test-transactions": "^1.11.1",
     "yup": "^0.28.5"
   },
   "devDependencies": {
@@ -80,8 +81,10 @@
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.7.4"
   },
-  "jest": {
-    "setupFilesAfterEnv": ["jest-extended"],
+  "jest": {     
+    "setupFilesAfterEnv": [
+      "jest-extended"
+    ],
     "moduleFileExtensions": [
       "js",
       "json",
