@@ -16,6 +16,7 @@ import { Avatar } from './avatar.entity'
      price?: number,
      quantity?: number,
      avatar?: number,
+     avatar_data?: Avatar,
      category?: string,
      created_at?: Date,
      updated_at?: Date
@@ -27,7 +28,8 @@ import { Avatar } from './avatar.entity'
      this.avatar = avatar || NaN
      this.category = category || '',
      this.created_at = created_at || new Date(),
-     this.updated_at = updated_at || new Date()
+     this.updated_at = updated_at || new Date(),
+     this.avatar_data = avatar_data || { id: NaN, name: '', url: '', created_at: new Date(), updated_at: new Date()}
    }
  
 

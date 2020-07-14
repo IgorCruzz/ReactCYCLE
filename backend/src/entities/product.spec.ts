@@ -1,4 +1,5 @@
 import { Product } from './product.entity' 
+import { Avatar } from './avatar.entity'
 
 describe('Product Entity', () => {
   it('should be possible register and product with no fields', () => {
@@ -12,6 +13,7 @@ describe('Product Entity', () => {
     expect(product.category).toBe('')
     expect(product.created_at).toBeInstanceOf(Date)
     expect(product.updated_at).toBeInstanceOf(Date)
+    expect(product.avatar_data).toBeInstanceOf(Object)
   })
 }) 
 
