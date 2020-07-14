@@ -11,7 +11,7 @@ export class Contact {
     message?: string,
     created_at?: Date ,
     updated_at?: Date) {
-      this.id = id || 1
+      this.id = id || NaN
       this.name = name ||''
       this.email = email ||''
       this.phone = phone ||''

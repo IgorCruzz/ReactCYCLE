@@ -17,6 +17,7 @@ const userMock = new User({
   password: bcrypt.hashSync('123456789', 8),  
 })
  
+ 
 
 describe('SessionService', () => {
   let service: SessionService; 

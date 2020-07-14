@@ -10,10 +10,10 @@ import {
 @Entity()
 export class Token{
   constructor(
-    user_id: number,
-    token: string,
-    created_at: Date,
-    updated_at: Date
+    user_id?: number,
+    token?: string,
+    created_at?: Date,
+    updated_at?: Date
   ){
     this.user_id = user_id || NaN
     this.token = token || ''

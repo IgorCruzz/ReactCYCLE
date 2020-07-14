@@ -10,16 +10,16 @@ import { Avatar } from './avatar.entity'
  @Entity()
  export class Product{ 
   
-   constructor({
-     id,
-     name,
-     price,
-     quantity,
-     avatar,
-     category,
-     created_at,
-     updated_at
-   }: any) {
+   constructor(
+     id?: number,
+     name?: string,
+     price?: number,
+     quantity?: number,
+     avatar?: number,
+     category?: string,
+     created_at?: Date,
+     updated_at?: Date
+   ) {
      this.id = id || NaN,
      this.name = name || '',
      this.quantity = quantity || NaN,

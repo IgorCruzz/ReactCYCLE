@@ -5,26 +5,30 @@ import { Repository } from 'typeorm'
 import { Product } from '../entities/product.entity'
 
 
-const newProduct = new Product(
-  {
-     id: 1,
-     name: 'PRODUCT NAME',
-     price: 54,
-     quantity: 10,
-     avatar: '',
-     category: 'category'  
-  }
+const newProduct = new Product( 
+  1,
+  'PRODUCT NAME',
+  54,
+  10,
+  1,
+  'category' 
 )
 
-const product1 = new Product(
-  {
-     id: 1,
-     name: 'PRODUCT NAME',
-     price: 54,
-     quantity: 10,
-     avatar: 1,   
-     category: 'category'  
-  }
+const product1 = new Product(  
+  1,
+  'PRODUCT NAME',
+  54,
+  10,
+  1,   
+  'category'  
+)
+
+const product2 = new Product(   
+  2,
+  'PRODUCT NAME2',
+  54,
+  10,
+  2  
 )
 
 const productExtends = {
@@ -39,17 +43,6 @@ const productExtends = {
 
 }
 
-const product2 = new Product(
-  {
-     id: 2,
-     name: 'PRODUCT NAME2',
-     price: 54,
-     quantity: 10,
-     avatar: 2,      
-     category: 'category'  
-  }
-)
-
 const productExtends2 = {
   ...product2,
     avatar_data: {
@@ -59,10 +52,8 @@ const productExtends2 = {
     created_at: new Date(),
     updated_at: new Date(),
    }
-
 }
-
-const list = [product1, product2]
+ 
 const productList =  [productExtends, productExtends2]
  
 

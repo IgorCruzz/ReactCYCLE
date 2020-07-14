@@ -11,81 +11,56 @@ import {
 @Entity()
 export class User {   
 
-  constructor(
-  {
-  id,
-  name,
-  email, 
-  password,
-  cpf,
-  cnpj,
-  stateRegistration,
-  companyName, 
-  phone,
-  gender,
-  birth,
-  cep,
-  address,
-  number,
-  complement,
-  referency,
-  neighborhood,
-  city,
-  state,
-  active,
-  administrator,
-  created_at, 
-  updated_at
-  }: {
-  id?: number,
-  name?: string,
-  email?: string, 
-  password?: string,
-  cpf?: string,
-  cnpj?: string,
-  stateRegistration?: string,
-  companyName?: string, 
-  phone?: string,
-  gender?: string,
-  birth?: number,
-  cep?: string,
-  address?: string,
-  number?: number,
-  complement?: string,
-  referency?: string,
-  neighborhood?: string,
-  city?: string,
-  state?: string,
-  active?: boolean,
-  administrator?: boolean,
-  created_at?: Date, 
-  updated_at?: Date, 
-  }  
-  ){
-    this.id =id || 1
-    this.name = name || ''
-    this.email = email || '' 
-    this.password = password || ''
-    this.cpf  = cpf || ''
-    this.cnpj = cnpj || ''
-    this.stateRegistration = stateRegistration || ''
-    this.companyName = companyName || '' 
-    this.phone = phone || ''
-    this.gender = gender || ''
-    this.birth = birth || NaN
-    this.cep = cep || ''
-    this.address = address || ''
-    this.number = number || NaN
-    this.complement = complement || ''
-    this.referency = referency || ''
-    this.neighborhood = neighborhood || ''
-    this.city = city || ''
-    this.state = state || ''
-    this.active = active || false
-    this.administrator = administrator || false
-    this.created_at = created_at|| new Date() 
-    this.updated_at = updated_at || new Date()
-  }
+  constructor(user?: {
+    id?: number,
+    name?: string,
+    email?: string, 
+    password?: string,
+    cpf?: string,
+    cnpj?: string,
+    stateRegistration?: string,
+    companyName?: string, 
+    phone?: string,
+    gender?: string,
+    birth?: number,
+    cep?: string,
+    address?: string,
+    number?: number,
+    complement?: string,
+    referency?: string,
+    neighborhood?: string,
+    city?: string,
+    state?: string,
+    active?: boolean,
+    administrator?: boolean,
+    created_at?: Date, 
+    updated_at?: Date, 
+    }  
+    ){
+      this.id = user?.id || 1
+      this.name = user?.name || ''
+      this.email = user?.email || '' 
+      this.password = user?.password || ''
+      this.cpf  = user?.cpf || ''
+      this.cnpj = user?.cnpj || ''
+      this.stateRegistration = user?.stateRegistration || ''
+      this.companyName = user?.companyName || '' 
+      this.phone = user?.phone || ''
+      this.gender = user?.gender || ''
+      this.birth = user?.birth || NaN
+      this.cep = user?.cep || ''
+      this.address = user?.address || ''
+      this.number = user?.number || NaN
+      this.complement = user?.complement || ''
+      this.referency = user?.referency || ''
+      this.neighborhood = user?.neighborhood || ''
+      this.city = user?.city || ''
+      this.state = user?.state || ''
+      this.active = user?.active || false
+      this.administrator = user?.administrator || false
+      this.created_at = user?.created_at|| new Date() 
+      this.updated_at = user?.updated_at || new Date()
+    }
 
   @PrimaryGeneratedColumn()
   id: number
