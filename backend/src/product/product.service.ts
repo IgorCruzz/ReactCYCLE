@@ -36,26 +36,24 @@ export class ProductService {
     return product  
   } 
 
-  async index(paramData: {
+  async index(paramData?: {
     category?: string, 
     page?: number, 
     min?: number,
     max?: number 
-  }): Promise<any> {
-  
-    const { category, page, min, max } = paramData
+  }): Promise<any> {  
    
-    if(!category){
+    if(!paramData){
       const products = await this.productRepository.find()     
       return products
     }     
  
     const products = await this.productRepository.find({         
       where: { 
-        category,
-        price: Between(min, max)
+        category: paramData.category,
+        price: Between(paramData.min, paramData.max)
         },      
-      skip: (Number(page) - 1) * 12,      
+      skip: (Number(paramData.page) - 1) * 12,      
       take: 12,
       relations: ['avatar_data']      
     })   

@@ -110,7 +110,7 @@ describe('ProductService', () => {
 
     describe('Index', () => {
       it('should be  able to list all products', async () => {
-        expect(await service.index({page: 1, min: 1, max: 999})).toEqual(productList)           
+        expect(await service.index()).toEqual(productList)           
       })
 
       it('should be able to list all product of an specific category', async () => {
