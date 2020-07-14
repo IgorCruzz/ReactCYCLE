@@ -3,16 +3,17 @@ import { ContactService } from './contact.service';
 import {  getRepositoryToken  } from '@nestjs/typeorm' 
 import { Contact } from '../entities/contact.entity' 
 
-const contact = new Contact(
-      1,
-     'username',
-     'email@gmail.com',
-     '123456798',
-     '123',
-     'message',
-      new Date(),
-      new Date()
-)
+const contact = {
+     id: 1,
+     name: 'username',
+     email: 'email@gmail.com',
+     phone: '123456798',
+     order: '123',
+     message: 'message',
+     created_at: new Date(),
+    updated_at: new Date()
+}
+ 
  
 describe('ContactService', () => {
   let service: ContactService;

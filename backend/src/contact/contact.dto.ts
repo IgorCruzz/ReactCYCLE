@@ -1,7 +1,10 @@
 export interface ContactDTO {
+	id?: number,
   name: string,
 	email: string,
 	phone: string,
 	order: string,
-	message: string
+	message: string,
+	created_at?: Date,
+	updated_at?: Date
 }

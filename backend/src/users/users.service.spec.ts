@@ -7,7 +7,7 @@ import { Token } from '../entities/token.entity'
 import * as bcrypt from 'bcrypt'
 import * as crypto from 'crypto'
 
-const userMock = new User({ 
+const userMock =  { 
   id: 1,
   name: 'user one',
   email: 'userone@gmail.com', 
@@ -24,9 +24,9 @@ const userMock = new User({
   neighborhood: "barra do imbui",
   city: "teresopolis",
   state: "RJ"   
-})
+}
 
-const userMock2 = new User({ 
+const userMock2 = { 
   id: 2,
   name: 'user two',
   email: 'usertwo@gmail.com', 
@@ -43,9 +43,9 @@ const userMock2 = new User({
   neighborhood: "barra do imbui",
   city: "teresopolis",
   state: "RJ"   
-})
+}
 
-const newUser = new User(
+const newUser = 
   { 
     name: "new user",
     email: "newuser@gmail.com",
@@ -63,16 +63,16 @@ const newUser = new User(
     city: "teresopolis",
     state: "RJ" 
   }
-)
+
 
 const manyUsers = [userMock, userMock2] 
 
-const token = new Token({
+const token = {
   user_id: 1,
   token: crypto.randomBytes(16).toString('hex'),
   created_at: new Date(),
   updated_at: new Date()
-})
+}
 
 describe('UsersService', () => {
   let service: UsersService;
