@@ -1,5 +1,5 @@
 import { Injectable, HttpException, HttpStatus  } from '@nestjs/common';
-import { LoginDTO } from './session.dto'
+import { ILoginDTO } from './session.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User } from '../entities/user.entity'
 import { Repository } from 'typeorm'
@@ -15,7 +15,7 @@ export class SessionService {
     private jwtService: JwtService
   ) {}
 
-  async store(login: LoginDTO): Promise<LoginDTO> {
+  async store(login: ILoginDTO): Promise<ILoginDTO> {
     const schema = Yup.object().shape({
       email: Yup.string().email().required(),
       password: Yup.string().required()
@@ -34,7 +34,7 @@ export class SessionService {
     if(!user){
       throw new HttpException({
         status: HttpStatus.BAD_REQUEST,
-        error: 'Dont have an user with this e-mail'
+        error: 'Does not have an user with this e-mail'
       }, HttpStatus.BAD_REQUEST)
     }
 

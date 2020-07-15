@@ -1,18 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SessionController } from './session.controller'
 import { SessionService } from './session.service'
-import { JwtService } from '@nestjs/jwt'
-
-let jwtService: JwtService
 
 const Session = {
   id: 1,
   email: 'email@gmail.com',
   password: 'password',
-  token: jwtService.sign({ payload: { sub: '1'}})
+  token: 'token'
 }
-
-
 
 describe('Cat Controller', () => {
   let controller: SessionController;
@@ -45,7 +40,5 @@ describe('Cat Controller', () => {
         .toEqual(Session)
       })
   })
-
-
 
 });

@@ -11,7 +11,6 @@ const contact = new Contact({
      message: 'message'
 })
 
-
 describe('ContactService', () => {
   let service: ContactService;
 

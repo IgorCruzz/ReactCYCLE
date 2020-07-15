@@ -1,4 +1,4 @@
-export interface LoginDTO {
+export interface ILoginDTO {
   id?: number,
   email: string,
   password: string,
