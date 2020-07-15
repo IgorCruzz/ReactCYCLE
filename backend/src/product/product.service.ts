@@ -31,18 +31,16 @@ export class ProductService {
 
     const { name, ...rest } = contact
 
-    const product = await this.productRepository.save({
+    return await this.productRepository.save({
       name: name.toLowerCase(),
 	    ...rest
     })
-    return product
   }
 
   async index(paramData?: IParamData): Promise<IProductDTO[] | IProductList[]> {
 
     if(!paramData){
-      const products = await this.productRepository.find()
-      return products
+      return await this.productRepository.find()
     }
 
     const products = await this.productRepository.find({

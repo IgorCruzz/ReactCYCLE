@@ -106,8 +106,6 @@ export class UsersService {
       }, HttpStatus.BAD_REQUEST)
     }
 
-    const userData = await this.usersRepositoy.update(id, user)
-
-    return userData
+    return await this.usersRepositoy.update(id, user)
   }
 }
