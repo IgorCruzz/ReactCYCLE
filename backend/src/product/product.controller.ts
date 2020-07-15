@@ -22,7 +22,7 @@ export class ProductController {
   }
 
   @Get('/:id')
-  showOne(@Param() product: { id: number}): Promise<ProductDTO[]> {
+  showOne(@Param() product: { id: number}): Promise<ProductDTO> {
     return this.productService.showOne(product)
   }
 

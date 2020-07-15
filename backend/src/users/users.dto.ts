@@ -4,7 +4,7 @@ export interface IUserDTO {
 	email: string,
 	password: string,
   cpf?: string,
-  cnpj: string,
+  cnpj?: string,
 	phone: string,
 	gender: string,
 	birth: number,
