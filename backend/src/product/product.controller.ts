@@ -18,7 +18,7 @@ export class ProductController {
     min?: number,
     max?: number 
   }  ): Promise<ProductDTO> {
-    return this.productService.index(paramData)
+    return this.productService.index(paramData || undefined)
   }
 
   @Get('/:id')

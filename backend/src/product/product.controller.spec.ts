@@ -3,6 +3,16 @@ import {  ProductController  } from './product.controller'
 import {  ProductDTO } from './product.dto'
 import { ProductService } from './product.service' 
 
+
+
+const product = {
+  name: "nome do produtomaydaaa",
+  quantity: 10,
+  price: 500.5,
+  category: "Bicicletas",
+  avatar: 117
+}
+
 describe('Cat Controller', () => {
   let controller: ProductController;
   let service: ProductService;
@@ -14,10 +24,10 @@ describe('Cat Controller', () => {
         {
           provide: ProductService,
           useValue: {
-            store: jest.fn(),
-            index: jest.fn(),
-            showOne: jest.fn(),
-            show: jest.fn()
+            store: jest.fn().mockResolvedValue(product),
+            index: jest.fn().mockResolvedValue(product),
+            showOne: jest.fn().mockResolvedValue(product),
+            show: jest.fn().mockResolvedValue(product)
           }
         }
       ],
@@ -30,6 +40,28 @@ describe('Cat Controller', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  describe('Product', () => {
+    it('should be able to create a product', async () => {
+      expect(await controller.store({
+        id: 1,
+        name: "nome do produtomaydaaa",
+        quantity: 10,
+        price: 500.5,
+        category: "Bicicletas",
+        avatar: 117
+      })).toEqual(product)
+    })
+    it('should be able to show a certain product', async () => {
+      expect(await controller.showOne({ id: 1})).toEqual(product)
+    })
+    it('should be able to show product with certain characters', async () => {
+      expect(await controller.show('product')).toEqual(product)
+    })
+    it('should be able to show all products', async () => {
+      expect(await controller.index(undefined)).toEqual(product)
+    })
+  })
  
  
 });
