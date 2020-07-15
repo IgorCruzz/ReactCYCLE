@@ -37,13 +37,21 @@ describe('ContactService', () => {
 
    describe('contact', () => {
     it('should be possible create an message', async () => {
-      expect(await service.store({
-        name: contact.name,
-        email: contact.email,
-        phone: contact.phone,
-        order: contact.order,
-        message: contact.message
-      })).toEqual(contact)
+      expect(await service.store(contact)).toEqual(contact)
+    })
+
+    it('throw an error if field isnt filled', async () => {
+      try {
+          await service.store({
+            name: '',
+            email: '',
+            phone: '',
+            order: '',
+            message: ''
+          })
+      } catch(err){
+        expect(err.message).toEqual('Http Exception')
+      }
     })
 
    })

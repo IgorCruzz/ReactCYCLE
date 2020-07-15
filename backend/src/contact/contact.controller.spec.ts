@@ -1,9 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing'; 
+import { Test, TestingModule } from '@nestjs/testing';
 import { ContactController } from './contact.controller'
-import { ContactDTO } from './contact.dto'
 import { ContactService } from './contact.service'
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Contact } from '../entities/contact.entity'
 
 
 const newContact = {
@@ -12,19 +9,19 @@ const newContact = {
   email: "email@gmail.com",
   phone: "21999999999",
   order: "999",
-  message: "mensagem",          
+  message: "mensagem",
   created_at: new Date(),
   updated_at: new Date()
 }
- 
+
 
 describe('Cat Controller', () => {
   let controller: ContactController;
   let service: ContactService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({    
-      controllers: [ContactController],     
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [ContactController],
       providers: [
         {
           provide: ContactService,
@@ -45,10 +42,10 @@ describe('Cat Controller', () => {
 
   describe('New Contact', () => {
     it('should be able to create a contact', async () => {
-      
+
       expect(await controller.store(newContact)).toEqual(newContact)
-      
+
     })
   })
- 
+
 });

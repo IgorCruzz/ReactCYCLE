@@ -5,6 +5,6 @@ export interface IContactDTO {
 	phone: string,
 	order: string,
   message: string,
-  created_at: Date,
-  updated_at: Date
+  created_at?: Date,
+  updated_at?: Date
 }
