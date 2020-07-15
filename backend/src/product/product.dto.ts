@@ -9,3 +9,18 @@ export interface IProductDTO {
   created_at?: Date,
   updated_at?: Date
 }
+
+export interface IProductList {
+  readonly id: number,
+  readonly name: string,
+  readonly price: number,
+  readonly quantity: number,
+  readonly avatar_url: string
+}
+
+export interface IParamData {
+  category?: string,
+  page?: number,
+  min?: number,
+  max?: number
+}

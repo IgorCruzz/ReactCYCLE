@@ -3,7 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Product } from '../entities/product.entity';
 import { Repository, Between, Like } from 'typeorm';
 import * as Yup from 'yup'
-import { IProductDTO } from './product.dto';
+import { IProductDTO, IProductList, IParamData } from './product.dto';
+
+
 
 @Injectable()
 export class ProductService {
@@ -22,7 +24,7 @@ export class ProductService {
     if(! await schema.isValid(contact)){
       throw new HttpException({
         statis: HttpStatus.BAD_REQUEST,
-        error: 'Erro na validação'
+        error: 'Validation Error'
       }, HttpStatus.BAD_REQUEST)
 
     }
@@ -36,12 +38,7 @@ export class ProductService {
     return product
   }
 
-  async index(paramData?: {
-    category?: string,
-    page?: number,
-    min?: number,
-    max?: number
-  }): Promise<any> {
+  async index(paramData?: IParamData): Promise<IProductDTO[] | IProductList[]> {
 
     if(!paramData){
       const products = await this.productRepository.find()
@@ -71,7 +68,7 @@ export class ProductService {
     return productList
   }
 
-  async show(name: string): Promise<any[]> {
+  async show(name: string): Promise<IProductList[]> {
 
     const products = await this.productRepository.find({
       where: {

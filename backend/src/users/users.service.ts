@@ -2,29 +2,29 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository, UpdateResult, DeleteResult } from 'typeorm'
 import { User } from '../entities/user.entity'
-import { Token } from '../entities/token.entity' 
+import { Token } from '../entities/token.entity'
 import * as Yup from 'yup'
 import { hashSync } from 'bcrypt'
 import RegisterMail from '../jobs/RegisterMail'
 import * as crypto from 'crypto'
 import { IUserDTO, IUserUpdateDTO } from './users.dto';
- 
+
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private usersRepositoy: Repository<User>,    
+    private usersRepositoy: Repository<User>,
     @InjectRepository(Token)
     private tokenRepository: Repository<Token>
   ) {}
-  
+
   async store(user: any): Promise<IUserDTO> {
     const schema = Yup.object().shape({
         email: Yup.string().email().required(),
-        confirmEmail: Yup.string().oneOf([Yup.ref('email')], 'Os emails não se correspondem').required(),
+        confirmEmail: Yup.string().oneOf([Yup.ref('email')], 'E-mails dont match').required(),
         password: Yup.string().min(6).required(),
-        confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'As senhas não se correspondem').required(),
+        confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Passwords dont match').required(),
         name: Yup.string().min(4).required(),
         cpf: Yup.string(),
         cnpj: Yup.string(),
@@ -47,8 +47,8 @@ export class UsersService {
       throw new HttpException({
         status: HttpStatus.BAD_REQUEST,
         error: 'Erro na validação'
-      }, HttpStatus.BAD_REQUEST)      
-    }     
+      }, HttpStatus.BAD_REQUEST)
+    }
 
     const { email, password } = user
 
@@ -57,8 +57,8 @@ export class UsersService {
     if(findUser) {
       throw new HttpException({
         status: HttpStatus.BAD_REQUEST,
-        error: 'Este e-mail já está cadastrado no sistema'   
-      }, HttpStatus.BAD_REQUEST)     
+        error: 'This e-mail has been already registered'
+      }, HttpStatus.BAD_REQUEST)
     }
 
     const hashPassword = hashSync(password, 8)
@@ -68,31 +68,27 @@ export class UsersService {
       password: hashPassword
     })
 
- 
+
     const token =  await this.tokenRepository.save({
       user_id: user.id,
       token: crypto.randomBytes(16).toString('hex')
-    }) 
- 
+    })
+
     await RegisterMail.handle(token)
-    
-    return userData 
+
+    return userData
   }
 
   async index(): Promise<IUserDTO[]> {
-    
-    const users = await this.usersRepositoy.find() 
- 
-
-    return users
+    return await this.usersRepositoy.find()
   }
 
   async show(id: number): Promise<IUserDTO>{
-    const user = await this.usersRepositoy.findOne({ id })
-    return user
+
+    return await this.usersRepositoy.findOne({ id })
   }
 
-  async delete(id: number): Promise<DeleteResult> { 
+  async delete(id: number): Promise<DeleteResult> {
     return await this.usersRepositoy.delete(id)
   }
 
@@ -107,8 +103,8 @@ export class UsersService {
       throw new HttpException({
         status: HttpStatus.BAD_REQUEST,
         error: 'Validation Error'
-      }, HttpStatus.BAD_REQUEST)    
-    } 
+      }, HttpStatus.BAD_REQUEST)
+    }
 
     const userData = await this.usersRepositoy.update(id, user)
 

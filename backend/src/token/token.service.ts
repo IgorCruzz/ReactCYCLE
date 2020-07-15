@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common' 
+import { Injectable } from '@nestjs/common'
 import {Token} from '../entities/token.entity'
 import { User } from '../entities/user.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
+import { ITokenDTO } from './token.dto'
 
 @Injectable()
 export class TokenService {
@@ -13,7 +14,7 @@ export class TokenService {
     private userRepository: Repository<User>
   ) {}
 
-  async store(token: string): Promise<void> {   
+  async store(token: ITokenDTO): Promise<void> {
 
     const tokenExists = await this.tokenRepository.findOne({ where: { token }})
 
@@ -21,6 +22,6 @@ export class TokenService {
 
     await this.userRepository.update(user.id, {
       active: true
-    })  
+    })
   }
 }

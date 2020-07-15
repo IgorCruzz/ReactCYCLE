@@ -1,7 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing'; 
+import { Test, TestingModule } from '@nestjs/testing';
 import {  ProductController  } from './product.controller'
-import {  ProductDTO } from './product.dto'
-import { ProductService } from './product.service' 
+import { ProductService } from './product.service'
 
 
 
@@ -18,8 +17,8 @@ describe('Cat Controller', () => {
   let service: ProductService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({    
-      controllers: [ProductController],     
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [ProductController],
       providers: [
         {
           provide: ProductService,
@@ -59,9 +58,9 @@ describe('Cat Controller', () => {
       expect(await controller.show('product')).toEqual(product)
     })
     it('should be able to show all products', async () => {
-      expect(await controller.index(undefined)).toEqual(product)
+      expect(await controller.index()).toEqual(product)
     })
   })
- 
- 
+
+
 });

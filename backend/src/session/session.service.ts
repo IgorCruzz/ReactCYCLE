@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { User } from '../entities/user.entity'
 import { Repository } from 'typeorm'
 import { compare } from 'bcrypt'
-import { JwtService } from '@nestjs/jwt' 
+import { JwtService } from '@nestjs/jwt'
 
 @Injectable()
 export class SessionService {
@@ -12,30 +12,30 @@ export class SessionService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
     private jwtService: JwtService
-  ) {} 
+  ) {}
 
   async store(login: LoginDTO): Promise<LoginDTO> {
-    const { email, password } = login 
+    const { email, password } = login
 
-    const user = await this.usersRepository.findOne({ email })    
-   
-    if(!user){    
+    const user = await this.usersRepository.findOne({ email })
+
+    if(!user){
       throw new HttpException({
         status: HttpStatus.BAD_REQUEST,
-        error: 'Não existe um usuário com este e-mail'
-      }, HttpStatus.BAD_REQUEST)   
+        error: 'Dont have an user with this e-mail'
+      }, HttpStatus.BAD_REQUEST)
     }
-   
+
     const comparePassword = await compare(password, user.password)
- 
+
     if(!comparePassword) {
       throw new HttpException({
         status: HttpStatus.BAD_REQUEST,
-        error: 'A senha está incorreta'
+        error: 'The password has been incorrect'
       }, HttpStatus.BAD_REQUEST)
-    }   
+    }
 
-    const payload = { 
+    const payload = {
       sub: user.id
     }
 

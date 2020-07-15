@@ -1,6 +1,6 @@
 import { Controller, Post, Get, Body, Param, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
-import { IProductDTO } from './product.dto';
+import { IProductDTO, IParamData, IProductList } from './product.dto';
 
 @Controller('product')
 export class ProductController {
@@ -12,13 +12,8 @@ export class ProductController {
   }
 
   @Get()
-  index(@Query() paramData: {
-    category?: string,
-    page?: number,
-    min?: number,
-    max?: number
-  }  ): Promise<IProductDTO> {
-    return this.productService.index(paramData || undefined)
+  index(@Query() paramData?: IParamData): Promise<IProductDTO[] | IProductList[]> {
+    return this.productService.index(paramData)
   }
 
   @Get('/:id')
@@ -27,7 +22,7 @@ export class ProductController {
   }
 
   @Get('/busca')
-  show(@Query() name: string): Promise<IProductDTO[]> {
+  show(@Query() name: string): Promise<IProductList[]> {
     return this.productService.show(name)
   }
 }
