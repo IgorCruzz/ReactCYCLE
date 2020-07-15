@@ -1,18 +1,33 @@
-import { 
-  Entity, 
-  Column, 
+import {
+  Entity,
+  Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn,  
+  UpdateDateColumn,
  } from 'typeorm'
 
 @Entity()
-export class Avatar { 
-  @PrimaryGeneratedColumn()
+export class Avatar {
+
+  constructor(data ?: {
+    id?: number,
+    name?: string,
+    url?: string,
+    created_at?: Date,
+    updated_at?: Date
+  }){
+    this.id = NaN
+    this.name = data?.name || ''
+    this.url = data?.url || ''
+    this.created_at = new Date()
+    this.updated_at = new Date()
+  }
+
+  @PrimaryGeneratedColumn('increment')
   id: number
-  
+
   @Column()
-  name: string 
+  name: string
 
   @Column()
   url: string

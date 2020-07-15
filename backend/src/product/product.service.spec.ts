@@ -2,41 +2,42 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ProductService } from './product.service';
 import { getRepositoryToken } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { Product } from '../entities/product.entity' 
+import { Product } from '../entities/product.entity'
+import { Avatar } from '../entities/avatar.entity'
 
-const avatar =  {
+const avatar = new  Avatar({
   id: 1,
   name: 'IMAGE',
   url: 'http//test.com/IMAGE'
-}
+})
 
 const newProduct = {
   id: 1,
   name: 'PRODUCT NAME',
   price: 54,
-  quantity: 10, 
-  category: 'category', 
+  quantity: 10,
+  category: 'category',
 }
 
-const productExtends = {
+const productExtends = new Product({
   id: 1,
   name: 'PRODUCT NAME',
   price: 54,
   quantity: 10,
-  avatar: avatar.id,   
-  category: 'category', 
-  avatar_data: avatar
-}
+  avatar: avatar.id,
+  avatar_data: avatar,
+  category: 'category'
+})
 
-const productExtends2 = {
+const productExtends2 = new Product({
   id: 2,
   name: 'PRODUCT NAME2',
   price: 54,
   quantity: 10,
-  avatar: 2,
-  category: 'category',
-  avatar_data: avatar   
-} 
+  avatar: avatar.id,
+  avatar_data: avatar,
+  category: 'category'
+})
 
 describe('ProductService', () => {
   let service: ProductService;
@@ -61,7 +62,7 @@ describe('ProductService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
- 
+
   });
 
   describe('Product', () => {
@@ -77,12 +78,11 @@ describe('ProductService', () => {
       it('throw an error if the request body has empty values', async () => {
         try {
           await service.store({
-            id: NaN,
             name: '',
             price: NaN,
             quantity: NaN,
             avatar: NaN,
-            category: ''  
+            category: ''
          })
         } catch(err){
           expect(err.message).toEqual('Http Exception')
@@ -92,7 +92,7 @@ describe('ProductService', () => {
 
     describe('Index', () => {
       it('should be  able to list all products', async () => {
-        expect(await service.index()).toEqual([productExtends, productExtends2])           
+        expect(await service.index()).toEqual([productExtends, productExtends2])
       })
 
       it('should be able to list all product of an specific category', async () => {
@@ -102,20 +102,20 @@ describe('ProductService', () => {
           price: productExtends.price,
           quantity: productExtends.quantity,
           avatar_url: productExtends.avatar_data.url
-        },     
+        },
         {
           id: productExtends2.id,
           name: productExtends2.name,
           price: productExtends2.price,
           quantity: productExtends2.quantity,
-          avatar_url: productExtends2.avatar_data.url        
+          avatar_url: productExtends2.avatar_data.url
       }])
       })
-    }) 
+    })
 
-    
+
     describe('ShowOne', () => {
-      it('should be able to show one product', async () => {      
+      it('should be able to show one product', async () => {
         const repoSpy = jest.spyOn(repo, 'findOne')
         expect(await service.showOne({ id: 1})).toEqual(productExtends)
         expect(repoSpy).toBeCalledTimes(1)
@@ -130,16 +130,17 @@ describe('ProductService', () => {
         .toEqual([{
         avatar_url: "http//test.com/IMAGE",
         id: 1,
-        name: "PRODUCT NAME", 
+        name: "PRODUCT NAME",
         price: 54,
         quantity: 10
-      }, 
+      },
       {
-        avatar_url: "http//test.com/IMAGE", 
-        id: 2, 
-        name: "PRODUCT NAME2", 
+        avatar_url: "http//test.com/IMAGE",
+        id: 2,
+        name: "PRODUCT NAME2",
         price: 54,
-        quantity: 10}
+        quantity: 10
+      }
       ])
         expect(repoSpy).toBeCalledTimes(1)
       })

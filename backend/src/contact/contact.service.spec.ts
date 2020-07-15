@@ -1,23 +1,20 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ContactService } from './contact.service';
-import {  getRepositoryToken  } from '@nestjs/typeorm' 
-import { Contact } from '../entities/contact.entity' 
+import {  getRepositoryToken  } from '@nestjs/typeorm'
+import { Contact } from '../entities/contact.entity'
 
-const contact = {
-     id: 1,
+const contact = new Contact({
      name: 'username',
      email: 'email@gmail.com',
      phone: '123456798',
      order: '123',
-     message: 'message',
-     created_at: new Date(),
-    updated_at: new Date()
-}
- 
- 
+     message: 'message'
+})
+
+
 describe('ContactService', () => {
   let service: ContactService;
- 
+
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -25,13 +22,13 @@ describe('ContactService', () => {
         ContactService,
       {
         provide: getRepositoryToken(Contact),
-        useValue: { 
+        useValue: {
           save: jest.fn().mockReturnValue(contact)
         }
       }],
     }).compile();
 
-    service = module.get<ContactService>(ContactService); 
+    service = module.get<ContactService>(ContactService);
   });
 
   it('should be defined', () => {
@@ -40,7 +37,6 @@ describe('ContactService', () => {
 
    describe('contact', () => {
     it('should be possible create an message', async () => {
-      expect.assertions(1)
       expect(await service.store({
         name: contact.name,
         email: contact.email,
@@ -49,8 +45,8 @@ describe('ContactService', () => {
         message: contact.message
       })).toEqual(contact)
     })
-     
+
    })
 
-  
+
 })

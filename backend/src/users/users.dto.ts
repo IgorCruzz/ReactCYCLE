@@ -15,7 +15,9 @@ export interface IUserDTO {
 	referency: string,
 	neighborhood: string,
 	city: string,
-	state: string 
+  state: string,
+  created_at?: Date,
+  updated_at?: Date
 }
 
 export interface IUserUpdateDTO {
@@ -35,5 +37,7 @@ export interface IUserUpdateDTO {
 	referency?: string,
 	neighborhood?: string,
 	city?: string,
-	state?: string 
+  state?: string,
+  created_at?: Date,
+  updated_at?: Date
 }

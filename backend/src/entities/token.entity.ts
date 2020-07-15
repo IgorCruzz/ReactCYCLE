@@ -1,15 +1,27 @@
-import { 
-  Entity, 
-  Column,  
+import {
+  Entity,
+  Column,
   CreateDateColumn,
-  UpdateDateColumn,  
+  UpdateDateColumn,
   PrimaryColumn
 } from 'typeorm'
 
 
 @Entity()
-export class Token{  
- 
+export class Token{
+
+  constructor(data ?: {
+    user_id?: number,
+    token?: string,
+    created_at?: Date
+    updated_at?: Date
+  }){
+    this.user_id = data?.user_id || NaN,
+    this.token = data?.token || ''
+    this.created_at = new Date()
+    this.updated_at = new Date()
+  }
+
   @PrimaryColumn()
   user_id: number
 
@@ -23,4 +35,3 @@ export class Token{
   updated_at: Date
 
 }
- 
