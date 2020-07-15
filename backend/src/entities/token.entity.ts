@@ -6,7 +6,6 @@ import {
   PrimaryColumn
 } from 'typeorm'
 
-
 @Entity()
 export class Token{
 

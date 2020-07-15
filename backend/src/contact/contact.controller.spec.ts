@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ContactController } from './contact.controller'
 import { ContactService } from './contact.service'
 
-
 const newContact = {
   id: 17,
   name: "igor",
@@ -43,7 +42,13 @@ describe('Cat Controller', () => {
   describe('New Contact', () => {
     it('should be able to create a contact', async () => {
 
-      expect(await controller.store(newContact)).toEqual(newContact)
+      expect(await controller.store({
+        name: "igor",
+        email: "email@gmail.com",
+        phone: "21999999999",
+        order: "999",
+        message: "mensagem",
+      })).toEqual(newContact)
 
     })
   })
