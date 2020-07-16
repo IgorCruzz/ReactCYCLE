@@ -53,6 +53,20 @@ describe('ContactService', () => {
       }
     })
 
+    it('throw an error if email is in incorrect format', async () => {
+      try {
+        await service.store({
+          name: 'name',
+          email: 'wrongemail.com',
+          phone: '2199999999',
+          order: '21',
+          message: 'message'
+        })
+    } catch(err){
+      expect(err.message).toEqual('Http Exception')
+    }
+    })
+
    })
 
 

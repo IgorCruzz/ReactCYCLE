@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common'
 import {Token} from '../entities/token.entity'
 import { User } from '../entities/user.entity'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { Repository, UpdateResult } from 'typeorm'
 import { ITokenDTO } from './token.dto'
 
 @Injectable()
@@ -14,13 +14,20 @@ export class TokenService {
     private userRepository: Repository<User>
   ) {}
 
-  async store(token: ITokenDTO): Promise<void> {
+  async store(token: ITokenDTO): Promise<UpdateResult> {
 
     const tokenExists = await this.tokenRepository.findOne({ where: { token }})
 
-    const user = await this.userRepository.findOne({ where: { id: tokenExists.user_id }})
+    if(!tokenExists){
+      throw new HttpException({
+        status: HttpStatus.BAD_REQUEST,
+        error: 'Incorrect Token'
+      }, HttpStatus.BAD_REQUEST)
+    }
 
-    await this.userRepository.update(user.id, {
+    const user = await this.userRepository.findOne({ id: tokenExists.user_id })
+
+    return await this.userRepository.update(user.id, {
       active: true
     })
   }
