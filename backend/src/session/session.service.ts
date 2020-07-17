@@ -1,61 +1,72 @@
-import { Injectable, HttpException, HttpStatus  } from '@nestjs/common';
-import { ILoginDTO } from './session.dto'
-import { InjectRepository } from '@nestjs/typeorm'
-import { User } from '../entities/user.entity'
-import { Repository } from 'typeorm'
-import { compare } from 'bcrypt'
-import { JwtService } from '@nestjs/jwt'
-import * as Yup from 'yup'
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { ILoginDTO } from './session.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from '../entities/user.entity';
+import { Repository } from 'typeorm';
+import { compare } from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
+import * as Yup from 'yup';
 
 @Injectable()
 export class SessionService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
   async store(login: ILoginDTO): Promise<ILoginDTO> {
     const schema = Yup.object().shape({
-      email: Yup.string().email().required(),
-      password: Yup.string().required()
-    })
-    if(! await schema.isValid(login)) {
-      throw new HttpException({
-        status: HttpStatus.BAD_REQUEST,
-        error: 'Erro na validação'
-      }, HttpStatus.BAD_REQUEST)
+      email: Yup.string()
+        .email()
+        .required(),
+      password: Yup.string().required(),
+    });
+    if (!(await schema.isValid(login))) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Erro na validação',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
-    const { email, password } = login
+    const { email, password } = login;
 
-    const user = await this.usersRepository.findOne({ email })
+    const user = await this.usersRepository.findOne({ email });
 
-    if(!user){
-      throw new HttpException({
-        status: HttpStatus.BAD_REQUEST,
-        error: 'Does not have an user with this e-mail'
-      }, HttpStatus.BAD_REQUEST)
+    if (!user) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Does not have an user with this e-mail',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
-    const comparePassword = await compare(password, user.password)
+    const comparePassword = await compare(password, user.password);
 
-    if(!comparePassword) {
-      throw new HttpException({
-        status: HttpStatus.BAD_REQUEST,
-        error: 'The password has been incorrect'
-      }, HttpStatus.BAD_REQUEST)
+    if (!comparePassword) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'The password has been incorrect',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
     const payload = {
-      sub: user.id
-    }
+      sub: user.id,
+    };
 
     return {
       id: user.id,
       email,
       password,
-      token: this.jwtService.sign(payload)
-    }
+      token: this.jwtService.sign(payload),
+    };
   }
 }

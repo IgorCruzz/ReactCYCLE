@@ -6,8 +6,8 @@
   "password": "docker",
   "database": "reactcycle",
   "entities": ["dist/**/*.entity.js"],
-  "migrations": ["src/migration/**/*.ts"],
+  "migrations": ["dist/migration/**/*.js"],
   "cli": {
     "migrationsDir": "src/migration"
-  }     
+  }
 }

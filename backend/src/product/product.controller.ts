@@ -8,21 +8,23 @@ export class ProductController {
 
   @Post()
   store(@Body() product: IProductDTO): Promise<IProductDTO> {
-    return this.productService.store(product)
+    return this.productService.store(product);
   }
 
   @Get()
-  index(@Query() paramData?: IParamData): Promise<IProductDTO[] | IProductList[]> {
-    return this.productService.index(paramData)
+  index(
+    @Query() paramData?: IParamData,
+  ): Promise<IProductDTO[] | IProductList[]> {
+    return this.productService.index(paramData);
   }
 
   @Get('/:id')
-  showOne(@Param() product: { id: number}): Promise<IProductDTO> {
-    return this.productService.showOne(product)
+  showOne(@Param() product: { id: number }): Promise<IProductDTO> {
+    return this.productService.showOne(product);
   }
 
   @Get('/busca')
   show(@Query() name: string): Promise<IProductList[]> {
-    return this.productService.show(name)
+    return this.productService.show(name);
   }
 }

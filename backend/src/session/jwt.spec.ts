@@ -1,5 +1,5 @@
-import { Test, TestingModule } from '@nestjs/testing'; 
-import { JwtStrategy } from './jwt.strategy'
+import { Test, TestingModule } from '@nestjs/testing';
+import { JwtStrategy } from './jwt.strategy';
 
 describe('AutenticacaoService', () => {
   let service: JwtStrategy;
@@ -19,8 +19,8 @@ describe('AutenticacaoService', () => {
 
   it('fodase', async () => {
     const payload = {
-      sub: "123456789"
-    }
-    expect(await service.validate(payload)).toEqual(payload.sub)
-  })
+      sub: '123456789',
+    };
+    expect(await service.validate(payload)).toEqual(payload.sub);
+  });
 });

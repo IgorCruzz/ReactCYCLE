@@ -1,13 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SessionController } from './session.controller'
-import { SessionService } from './session.service'
+import { SessionController } from './session.controller';
+import { SessionService } from './session.service';
 
 const Session = {
   id: 1,
   email: 'email@gmail.com',
   password: 'password',
-  token: 'token'
-}
+  token: 'token',
+};
 
 describe('Cat Controller', () => {
   let controller: SessionController;
@@ -20,9 +20,9 @@ describe('Cat Controller', () => {
         {
           provide: SessionService,
           useValue: {
-            store: jest.fn().mockResolvedValue(Session)
-          }
-        }
+            store: jest.fn().mockResolvedValue(Session),
+          },
+        },
       ],
     }).compile();
 
@@ -35,10 +35,13 @@ describe('Cat Controller', () => {
   });
 
   describe('Session', () => {
-      it('shoulb be possible login', async () => {
-        expect(await controller.store({ email: 'email@gmail.com', password: 'password'}))
-        .toEqual(Session)
-      })
-  })
-
+    it('shoulb be possible login', async () => {
+      expect(
+        await controller.store({
+          email: 'email@gmail.com',
+          password: 'password',
+        }),
+      ).toEqual(Session);
+    });
+  });
 });

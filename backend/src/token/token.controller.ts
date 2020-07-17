@@ -9,6 +9,6 @@ export class TokenController {
 
   @Post(':token')
   store(@Param() token: ITokenDTO): Promise<UpdateResult> {
-    return this.tokenService.store(token)
+    return this.tokenService.store(token);
   }
 }

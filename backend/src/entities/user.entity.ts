@@ -4,127 +4,126 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-} from 'typeorm'
+} from 'typeorm';
 
 @Entity()
 export class User {
-
-  constructor(data ?: {
-    id?: number,
-    name?: string,
-    email?: string,
-    password?: string,
-    cpf?: string,
-    cnpj?: string,
-    stateRegistration?: string,
-    companyName?: string,
-    phone?: string,
-    gender?: string,
-    birth?: number,
-    cep?: string,
-    address?: string,
-    number?: number,
-    complement?: string,
-    referency?: string,
-    neighborhood?: string,
-    city?: string,
-    state?: string,
-    active?: boolean,
-    administrator?: boolean,
-    created_at?: Date,
-    updated_at?: Date,
+  constructor(data?: {
+    id?: number;
+    name?: string;
+    email?: string;
+    password?: string;
+    cpf?: string;
+    cnpj?: string;
+    stateRegistration?: string;
+    companyName?: string;
+    phone?: string;
+    gender?: string;
+    birth?: number;
+    cep?: string;
+    address?: string;
+    number?: number;
+    complement?: string;
+    referency?: string;
+    neighborhood?: string;
+    city?: string;
+    state?: string;
+    active?: boolean;
+    administrator?: boolean;
+    created_at?: Date;
+    updated_at?: Date;
   }) {
-    this.id = data?.id || NaN
-    this.name = data?.name || ''
-    this.email = data?.email || ''
-    this.password = data?.password || ''
-    this.cnpj = data?.cnpj || '',
-    this.stateRegistration = data?.stateRegistration || ''
-    this.companyName = data?.companyName || ''
-    this.cpf = data?.cpf || ''
-    this.phone = data?.phone || ''
-    this.gender = data?.gender || ''
-    this.birth = data?.birth || NaN
-    this.cep = data?.cep || ''
-    this.address = data?.address || ''
-    this.number = data?.number || NaN
-    this.complement = data?.complement || ''
-    this.referency = data?.referency || ''
-    this.neighborhood = data?.neighborhood || ''
-    this.city = data?.city || ''
-    this.state = data?.state || ''
-    this.active = data?.active || false
-    this.administrator = data?.administrator || false
-    this.created_at = data?.created_at || new Date()
-    this.updated_at = data?.updated_at || new Date()
+    this.id = data?.id || NaN;
+    this.name = data?.name || '';
+    this.email = data?.email || '';
+    this.password = data?.password || '';
+    (this.cnpj = data?.cnpj || ''),
+      (this.stateRegistration = data?.stateRegistration || '');
+    this.companyName = data?.companyName || '';
+    this.cpf = data?.cpf || '';
+    this.phone = data?.phone || '';
+    this.gender = data?.gender || '';
+    this.birth = data?.birth || NaN;
+    this.cep = data?.cep || '';
+    this.address = data?.address || '';
+    this.number = data?.number || NaN;
+    this.complement = data?.complement || '';
+    this.referency = data?.referency || '';
+    this.neighborhood = data?.neighborhood || '';
+    this.city = data?.city || '';
+    this.state = data?.state || '';
+    this.active = data?.active || false;
+    this.administrator = data?.administrator || false;
+    this.created_at = data?.created_at || new Date();
+    this.updated_at = data?.updated_at || new Date();
   }
 
   @PrimaryGeneratedColumn('increment')
-  id: number
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  email: string
+  email: string;
 
   @Column()
-  password: string
+  password: string;
 
   @Column()
-  cpf: string
+  cpf: string;
 
   @Column()
-  cnpj: string
+  cnpj: string;
 
   @Column()
-  stateRegistration: string
+  stateRegistration: string;
 
   @Column()
-  companyName: string
+  companyName: string;
 
   @Column()
-  phone: string
+  phone: string;
 
   @Column()
-  gender: string
+  gender: string;
 
   @Column()
-  birth: number
+  birth: number;
 
   @Column()
-  cep: string
+  cep: string;
 
   @Column()
-  address: string
+  address: string;
 
   @Column()
-  number: number
+  number: number;
 
   @Column()
-  complement: string
+  complement: string;
 
   @Column()
-  referency: string
+  referency: string;
 
   @Column()
-  neighborhood: string
+  neighborhood: string;
 
   @Column()
-  city: string
+  city: string;
 
   @Column()
-  state: string
+  state: string;
 
   @Column()
-  active: boolean
+  active: boolean;
 
   @Column()
-  administrator: boolean
+  administrator: boolean;
 
   @CreateDateColumn()
-  created_at: Date
+  created_at: Date;
 
   @UpdateDateColumn()
-  updated_at: Date
+  updated_at: Date;
 }

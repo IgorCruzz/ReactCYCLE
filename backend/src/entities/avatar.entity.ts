@@ -4,37 +4,36 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
- } from 'typeorm'
+} from 'typeorm';
 
 @Entity()
 export class Avatar {
-
-  constructor(data ?: {
-    id?: number,
-    name?: string,
-    url?: string,
-    created_at?: Date,
-    updated_at?: Date
-  }){
-    this.id = NaN
-    this.name = data?.name || ''
-    this.url = data?.url || ''
-    this.created_at = new Date()
-    this.updated_at = new Date()
+  constructor(data?: {
+    id?: number;
+    name?: string;
+    url?: string;
+    created_at?: Date;
+    updated_at?: Date;
+  }) {
+    this.id = NaN;
+    this.name = data?.name || '';
+    this.url = data?.url || '';
+    this.created_at = new Date();
+    this.updated_at = new Date();
   }
 
   @PrimaryGeneratedColumn('increment')
-  id: number
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  url: string
+  url: string;
 
   @CreateDateColumn()
-  created_at: Date
+  created_at: Date;
 
   @UpdateDateColumn()
-  updated_at: Date
+  updated_at: Date;
 }

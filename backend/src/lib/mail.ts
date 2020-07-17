@@ -1,29 +1,27 @@
-import { createTransport } from 'nodemailer'
-import { resolve } from 'path'
-import nodemailerhbs from 'nodemailer-express-handlebars'
-import { create } from 'express-handlebars'
- 
+import { createTransport } from 'nodemailer';
+import { resolve } from 'path';
+import nodemailerhbs from 'nodemailer-express-handlebars';
+import { create } from 'express-handlebars';
 
 class Mail {
+  transporter: any;
 
-  transporter: any
-  
-  constructor(){
-    this.transporter =  createTransport({
-      host: "smtp.mailtrap.io",
+  constructor() {
+    this.transporter = createTransport({
+      host: 'smtp.mailtrap.io',
       port: 2525,
       auth: {
-      user: "da344a12e15959",
-      pass: "6164ee97c889a2"
-  }
-    })
+        user: 'da344a12e15959',
+        pass: '6164ee97c889a2',
+      },
+    });
 
-    this.configureTemplates()
+    this.configureTemplates();
   }
-   
-   configureTemplates(){
-    const viewPath = resolve('src', 'views', 'emails')
-    
+
+  configureTemplates() {
+    const viewPath = resolve('src', 'views', 'emails');
+
     this.transporter.use(
       'compile',
       nodemailerhbs({
@@ -35,16 +33,13 @@ class Mail {
         }),
         viewPath,
         extName: '.hbs',
-      })
+      }),
     );
   }
 
-  sendMail(message: any){
-    return this.transporter.sendMail(
-      message
-    )
+  sendMail(message: any) {
+    return this.transporter.sendMail(message);
   }
-
 }
 
-export default new Mail()
+export default new Mail();

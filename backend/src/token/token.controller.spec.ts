@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TokenController } from './token.controller'
-import {  TokenService } from './token.service'
+import { TokenController } from './token.controller';
+import { TokenService } from './token.service';
 
 describe('Cat Controller', () => {
   let controller: TokenController;
@@ -13,9 +13,9 @@ describe('Cat Controller', () => {
         {
           provide: TokenService,
           useValue: {
-            store: jest.fn().mockReturnValue(true)
-          }
-        }
+            store: jest.fn().mockReturnValue(true),
+          },
+        },
       ],
     }).compile();
 
@@ -29,10 +29,7 @@ describe('Cat Controller', () => {
 
   describe('Token', () => {
     it('should be able to active the token', async () => {
-
-      expect(controller.store({ token: 'ODASKDSDNSUDSDDY' })).toBeTruthy()
-
-    })
-  })
-
+      expect(controller.store({ token: 'ODASKDSDNSUDSDDY' })).toBeTruthy();
+    });
+  });
 });
