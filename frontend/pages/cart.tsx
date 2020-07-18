@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { AiFillPlusCircle, AiFillMinusCircle, AiOutlineArrowLeft, AiFillCloseCircle } from 'react-icons/ai'
 import { FaRegSadTear } from 'react-icons/fa'
-import { Container, Content, NoProduct } from '../styles/cart'
+import styles from '../styles/cart.module.scss'
 import  Link  from 'next/link'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -35,21 +35,20 @@ const Cart: React.FC = () => {
     <Head>
       <title>ReactCycle - Carrinho</title>
     </Head>
-    <Container>
+    <div id={styles.cartContainer}>
       {products.length === 0 ? (
 
-        <NoProduct>
+        <div id={styles.cartNoProducts}>
           <h1>Seu carrinho está vazio</h1>
           <FaRegSadTear />
-
-        </NoProduct>
+        </div>
       )
         : (
-          <Content>
+          <div id={styles.cartContent}>
 
             <h1>Carrinho</h1>
 
-            <div id="tableResponsive">
+            <div id={styles.tableResponsive}>
               <table>
                 <thead>
                   <tr>
@@ -102,10 +101,10 @@ const Cart: React.FC = () => {
               }}>Continuar</button>
             </div>
 
-          </Content>
+          </div>
         )}
 
-    </Container>
+    </div>
     </>
   )
 }

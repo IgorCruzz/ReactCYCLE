@@ -1,14 +1,14 @@
 import React from 'react'
 
-import { Container, Content } from './styles'
+import styles from './styles.module.scss'
 
 const Page: React.FC = ({ children }: { children?: React.ReactNode}) => {
   return (
-    <Container>
-      <Content>
+    <div id={styles.pageContainer}>
+      <div id={styles.pageContent}>
         {children}
-      </Content>
-    </Container>
+      </div>
+    </div>
   )
 }
 

@@ -1,6 +1,5 @@
-import styled from 'styled-components'
 
-export const Container = styled.div`
+#clientContainer{
   @media(max-width: 900px){
     padding: 15px;
   }
@@ -9,8 +8,10 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 50px;
-`
-export const Content = styled.div`
+}
+
+
+#clientContent {
   @media(max-width: 900px){
     width: 100%;
   }
@@ -98,4 +99,6 @@ export const Content = styled.div`
       border: 0;
     }
   }
-`
+}
+ 
+ 

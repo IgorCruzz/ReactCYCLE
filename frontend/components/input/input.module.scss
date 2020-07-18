@@ -1,0 +1,14 @@
+#inputContent {
+  display: flex;
+  flex-direction: column;
+  #error {
+    border: 1px solid red;
+  }
+}
+
+#errorMessage {
+  font-size: 0.7rem;
+  color: #B22222;
+}
+
+ 

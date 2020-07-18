@@ -1,13 +1,13 @@
-import styled from 'styled-components'
-
-export const Container = styled.div`
+ 
+#addressContainer {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 50px;
-`
-export const Content = styled.div`
+}
+
+#addressContent {
   @media(max-width: 900px){
     width: 100%;
   }
@@ -47,4 +47,6 @@ export const Content = styled.div`
       border: 0;
     }
   }
-`
+}
+ 
+ 

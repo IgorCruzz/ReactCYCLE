@@ -4,7 +4,7 @@ import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Link from 'next/link'
 import { FormHandles } from '@unform/core'
 import { Input } from '../components/input'
-import { Container, Content } from '../styles/address'
+import styles from '../styles/address.module.scss'
 import { useDispatch } from 'react-redux'
 import { requestAddress } from '../store/ducks/repositories/auth/actions'
 import { Address } from '../store/ducks/repositories/auth/types'
@@ -47,8 +47,8 @@ const Client: React.FC = () => {
   }
 
   return (
-    <Container>
-      <Content>
+    <div id={styles.addressContainer}>
+      <div id={styles.addressContent}>
         <strong>Cadastrar endereço</strong>
         <Form onSubmit={handleSubmit} ref={formRef}>
           <label htmlFor="cep">CEP</label>
@@ -79,8 +79,8 @@ const Client: React.FC = () => {
 
         </Form>
         <Link href="/client"><a><AiOutlineArrowLeft />Voltar</a></Link>
-      </Content>
-    </Container>
+      </div>
+    </div>
   )
 }
 

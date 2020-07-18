@@ -1,20 +1,15 @@
-import styled from 'styled-components'
-import { darken } from 'polished' 
-import banner from '../../assets/FUNDO.jpg'
-import banner2 from '../../assets/fundo2.png'
-
-export const Container = styled.div`
+#headerContainer {
   width: 100%;
   position: relative;
-`
+}
 
-export const Content = styled.div`
-  @media(max-width: 900px){
+#headerContent {
+   @media(max-width: 900px){
     height: 300px;
-    background: url(${banner2}) no-repeat;
+    background: url('../../public/assets/fundo2.png') no-repeat;
      background-size: cover;
   }
-  background: url(${banner}) no-repeat;
+  background: url('../../public/assets/FUNDO.jpg') no-repeat;
   background-size: cover;
   position: relative;
   height: 92vh;
@@ -66,10 +61,12 @@ export const Content = styled.div`
       margin: 0 15px;
       font-weight: bold;
       &:hover {
-        color: ${darken(0.1, '#00BFFF')};
+        color: darken($color: #00BFFF, $amount: 20)
       }
     }
   }
+  
+
   main {
     @media(max-width: 900px){
       display: none;
@@ -92,10 +89,10 @@ export const Content = styled.div`
       }
     }
   }
-`
+}
 
-export const Bar = styled.div`
-  @media(max-width: 900px){
+#bar {
+   @media(max-width: 900px){
     display:flex;
   }
   width: 100%;
@@ -185,9 +182,9 @@ export const Bar = styled.div`
       color: #FFFFFF;
     }
   }
-`
+}
 
-export const NavBar = styled.div`
+#navBar {
   @media(max-width: 900px){
     background: none;
   }
@@ -200,9 +197,10 @@ export const NavBar = styled.div`
       display: none;
     }
   }
-`
-export const Profile = styled.div`
-  display: flex;
+}
+
+#profile {
+    display: flex;
   background: #00BFFF;
   align-items: center;
   justify-content: center;
@@ -218,8 +216,9 @@ export const Profile = styled.div`
     justify-content: center;
     margin-left: 25px;
   }
-`
-export const Mobile = styled.span`
+}
+
+#mobile {
   display: none;
   @media(max-width: 900px){
     background: rgba(30,144,255, 0.9);
@@ -274,8 +273,9 @@ export const Mobile = styled.span`
       margin-left: 10px;
     }
   }
-`
-export const Main = styled.section`
+}
+ 
+#main { 
   height: 100%;
   width: 100%;
   background: rgba(0,0,0, 0.9);
@@ -295,7 +295,7 @@ export const Main = styled.section`
   a {
     width: 100%;
     height: 70px;
-    background: ${darken(0.1, '#1E90FF')};
+    background: darken($color: #1E90FF, $amount: 10);
     border-top: 1px solid #1E90FF;
     border-bottom: 1px solid #1E90FF;
     margin: 15px;
@@ -309,4 +309,5 @@ export const Main = styled.section`
     left: 29px;
     font-size: 30px;
   }
-  `
+}
+ 

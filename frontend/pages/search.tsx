@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'  
 import { useSelector } from 'react-redux'
 import Head from 'next/head'
-import api from '../services/api'
-import { Container, Content, Image, ProductGridLarge, ProductList, NoFound } from '../styles/search'
-import banner from '../assets/search.png'
+import api from '../services/api' 
+import { useRouter } from 'next/router'
+
+import styles from  '../styles/search.module.scss'
 
 interface RootState {
   search: {
@@ -22,7 +23,7 @@ interface Product {
 const SearchList: React.FC = () => {
   const search = useSelector((state: RootState) => state.search.name)
   const [products, setProducts] = useState<Product[]>([])
-  const [product, setProduct] = useState({ id: 1, avatar_url: '', name: '', price: 0, quantity: 0 })
+  const router = useRouter()
   
 
   useEffect(() => {
@@ -40,21 +41,20 @@ const SearchList: React.FC = () => {
     <Head>
       <title>ReactCycle - Buscar</title>
     </Head>
-    <Container>
-      <Content>       
-        <Image>
-          <img src={banner} alt="banner" />
-        </Image>
+    <div id={styles.searchContainer}>
+      <div id={styles.searchContainer}>       
+        <div id={styles.searchImage}>
+          <img src='../public/assets/search.png' alt="banner" />
+        </div>
         {products.length > 0 ? (
           <>
             <small>Voce pesquisou por: <strong>{search}</strong></small>
 
-            <ProductGridLarge>
+            <div id={styles.productGridLarge}>
               {products?.map(product => (
 
-                <ProductList key={product.id} onClick={() => {
-                  setProduct({ id: product.id, avatar_url: product.avatar_url, name: product.name, price: product.price, quantity: product.quantity })
-                  setOpenProduct(true)
+                <div id={styles.productLarge} key={product.id} onClick={() => {
+                  router.push(`/product/${product.id}`) 
                 }}>
                   <div >
                     <img
@@ -66,22 +66,22 @@ const SearchList: React.FC = () => {
                     style: 'currency',
                     currency: 'BRL'
                   })}</strong>
-                </ProductList>
+                </div>
 
               ))}
 
-            </ProductGridLarge>
+            </div>
           </>
         )
           : (
-            <NoFound>
+            <div id="no-products">
               <small>Voce pesquisou por: <strong>{search}</strong></small>
               <strong>Não há produtos com este nome</strong>
-            </NoFound>
+            </div>
           )}
 
-      </Content>
-    </Container>
+      </div>
+    </div>
     </>
   )
 }

@@ -1,25 +1,24 @@
-import styled, { keyframes } from 'styled-components'
-import { lighten } from 'polished'
+ 
 
-const background = '#D3D3D3'
+$background : #D3D3D3;
 
-export const Container = styled.div`
+#registerContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 20px 0;
-`
+}
 
-const animate = keyframes`
+@keyframes animate {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-`
+}
 
-export const Content = styled.div`
+#registerContent {
   width: 80%;
   small {
     margin-left: 15px;
@@ -71,16 +70,17 @@ export const Content = styled.div`
       text-align: center;
       padding: 15px;
       &:hover {
-        background: ${lighten(0.1, '#00BFFF')};
+        background: lighten($color: #00BFFF, $amount: 10)
       }
       svg {
-        animation: ${animate} 1s linear infinite;
+        animation: animate 1s linear infinite;
       }
     }
   }
-`
+}
+ 
 
-export const Title = styled.div`
+ #registerTitle {
   @media(max-width: 700px){
     display:flex;
     flex-direction: column;
@@ -101,49 +101,49 @@ export const Title = styled.div`
     padding-right: 10px;
     border-right: 1px solid #777777;
   }
-`
+ }
 
-export const DataAccess = styled.div`
-      width: 100%;
-      background: ${background};
-      padding: 20px;
-      #title {
-          margin-bottom: 10px;
-        }
-    #tabela {
-      @media(max-width: 700px){
-          width: 100%;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        }
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-        grid-gap: 10px;
-        span {
-        display: flex;
-        align-items: center;
-        label {
-        display: block;
-        font-size: 15px;
-        font-weight: bold;
-      }
-      svg {
-        height: 19px;
-      }
-      }
-      input {
-        @media(max-width: 700px){
-          width: 100%;
-        }
-        width: 100%;
-      }
-      }
+ #dataAccess {
+  width: 100%;
+  background: $background;
+  padding: 20px;
+  #dataAccessTitle {
+      margin-bottom: 10px;
     }
-`
-
-export const AccessTypes = styled.div`
+  #tabela {
+  @media(max-width: 700px){
+      width: 100%;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-gap: 10px;
+    span {
+    display: flex;
+    align-items: center;
+    label {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  svg {
+    height: 19px;
+  }
+  }
+  input {
+    @media(max-width: 700px){
+      width: 100%;
+    }
+    width: 100%;
+  }
+  }
+}
+ 
+ 
+#accessTypes {
   margin: 10px 0;
   padding: 20px;
-  background: ${background};
+  background: $background;
   width: 100%;
   div {
     display: flex;
@@ -158,13 +158,14 @@ export const AccessTypes = styled.div`
     margin: 0 15px;
   }
   }
-`
-export const PersonalData = styled.div`
+}
+
+#personalData {
   @media(max-width: 700px){
     width: 100%;
   }
   width: 50%;
-  background: ${background};
+  background: $background;
   padding: 20px;
   margin-right: 10px;
   display: flex;
@@ -187,15 +188,15 @@ export const PersonalData = styled.div`
       margin-right: 15px;
     }
   }
-`
-
-export const Address = styled.div`
-   @media(max-width: 700px){
+}
+ 
+#address {
+  @media(max-width: 700px){
     width: 100%;
     margin-top: 15px;
   }
   width: 50%;
-  background: ${background};
+  background: $background;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -212,4 +213,5 @@ export const Address = styled.div`
       margin-right: 15px;
     }
   }
-`
+}
+ 

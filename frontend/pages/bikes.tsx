@@ -6,10 +6,10 @@ import { FaRegSadTear } from 'react-icons/fa'
 import { GrPrevious, GrNext } from 'react-icons/gr'  
 import { useSelector } from 'react-redux'
 import api from '../services/api' 
-import { ProductGridLarge, Product, Search, Image, Section, Navigator, PriceSearch, WithoutProduct, ProductLarge } from '../styles/page'
-import Page from '../components/page'
-import bikes from "../assets/bikes.png"
+import styles from '../styles/page.module.scss'
+import Page from '../components/page' 
 import { useRouter } from 'next/router' 
+import bikes from "../public/assets/bikes.png"
 
 interface Product {
   id: number,
@@ -34,8 +34,7 @@ const Bike: React.FC = () => {
 
   useEffect(() => {
     async function loadProducts () {
-      const response = await api.get(`product?category=Bicicletas&page=${page}&min=${min}&max=${max}`)
-      console.log(response.data) 
+      const response = await api.get(`product?category=Bicicletas&page=${page}&min=${min}&max=${max}`)      
       setProducts(response.data) 
     }
     loadProducts()
@@ -47,7 +46,7 @@ const Bike: React.FC = () => {
       <title>ReactCycle - Bicicletas</title>
     </Head>
     <Page>      
-      <Search>
+      <div id={styles.search}>
         {profile.administrator && (
           <span>
             <button type="button" onClick={ () => setOpen(true)}>
@@ -68,7 +67,7 @@ const Bike: React.FC = () => {
 
           <strong>Faixa de Preço</strong>
 
-          <PriceSearch>
+          <div id={styles.priceSearch}>
             <button onClick={() => {
               setMin(25)
               setMax(50)
@@ -103,30 +102,30 @@ const Bike: React.FC = () => {
               setMin(600)
               setMax(99999)
             }}>de R$ 600,00 acima</button>
-          </PriceSearch>
+          </div>
         </div>
-      </Search>
+      </div>
 
-      <Section>
-        <Image>
+      <section id={styles.section}>
+        <div id={styles.image}>
           <img src={bikes} alt="bikes" />
-        </Image>
+        </div>
 
-        <Navigator>
+        <div id={styles.navigator}>
           <button id={page <= 1 ? 'limit-page' : ''} onClick={() => setPage(page - 1)}><GrPrevious /></button>
           <strong>{page}</strong>
           <button id={products?.length < 12 ? 'limit-page' : ''} onClick={() => setPage(page + 1)}><GrNext /></button>
-        </Navigator>
+        </div>
         {products.length === 0 ? (
-          <WithoutProduct>
+          <div id={styles.noProduct}>
             <strong>Não existem produtos nessa categoria ou na faixa de preço</strong>
             <FaRegSadTear size={100}/>
-          </WithoutProduct>
+          </div>
         ) : (
-          <ProductGridLarge>
+          <div id={styles.productGridLarge}>
             {products?.map(product => (
 
-              <ProductLarge key={product.id} onClick={() => {
+              <div id={styles.productLarge} key={product.id} onClick={() => {
                 router.push(`/product/${product.id}`)                
               }}>
 
@@ -140,14 +139,14 @@ const Bike: React.FC = () => {
                   style: 'currency',
                   currency: 'BRL'
                 })}</strong>
-              </ProductLarge>
+              </div>
 
             ))}
 
-          </ProductGridLarge>
+          </div>
 
         )}
-      </Section>
+      </section>
     </Page>
     </>
   )

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Head from 'next/head'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { RouteComponentProps } from '@reach/router'
-import { Container, Content, Available, Unavailable } from '../../styles/product'
+import styles from '../../styles/product.module.scss'
 import { useDispatch } from 'react-redux'
 import { addProct } from '../../store/ducks/repositories/cart/actions'
 import { useRouter } from 'next/router'
@@ -70,8 +70,8 @@ export const Product: React.FC<Props> = ({ product }) => {
   }
 
   return (
-    <Container>
-      <Content>   
+    <div id={styles.productContainer}>
+      <div id={styles.productContent}>    
         <div>
           <ReactImageMagnify {...{
             smallImage: {
@@ -93,10 +93,10 @@ export const Product: React.FC<Props> = ({ product }) => {
             <small>codigo: {product.id}</small>
           </div>
           {product.quantity >= 1 && (
-            <Available>
+            <div id={styles.productAvailable}>
               <BsCheck />
               <strong>Produto disponivel</strong>
-            </Available>
+            </div>
           )}
 
           <h1>{Number(product.price).toLocaleString('pt-BR', {
@@ -106,15 +106,15 @@ export const Product: React.FC<Props> = ({ product }) => {
           {product.quantity >= 1 ? (
             <button type="button" onClick={() => handleCart()}>Adicionar ao carrinho</button>
           ) : (
-            <Unavailable>
+            <div id={styles.productUnavailable}>
               <BsX />
               <strong>Produto indisponivel</strong>
-            </Unavailable>
+            </div>
           )}
 
         </aside>
-      </Content>
-    </Container>
+      </div>
+    </div>
   )
 }
 export default Product

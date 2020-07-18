@@ -1,40 +1,41 @@
 import React from 'react'
 import Link from 'next/link' 
-import { Container, Content, Image } from './styles'
-import dh from "../../assets/dh.png"
-import logo from "../../assets/logo.png"
+import styles from  './styles.module.scss' 
+
+import dh from "../../public/assets/dh.png"
+import logo from "../../public/assets/logo.png"
 
 export const Footer: React.FC = () => {
   return (
-    <Container>
-      <Content>
+    <div id={styles.footerContainer}>
+      <div id={styles.footerContent}>
 
         <article>
-          <div id="category">
+          <div id={styles.category}>
             <strong>Categorias</strong>
             <Link href="/"><a>Peças</a></Link>
             <Link href="/"><a>Equipamentos</a></Link>
             <Link href="/"><a>Bicicletas</a></Link>
           </div>
 
-          <div id="contact"> 
+          <div id={styles.contact}> 
             <strong>Conteúdo</strong>
             <Link href="/contato"><a>Fale conosco</a></Link>
           </div>
 
-          <div id="address">
+          <div id={styles.address}>
             <strong>Endereço</strong>
             <p>Rua dr.oliveira, 819 - Teresópolis/RJ</p>
           </div>
         </article>
 
-        <Image>
+        <div id={styles.footerImage}>
           <img src={dh} alt="dh" />
           <img src={logo} alt="logo" />
-        </Image>
+        </div>
 
-      </Content>
-    </Container>
+      </div>
+    </div>
   )
 }
 

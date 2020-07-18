@@ -1,15 +1,11 @@
-import styled from 'styled-components'
-
-export const Container = styled.div`
+#pageContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 20px 0;
+}
 
-
-`
-
-export const Content = styled.div`
+#pageContent {
   width: 90%;
   display: flex;
 
@@ -20,6 +16,5 @@ export const Content = styled.div`
       text-decoration: none;
     }
   }
-
-
-`
+}
+ 

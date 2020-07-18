@@ -1,12 +1,12 @@
-import styled from 'styled-components'
-import { darken } from 'polished'
-export const Container = styled.div`
+
+#cartContainer {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-`
-export const Content = styled.div`
+}
+
+#cartContent {
   @media(max-width: 500px){
     width: 100%;
   }
@@ -62,7 +62,7 @@ export const Content = styled.div`
         tr {
           background: #EEEEEE;
           &:hover {
-            background: ${darken(0.1, '#EEEEEE')};
+            background: darken($color: #EEEEEE, $amount: 10%)
           }
           td {
             padding: 5px;
@@ -101,8 +101,9 @@ export const Content = styled.div`
       }
   }
   }
-`
-export const NoProduct = styled.div`
+}
+
+#cartNoProducts{
   @media(max-width: 750px){
     display: flex;
     text-align:center;
@@ -120,4 +121,6 @@ export const NoProduct = styled.div`
     height: 200px;
     width: 200px;
   }
-`
+
+}
+ 

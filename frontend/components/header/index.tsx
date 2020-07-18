@@ -7,10 +7,10 @@ import { RiShoppingCartLine } from 'react-icons/ri'
 import { BsJustify } from 'react-icons/bs'  
 import { useSelector, useDispatch } from 'react-redux' 
 import { logout } from '../../store/ducks/repositories/signIn/actions'
-import { searchRequest } from '../../store/ducks/repositories/search/actions'
-import { Container, Content, Bar, NavBar, Profile, Mobile, Main } from './styles'
-import logo from "../../assets/logo.png"
+import { searchRequest } from '../../store/ducks/repositories/search/actions' 
+import styles from './styles.module.scss' 
 import Login from '../login'
+import logo from "../../public/logo.png" 
 
 interface RootState {
   signIn: {
@@ -47,11 +47,11 @@ const Header: React.FC = () => {
   }
 
   return (
-    <Container>
-      <Content>
+    <div id={styles.headerContainer}>
+      <div id={styles.headerContent}>
         {!signed && <Login open={login} close={() => setLogin(false)} />}
-        <NavBar>
-          <Mobile>
+        <div id={styles.navBar}>
+          <div id={styles.mobile}>
             <button type="button" id="hamburguer" onClick={() => setMain(true)}><BsJustify size={35} color="#FFFFFF"/></button>
             <span>{!signed
               ? (
@@ -69,7 +69,7 @@ const Header: React.FC = () => {
             </span>
 
             {main && (
-              <Main>
+              <div id={styles.main}>
                 <button type="button" id="close" onClick={() => setMain(false)}>X</button>
                 {profile.length !== 0 ? (
                   <p>Olá, {profile.name}</p>
@@ -78,7 +78,7 @@ const Header: React.FC = () => {
                     <p>Olá, visitante</p>
                   )
                 }
-                <span id="search">
+                <span id={styles.search}>
                   <input type="search"
                     value={search}
                     placeholder="Encontre o produto ideal"
@@ -93,10 +93,10 @@ const Header: React.FC = () => {
                 <Link href="/parts"><a onClick={() => setMain(false)}>Peças</a></Link>
                 <Link href="/bikes"><a onClick={() => setMain(false)}>Bicicletas</a></Link>
                 <Link href="/contact"><a onClick={() => setMain(false)}>Contato</a></Link>
-              </Main>
+              </div>
             )}
 
-          </Mobile>
+          </div>
 
           <main>
             <Link href="/equipments"><a>Equipamentos</a></Link>
@@ -105,7 +105,7 @@ const Header: React.FC = () => {
             <Link href="/contact"><a>Contato</a></Link>
           </main>
           {!signed && (
-            <div id="auth">
+            <div id={styles.auth}>
               <button
                 type="button"
                 onClick={() => setLogin(true)}
@@ -116,19 +116,19 @@ const Header: React.FC = () => {
           )}
 
           {signed && (
-            <Profile>
+            <div id={styles.profile}>
               <p>Bem vindo, {profile.name}</p>
               <button type="button" onClick={() => dispatch(logout())}><AiOutlineLogout /></button>
-            </Profile>
+            </div>
           )}
 
-        </NavBar>
-        <div id="logo">
+        </div>
+        <div id={styles.logo}>
           <Link href="/"><a><img src={logo} alt="logo" /></a></Link>
 
         </div>
-      </Content>
-      <Bar>
+      </div>
+      <div id={styles.bar}>
         <div>
           <input type="search"
             placeholder="Encontre o produto ideal"
@@ -141,8 +141,8 @@ const Header: React.FC = () => {
           <Link href="/cart"><a><p>Ver Carrinho</p><RiShoppingCartLine size={60}/></a></Link>
           {ProductCounter.length !== 0 ? (<strong>{ProductCounter.length}</strong>) : null }
         </span>
-      </Bar>
-    </Container>
+      </div>
+    </div>
   )
 }
 

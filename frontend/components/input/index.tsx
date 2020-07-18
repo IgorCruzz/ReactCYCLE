@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useField } from '@unform/core'
 import InputMask from 'react-input-mask'
-import { ErrorMessage, Content } from './styles'
+import styles from './input.module.scss'
 import IntlCurrencyInput from 'react-intl-currency-input'
 import { currencyConfig } from '../../config/currency'
 
@@ -25,10 +25,10 @@ export const Radio: React.FC<InputProps> = ({ name, ...rest }: Props) => {
   }, [fieldName, registerField])
 
   return (
-    <Content>
+    <div id={styles.inputContent}>
       <input type="radio" {...rest} id={error ? 'error' : fieldName} />
-      {error && <ErrorMessage>{error}</ErrorMessage> }
-    </Content>
+      {error && <div id={styles.errorMessage}>{error}</div> }
+    </div>
   )
 }
 
@@ -44,15 +44,15 @@ export const Input: React.FC<InputProps> = ({ name, ...rest } : Props) => {
     })
   }, [fieldName, registerField])
   return (
-    <Content>
+    <div id={styles.inputContent}>
       <input
         id={error ? 'error' : fieldName}
         ref={inputRef}
         defaultValue={defaultValue}
         {...rest}
       />
-      { error && <ErrorMessage>{error}</ErrorMessage> }
-    </Content>
+      { error && <div id={styles.errorMessage}>{error}</div> }
+    </div>
   )
 }
 
@@ -68,15 +68,15 @@ export const TextArea: React.FC<InputProps> = ({ name, ...rest } : Props) => {
     })
   }, [fieldName, registerField])
   return (
-    <Content>
+    <div id={styles.inputContent}>
       <textarea
         id={error ? 'error' : fieldName}
         ref={inputRef}
         defaultValue={defaultValue}
         {...rest}
       />
-      { error && <ErrorMessage>{error}</ErrorMessage> }
-    </Content>
+      { error && <div id={styles.errorMessage}>{error}</div> }
+    </div>
   )
 }
 
@@ -93,10 +93,10 @@ export const PhoneInput = ({ name, ...rest }: Props) => {
   }, [fieldName, registerField])
 
   return (
-    <Content>
+    <div id={styles.inputContent}>
       <InputMask {...rest} id={error ? 'error' : fieldName} ref={inputRef} defaultValue={defaultValue} mask="99 9 9999 9999" maskChar=" " />
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-    </Content>
+      {error && <div id={styles.errorMessage}>{error}</div>}
+    </div>
   )
 }
 
@@ -113,10 +113,10 @@ export const CpfInput = ({ name, ...rest }: Props) => {
   }, [fieldName, registerField])
 
   return (
-    <Content>
+    <div id={styles.inputContent}>
       <InputMask {...rest} id={error ? 'error' : fieldName} ref={inputRef} defaultValue={defaultValue} mask="999.999.999-99" maskChar=" " />
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-    </Content>
+      {error && <div id={styles.errorMessage}>{error}</div>}
+    </div>
   )
 }
 
@@ -133,10 +133,10 @@ export const CnpjInput = ({ name, ...rest }: Props) => {
   }, [fieldName, registerField])
 
   return (
-    <Content>
+    <div id={styles.inputContent}>
       <InputMask {...rest} id={error ? 'error' : fieldName} ref={inputRef} defaultValue={defaultValue} mask="99.999.999/9999-99" maskChar=" " />
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-    </Content>
+      {error && <div id={styles.errorMessage}>{error}</div>}
+    </div>
   )
 }
 
@@ -153,10 +153,10 @@ export const BirthInput = ({ name, ...rest }: Props) => {
   }, [fieldName, registerField])
 
   return (
-    <Content>
+    <div id={styles.inputContent}>
       <InputMask {...rest} id={error ? 'error' : fieldName} ref={inputRef} defaultValue={defaultValue} mask="99/99/9999" maskChar=" " />
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-    </Content>
+      {error && <div id={styles.errorMessage}>{error}</div>}
+    </div>
   )
 }
 
@@ -177,7 +177,7 @@ export const Select = ({ name, children, ...rest }: Props) => {
       <select {...rest} defaultValue={defaultValue} ref={inputRef} id={error ? 'error' : fieldName }>
         {children}
       </select>
-      {error && <ErrorMessage>{error}</ErrorMessage>}
+      {error && <div id={styles.errorMessage}>{error}</div>}
     </>
   )
 }
@@ -186,12 +186,12 @@ export const CurrencyInput: React.FC<InputProps> = ({ name, stateName, ...rest }
   const { error } = useField(name)
 
   return (
-    <Content>
+    <div id={styles.inputContent}>
       <IntlCurrencyInput currency="BRL" config={currencyConfig} {...rest} onChange={ (event: any, value: number) => {
         event.preventDefault()
         stateName(value)
       }}/>
-      { error && <ErrorMessage>{error}</ErrorMessage> }
-    </Content>
+      { error && <div id={styles.errorMessage}>{error}</div> }
+    </div>
   )
 }

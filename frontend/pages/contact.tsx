@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import { Form } from '@unform/web'
 import Head from 'next/head'
 import * as Yup from 'yup'
-import { Container, Content } from '../styles/contact'
+import styles from '../styles/contact.module.scss'
 import { Input, TextArea, PhoneInput } from '../components/input'
 import { FormHandles } from '@unform/core' 
 import { useDispatch } from 'react-redux'
@@ -59,8 +59,8 @@ export const Contact: React.FC = () => {
     <Head>
       <title>ReactCycle - Contato</title>
     </Head>
-    <Container>
-      <Content>
+    <div id={styles.contactContainer}>
+      <div id={styles.contactContent}> 
         <header>
           <h3>FALE CONOSCO</h3>
           <small>Preencha o formulário abaixo.</small>
@@ -83,8 +83,8 @@ export const Contact: React.FC = () => {
           <TextArea name="message" />
           <button type="submit">Enviar</button>
         </Form>
-      </Content>
-    </Container>
+      </div>
+    </div>
     </>
   )
 }

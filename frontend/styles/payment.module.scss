@@ -1,12 +1,12 @@
-import styled from 'styled-components'
-
-export const Container = styled.div`
+ #paymentContainer {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
- `
-export const Content = styled.div`
+ }
+
+
+ #paymentContent {
   margin: 100px;
   width: 80%;
   display: flex;
@@ -22,4 +22,6 @@ export const Content = styled.div`
     }
     color: #008000;
   }
-`
+ }
+ 
+ 

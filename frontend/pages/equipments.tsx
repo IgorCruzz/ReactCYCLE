@@ -7,9 +7,9 @@ import { FaRegSadTear } from 'react-icons/fa'
 import { GrPrevious, GrNext } from 'react-icons/gr'  
 import { useSelector } from 'react-redux'
 import api from '../services/api'
-import { ProductGrid, Product, Search, Image, Section, Navigator, PriceSearch, WithoutProduct } from '../styles/page'
-import Page from '../components/page'
-import equip from "../assets/equip.png"
+import styles from '../styles/page.module.scss'
+import Page from '../components/page' 
+import equipment from "../public/assets/equip.png"
 
 interface Product {
   id: number,
@@ -49,7 +49,7 @@ const Equipment: React.FC = () => {
     </Head>
 
     <Page>     
-      <Search>
+      <div id={styles.search}>
         {profile.administrator && (
           <span>
             <button type="button" onClick={ () => setOpen(true)}>
@@ -70,7 +70,7 @@ const Equipment: React.FC = () => {
 
           <strong>Faixa de Preço</strong>
 
-          <PriceSearch>
+          <div id={styles.priceSearch}>
             <button onClick={() => {
               setMin(25)
               setMax(50)
@@ -105,30 +105,30 @@ const Equipment: React.FC = () => {
               setMin(600)
               setMax(9999)
             }}>de R$ 600,00 acima</button>
-          </PriceSearch>
+          </div>
         </div>
-      </Search>
+      </div>
 
-      <Section>
-        <Image>
-          <img src={equip} alt="bikes" />
-        </Image>
+      <section id={styles.section}>
+        <div id={styles.image}>
+          <img src={equipment} alt="bikes" />
+        </div>
 
-        <Navigator>
+        <div id={styles.navigator}>
           <button id={page <= 1 ? 'limit-page' : ''} onClick={() => setPage(page - 1)}><GrPrevious /></button>
           <strong>{page}</strong>
           <button id={products?.length < 12 ? 'limit-page' : ''} onClick={() => setPage(page + 1)}><GrNext /></button>
-        </Navigator>
+        </div>
         {products.length === 0 ? (
-          <WithoutProduct>
+          <div id="no-product">
             <strong>Não existem produtos nessa categoria ou na faixa de preço</strong>
             <FaRegSadTear size={100}/>
-          </WithoutProduct>
+          </div>
         ) : (
-          <ProductGrid>
+          <div id={styles.productGrid}>
             {products?.map(product => (
 
-              <Product key={product.id} onClick={() => {
+              <div id={styles.product} key={product.id} onClick={() => {
                 router.push(`/product/${product.id}`) 
               }}>
 
@@ -142,14 +142,14 @@ const Equipment: React.FC = () => {
                   style: 'currency',
                   currency: 'BRL'
                 })}</strong>
-              </Product>
+              </div>
 
             ))}
-          </ProductGrid>
+          </div>
 
         )}
 
-      </Section>
+      </section>
     </Page>
     </>
   )

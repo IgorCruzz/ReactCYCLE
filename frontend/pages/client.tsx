@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 import { Form } from '@unform/web'
 import { FormHandles } from '@unform/core'
 import { Input, CpfInput, Select, CnpjInput, BirthInput, PhoneInput, Radio } from '../components/input'
-import { Container, Content } from '../styles/client'
+import styles from '../styles/client.module.scss'
 import { useDispatch } from 'react-redux'
 import { requestData } from '../store/ducks/repositories/auth/actions'
 import { Data } from '../store/ducks/repositories/auth/types'
@@ -59,11 +59,11 @@ const Client: React.FC = () => {
     <Head>
       <title>ReactCycle - Cadastro</title>
     </Head>
-    <Container>
-      <Content>
+    <div id={styles.clientContainer}>
+      <div id={styles.clientContent}>
         <strong>Seus Dados</strong>
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <div id="radio">
+          <div id={styles.radio}>
             <input type="radio" id="cpf" name="data" onClick={ () => setCpf(false)} defaultChecked />
             <label htmlFor="cpf">Pessoa Física</label>
 
@@ -74,7 +74,7 @@ const Client: React.FC = () => {
           <label htmlFor="name">Nome completo: </label>
           <Input name="name" />
 
-          <div id="email">
+          <div id={styles.email}>
             <span>
               <label htmlFor="email">Email: </label>
               <Input name="email" />
@@ -86,7 +86,7 @@ const Client: React.FC = () => {
             </span>
           </div>
 
-          <div id="password">
+          <div id={styles.password}>
             <span>
               <label htmlFor="Password">Crie uma senha</label>
               <Input name="password" type="password" />
@@ -98,7 +98,7 @@ const Client: React.FC = () => {
             </span>
           </div>
 
-          <div id="checkCpf">
+          <div id={styles.checkCpf}>
             {!cpf && (
               <span>
                 <label htmlFor="cpf">Cpf: </label>
@@ -130,7 +130,7 @@ const Client: React.FC = () => {
             <option value="F">F</option>
           </Select>
           {cpf && (
-            <div id="cnpj">
+            <div id={styles.cnpj}>
               <label htmlFor="companyName">Razão Social: </label>
               <Input name="companyName" />
 
@@ -142,8 +142,8 @@ const Client: React.FC = () => {
           <button type="submit">Continuar</button>
 
         </Form>
-      </Content>
-    </Container>
+      </div>
+    </div>
     </>
   )
 }

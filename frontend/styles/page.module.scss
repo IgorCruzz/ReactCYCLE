@@ -1,18 +1,16 @@
-import styled from 'styled-components'
-import { darken } from 'polished'
 
-export const Section = styled.div`
-  @media(max-width: 900px){
+#section {
+    @media(max-width: 900px){
     width: 100%;
   }
   background:  #FFFFFF;
   display: flex;
   flex-direction: column;
   width: 80%;
-`
+} 
 
-export const Image = styled.div`
-  display: flex;
+#image {
+    display: flex;
   align-items: center;
   justify-content: center;
   img {
@@ -22,25 +20,27 @@ export const Image = styled.div`
     width: 100%;
     border-radius: 70px 0 70px 0;
   }
-`
-export const ProductGrid = styled.div`
+}
+
+#productGrid {
   display: grid;
   grid-template-columns:  repeat(auto-fit, minmax(230px, 1fr));
   grid-gap: 20px;
   background: #FFFFFF;
   padding: 20px;
-`
+} 
 
-export const ProductGridLarge = styled.div`
+
+#productGridLarge {
   display: grid;
   grid-template-columns:  repeat(auto-fit, minmax(350px, 1fr));
   grid-gap: 20px;
   background: #FFFFFF;
   padding: 20px;
-`
-
-export const Product = styled.div`
-  width: 250px;
+}
+ 
+#product {
+    width: 250px;
   justify-self: center;
   cursor: pointer;
   display: flex;
@@ -71,9 +71,9 @@ export const Product = styled.div`
   strong {
     color: #00BFFF;
   }
-  `
+}
 
-export const Search = styled.div`
+#search {
   @media(max-width: 900px){
     display: none;
   }
@@ -128,12 +128,13 @@ export const Search = styled.div`
       font-weight: bold;
       font-size: 13px;
       &:hover {
-        color: ${darken(0.2, '#ADD8E6')};
+        color: darken($color: #ADD8E6, $amount: 10%)
       }
     }
  }
-  `
-export const Navigator = styled.div`
+}
+
+#navigator {
   margin-top: 10px;
   margin-right: 10px;
   display: flex;
@@ -145,17 +146,18 @@ export const Navigator = styled.div`
     border: 0;
     margin: 0 15px;
     display: flex;
-    align-items;
+    align-items: center;
     svg {
       color: #363636;
     }
   }
-  #limit-page {
+  #limitPage {
     visibility: hidden;
   }
-`
-export const PriceSearch = styled.div`
-width: 100%;
+}
+ 
+#priceSearch {
+  width: 100%;
   button {
     color: #777777;
     width: 100%;
@@ -164,13 +166,13 @@ width: 100%;
     margin: 10px;
     border: 0;
     &:hover {
-      color: ${darken(0.5, '#777777')};
+      color: darken($color: #777777, $amount: 10)
     }
   }
-`
+}
 
-export const WithoutProduct = styled.div`
-  @media(max-width: 400px){
+#noProduct {
+   @media(max-width: 400px){
     text-align: center;
   }
 display: flex;
@@ -184,9 +186,10 @@ flex-direction: column;
   svg {
     color: #777777;
   }
-`
-export const ProductLarge = styled.div`
- @media(max-width: 400px){
+}
+
+#productLarge {
+   @media(max-width: 400px){
     width: 200px;
   }
  width: 350px;
@@ -219,4 +222,6 @@ small {
 strong {
   color: #00BFFF;
 }
-`
+}
+ 
+ 

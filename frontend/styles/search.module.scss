@@ -1,17 +1,18 @@
-import styled from 'styled-components'
 
-export const Container = styled.div`
+
+#searchContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 20px 0;
-`
-
-export const Content = styled.div`
+}
+ 
+#searchContent {
   width: 90%;
   display: flex;
   flex-direction: column;
   align-items:center;
+
   div {
     a {
       color: #FFFFFF;
@@ -20,11 +21,10 @@ export const Content = styled.div`
   }
   small {
     margin: 10px;
-    font-size: 12px;
-  }
-`
+    
+}
 
-export const Image = styled.div`
+#searchImage {
   width: 100%;
   display: flex;
   align-items: center;
@@ -38,9 +38,9 @@ export const Image = styled.div`
     align-self: center;
     border-radius: 70px 0 70px 0;
   }
-`
+} 
 
-export const ProductGridLarge = styled.div`
+#productGridLarge {
   margin-top: 20px;
   width: 70%;
   display: grid;
@@ -49,8 +49,10 @@ export const ProductGridLarge = styled.div`
   background: #FFFFFF;
   padding: 20px;
   justify-content: center;
-`
-export const ProductList = styled.div`
+}
+
+
+#productLarge {
   width: 250px;
   cursor: pointer;
   display: flex;
@@ -81,8 +83,10 @@ export const ProductList = styled.div`
   strong {
     color: #00BFFF;
   }
-  `
-export const NoFound = styled.div`
+
+}
+
+#noProducts {
   @media(max-width: 450px){
     text-align: center;
   }
@@ -90,4 +94,6 @@ export const NoFound = styled.div`
   align-items: center;
   flex-direction: column;
   color: #777777;
-`
+}
+ 
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io'
-import { Container, Content } from '../styles/payment'
+import styles from '../styles/payment.module.scss'
 
 const Payment: React.FC = () => {
   return (
@@ -9,12 +9,12 @@ const Payment: React.FC = () => {
     <Head>
       <title>ReactCycle - Pagamento</title>
     </Head>
-    <Container>
-      <Content>
+    <div id={styles.paymentContainer}>
+      <div id={styles.paymentContent}>
         <IoMdCheckmarkCircleOutline size={250} />
         <h1>Compra finalizada!</h1>
-      </Content>
-    </Container>
+      </div>
+    </div>
     </>
   )
 }

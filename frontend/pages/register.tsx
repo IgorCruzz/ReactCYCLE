@@ -12,7 +12,7 @@ import { Form } from '@unform/web'
 import * as Yup from 'yup' 
 import { useDispatch, useSelector } from 'react-redux'
 import { signUpRequest } from '../store/ducks/repositories/auth/actions'
-import { Container, Content, Title, DataAccess, AccessTypes, PersonalData, Address } from '../styles/register'
+import styles from '../styles/register.module.scss'
 
 interface Errors {
   [key: string]: string;
@@ -79,18 +79,18 @@ const Register: React.FC = () => {
     <Head>
       <title>ReactCycle - Cadastro</title>
     </Head>
-    <Container>
-      <Content>
+    <div id={styles.registerContainer}>
+      <div id={styles.registerContent}>
 
-        <Title>
+        <div id={styles.registerTitle}>
           <h4>IDENTIFICAÇÃO</h4>
           <small>Faça o seu login ou crie uma conta caso ainda não possua cadastro</small>
-        </Title>
+        </div>
 
         <Form onSubmit={handleSubmit} ref={formRef}>
 
-          <DataAccess>
-            <div id="title">
+          <div id={styles.dataAccess}>
+            <div id={styles.dataAccessTitle}>
               <MdDataUsage />
               <h4>DADOS PARA ACESSO</h4>
             </div>
@@ -131,17 +131,17 @@ const Register: React.FC = () => {
               </div>
             </div>
 
-          </DataAccess>
+          </div>
 
-          <AccessTypes>
-            <div id="title">
+          <div id={styles.accessTypes}>
+            <div id={styles.accessTypesTitle}>
               <BsFillPeopleFill />
               <h4>TIPO DE CADASTRO</h4>
             </div>
             <hr />
 
             <div>
-              <div id="teste">
+              <div id={styles.teste}>
                 <input type="radio" id="cpf" name="data" onClick={ () => setCpf(false)} defaultChecked />
                 <label htmlFor="cpf">Pessoa Física</label>
 
@@ -149,11 +149,11 @@ const Register: React.FC = () => {
                 <label htmlFor="cnpj">Pessoa Jurídica</label>
               </div>
             </div>
-          </AccessTypes>
+          </div>
 
-          <div id="tables">
-            <PersonalData>
-              <div id="title">
+          <div id={styles.tables}>
+            <div id={styles.personalData}>
+              <div id={styles.personalDataTitle}>
                 <AiOutlineUser />
                 <h4>DADOS PESSOAIS</h4>
               </div>
@@ -194,10 +194,10 @@ const Register: React.FC = () => {
               <label htmlFor="birth">Data de nascimento</label>
               <BirthInput name="birth"/>
 
-            </PersonalData>
+            </div>
 
-            <Address>
-              <div id="title">
+            <div id={styles.address}>
+              <div id={styles.addressTitle}>
                 <AiOutlineUser />
                 <h4>ENDEREÇO</h4>
 
@@ -226,13 +226,13 @@ const Register: React.FC = () => {
 
               <label htmlFor="state">Estado</label>
               <Input name="state"/>
-            </Address>
+            </div>
           </div>
 
           <button type="submit">{ loading ? <AiOutlineLoading /> : <strong>CADASTRAR</strong>}</button>
         </Form>
-      </Content>
-    </Container>
+      </div>
+    </div>
     </>
   )
 }

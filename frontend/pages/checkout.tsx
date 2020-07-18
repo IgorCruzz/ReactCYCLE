@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Content } from '../styles/checkout'
+import styles from '../styles/checkout.module.scss'
 import { useRouter } from 'next/router'
 import Cards, { Focused } from 'react-credit-cards'
 import Head from 'next/head'
@@ -23,8 +23,8 @@ const Checkout: React.FC = () => {
     <Head>
       <title>ReactCycle - Checkout</title>
     </Head>
-    <Container>
-      <Content>
+    <div id={styles.checkoutContainer}>
+      <div id={styles.checkoutContent}>
 
         <Cards
           number={number}
@@ -68,9 +68,9 @@ const Checkout: React.FC = () => {
           <button type="submit">Finalizar compra</button>
         </form>
 
-      </Content>
+      </div>
 
-    </Container>
+    </div>
     </>
   )
 }
