@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
-import { Form } from '@unform/web'
-import { Container } from './styles'
+import { Form } from '@unform/web' 
 import { RouteComponentProps } from '@reach/router'
 import { FormHandles } from '@unform/core'
 import { Input } from '../../components/input'
@@ -8,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { signInRequest } from '../../store/ducks/repositories/signIn/actions'
 import { SignIn } from '../../store/ducks/repositories/signIn/types'
 import * as Yup from 'yup'
+import styles from './styles.module.scss'
 
 interface Errors {
   [key: string]: string
@@ -44,8 +44,8 @@ const Login: React.FC<Props> = ({ open, close }: Props) => {
     }
   }
 
-  return (
-    <Container open={open}>
+  return (    
+    <div id={open ? styles.loginContainer : styles.close}>
       <Form onSubmit={handeSubmit} ref={formRef}>
         <label htmlFor="email">E-mail: </label>
         <Input name="email" id="email" type="email" />
@@ -55,8 +55,8 @@ const Login: React.FC<Props> = ({ open, close }: Props) => {
 
         <button type="submit" id="button">Entrar</button>
       </Form>
-      <button type="button" id="cancel" onClick={close}>Cancelar</button>
-    </Container>
+      <button type="button" id={styles.cancel} onClick={close}>Cancelar</button>
+    </div>
   )
 }
 
