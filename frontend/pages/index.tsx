@@ -6,6 +6,7 @@ import styles from '../styles/home.module.scss'
 import bike from "../public/assets/BN1.png"
 import parts from "../public/assets/BN2.png"
 import equipments from "../public/assets/BN3.png"
+import freight from '../public/assets/FRETE.png'
  
 const Home: React.FC = () => {
   return (
@@ -15,7 +16,7 @@ const Home: React.FC = () => {
     </Head>
     <div id={styles.homeContainer}>
       <div id={styles.homeContent}>
-        <img src='../public/assets/FRETE.png' alt="frete" />
+        <img src={freight} alt="frete" />
 
         <Link href="/bikes"><a><img src={bike} alt="bikes" /></a></Link>
         <Link href="/parts"><a><img src={parts} alt="parts" /></a></Link>

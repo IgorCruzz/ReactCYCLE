@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import Head from 'next/head'
 import api from '../services/api' 
 import { useRouter } from 'next/router'
+import searchImage from '../public/assets/search.png'
 
 import styles from  '../styles/search.module.scss'
 
@@ -44,7 +45,7 @@ const SearchList: React.FC = () => {
     <div id={styles.searchContainer}>
       <div id={styles.searchContainer}>       
         <div id={styles.searchImage}>
-          <img src='../public/assets/search.png' alt="banner" />
+          <img src={searchImage} alt="banner" />
         </div>
         {products.length > 0 ? (
           <>

@@ -96,8 +96,7 @@ const Register: React.FC = () => {
             </div>
             <hr />
 
-            <div id="tabela">
-
+            <div id={styles.tabela}>
               <div>
                 <span>
                   <AiOutlineMail />

@@ -53,7 +53,7 @@ const Login: React.FC<Props> = ({ open, close }: Props) => {
         <label htmlFor="pass">Senha: </label>
         <Input name="password" id="pass" type="password" />
 
-        <button type="submit" id="button">Entrar</button>
+        <button type="submit" id={styles.button}>Entrar</button>
       </Form>
       <button type="button" id={styles.cancel} onClick={close}>Cancelar</button>
     </div>

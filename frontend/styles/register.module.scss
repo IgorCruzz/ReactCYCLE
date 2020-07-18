@@ -107,8 +107,13 @@ $background : #D3D3D3;
   width: 100%;
   background: $background;
   padding: 20px;
+ 
   #dataAccessTitle {
-      margin-bottom: 10px;
+      margin-bottom: 10px; 
+      display: flex;
+      h4 {
+        margin-left: 15px;
+      }
     }
   #tabela {
   @media(max-width: 700px){
@@ -118,7 +123,8 @@ $background : #D3D3D3;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     grid-gap: 10px;
-    span {
+ 
+    span {   
     display: flex;
     align-items: center;
     label {
