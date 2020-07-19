@@ -4,7 +4,7 @@ import { Product } from '../entities/product.entity';
 import { Repository, Between, Like } from 'typeorm';
 import * as Yup from 'yup';
 import { IProductDTO, IProductList, IParamData } from './product.dto';
-
+import { Query } from '@nestjs/common';
 @Injectable()
 export class ProductService {
   constructor(
@@ -43,8 +43,8 @@ export class ProductService {
     });
   }
 
-  async index(paramData?: IParamData): Promise<IProductDTO[] | IProductList[]> {
-    if (!paramData) {
+  async index(paramData: IParamData): Promise<IProductDTO[] | IProductList[]> {
+    if (!paramData.category) {
       return await this.productRepository.find();
     }
 
@@ -70,10 +70,10 @@ export class ProductService {
     return productList;
   }
 
-  async show(name: string): Promise<IProductList[]> {
+  async show(product: {name: string}): Promise<IProductList[]> {
     const products = await this.productRepository.find({
       where: {
-        name: Like(`%${name}%`),
+        name: Like(`%${product.name}%`),
       },
       relations: ['avatar_data'],
     });

@@ -111,7 +111,7 @@ describe('UsersService', () => {
 
   describe('show', () => {
     it('should be possible to get an user', async () => {
-      expect(await service.show(userMock.id)).toEqual(userMock);
+      expect(await service.show({ id:  1})).toEqual(userMock);
     });
   });
 
@@ -123,7 +123,7 @@ describe('UsersService', () => {
 
   describe('delete', () => {
     it('should be delete an user', async () => {
-      expect(await service.delete(1)).toBe(true);
+      expect(await service.delete({ id: 1})).toBe(true);
     });
   });
 
@@ -219,7 +219,9 @@ describe('UsersService', () => {
         await service.store({
           name: '',
           email: '',
+          confirmEmail: '',
           password: '',
+          confirmPassword: '',
           cpf: '',
           phone: '',
           gender: '',

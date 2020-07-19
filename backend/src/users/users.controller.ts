@@ -8,15 +8,16 @@ import {
   Param,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { IUserDTO, IUserUpdateDTO } from './users.dto';
+import { IUserDTO, IUserUpdateDTO, ICreateUserDTO } from './users.dto';
 import { UpdateResult, DeleteResult } from 'typeorm';
+
 
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Post()
-  store(@Body() user: IUserDTO): Promise<IUserDTO> {
+  store(@Body() user: ICreateUserDTO): Promise<IUserDTO> {
     return this.usersService.store(user);
   }
 
@@ -26,13 +27,13 @@ export class UsersController {
   }
 
   @Get(':id')
-  show(@Param() id: number): Promise<IUserDTO> {
-    return this.usersService.show(id);
+  show(@Param() user: { id: number}): Promise<IUserDTO> {
+    return this.usersService.show(user);
   }
 
   @Delete(':id')
-  delete(@Param() id: number): Promise<DeleteResult> {
-    return this.usersService.delete(id);
+  delete(@Param() user: { id: number}): Promise<DeleteResult> {
+    return this.usersService.delete(user);
   }
 
   @Put(':id')

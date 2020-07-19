@@ -56,13 +56,13 @@ describe('Cat Controller', () => {
       expect(await controller.store(newUser)).toEqual(newUser);
     });
     it('should be able to delete an user', async () => {
-      expect(await controller.delete(1)).toBeTruthy();
+      expect(await controller.delete({ id: 1})).toBeTruthy();
     });
     it('should be able to update an user data', async () => {
       expect(await controller.update(1, { name: 'igor' })).toBeTruthy();
     });
     it('should be able to show an certain user', async () => {
-      expect(await controller.show(1)).toEqual(newUser);
+      expect(await controller.show({ id: 1})).toEqual(newUser);
     });
     it('should be able to show all users', async () => {
       expect(await controller.index()).toEqual(newUser);

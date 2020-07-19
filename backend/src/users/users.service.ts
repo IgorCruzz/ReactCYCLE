@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import { hashSync } from 'bcrypt';
 import RegisterMail from '../jobs/RegisterMail';
 import * as crypto from 'crypto';
-import { IUserDTO, IUserUpdateDTO } from './users.dto';
+import { IUserDTO, IUserUpdateDTO, ICreateUserDTO } from './users.dto';
 
 @Injectable()
 export class UsersService {
@@ -18,7 +18,7 @@ export class UsersService {
     private tokenRepository: Repository<Token>,
   ) {}
 
-  async store(user: any): Promise<IUserDTO> {
+  async store(user: ICreateUserDTO): Promise<IUserDTO> {
     const schema = Yup.object().shape({
       email: Yup.string()
         .email()
@@ -62,7 +62,7 @@ export class UsersService {
       throw new HttpException(
         {
           status: HttpStatus.BAD_REQUEST,
-          error: 'Erro na validação',
+          error: 'Validation Error',
         },
         HttpStatus.BAD_REQUEST,
       );
@@ -90,7 +90,7 @@ export class UsersService {
     });
 
     const token = await this.tokenRepository.save({
-      user_id: user.id,
+      user_id: userData.id,
       token: crypto.randomBytes(16).toString('hex'),
     });
 
@@ -103,12 +103,12 @@ export class UsersService {
     return await this.usersRepositoy.find();
   }
 
-  async show(id: number): Promise<IUserDTO> {
-    return await this.usersRepositoy.findOne({ id });
+  async show(user: { id: number}): Promise<IUserDTO> {
+    return await this.usersRepositoy.findOne({ id: user.id });
   }
 
-  async delete(id: number): Promise<DeleteResult> {
-    return await this.usersRepositoy.delete(id);
+  async delete(user: { id: number}): Promise<DeleteResult> {
+    return await this.usersRepositoy.delete(user.id);
   }
 
   async update(id: number, user: IUserUpdateDTO): Promise<UpdateResult> {

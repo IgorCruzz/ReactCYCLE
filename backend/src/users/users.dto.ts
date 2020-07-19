@@ -41,3 +41,8 @@ export interface IUserUpdateDTO {
   created_at?: Date;
   updated_at?: Date;
 }
+
+export interface ICreateUserDTO extends IUserDTO {
+  confirmEmail: string,
+  confirmPassword: string
+}

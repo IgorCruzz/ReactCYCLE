@@ -94,7 +94,11 @@ describe('ProductService', () => {
 
     describe('Index', () => {
       it('should be  able to list all products', async () => {
-        expect(await service.index()).toEqual([
+        expect(await service.index({
+          page: 1,
+          min: 1,
+          max: 999,
+        })).toEqual([
           productExtends,
           productExtends2,
         ]);
@@ -139,7 +143,7 @@ describe('ProductService', () => {
       it('should be able to search certain product', async () => {
         const repoSpy = jest.spyOn(repo, 'find');
 
-        expect(await service.show('PRODUCT')).toEqual([
+        expect(await service.show({ name: 'PRODUCT'})).toEqual([
           {
             avatar_url: 'http//test.com/IMAGE',
             id: 1,

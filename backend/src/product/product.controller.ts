@@ -24,7 +24,7 @@ export class ProductController {
   }
 
   @Get('/busca')
-  show(@Query() name: string): Promise<IProductList[]> {
-    return this.productService.show(name);
+  show(@Query() product: { name: string}): Promise<IProductList[]> {
+    return this.productService.show(product);
   }
 }
