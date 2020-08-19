@@ -42,8 +42,3 @@ Styled components,
  </p>
 
 <img src="https://github.com/IgorCruzz/ReactCYCLE/blob/master/screenshot/LAYOUT.png" alt="login" />
- 
- 
-
-
-
