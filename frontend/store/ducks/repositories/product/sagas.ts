@@ -1,17 +1,15 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects'
 import { RepositoriesTypes } from './types'
-import { createProductFailure, createProductSuccess } from './actions'
-import { AnyAction } from 'redux'
+import { createProductFailure, createProductSuccess } from './actions' 
 import api from '../../../../services/api'
 
-export function * store (action: AnyAction) {
-  try {
-    console.log(action.payload.data)
+export function * store (action: any) {  try {
+ 
     yield call(api.post, 'product', action.payload.data)
 
     yield put(createProductSuccess())
 
-    window.location.reload()
+    //window.location.reload()
   } catch (err) {
     yield put(createProductFailure())
   }

@@ -1,13 +1,13 @@
 import produce from 'immer'
 import { RepositoriesTypes } from './types'
-import { AnyAction } from 'redux'
+ 
 
-const INITIAL_VALUES = {
+export const INITIAL_VALUES = {
   loading: false,
-  user: []
+  user: {}
 }
 
-export default function auth (state = INITIAL_VALUES, action: AnyAction) {
+export default function auth (state = INITIAL_VALUES, action: any) {
   return produce(state, draft => {
     switch (action.type) {
       case RepositoriesTypes.SIGNUP_REQUEST: {

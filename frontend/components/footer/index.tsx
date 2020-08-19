@@ -5,7 +5,7 @@ import styles from  './styles.module.scss'
 import dh from "../../public/assets/dh.png"
 import logo from "../../public/assets/logo.png"
 
-export const Footer: React.FC = () => {
+const Footer: React.FC = () => {
   return (
     <div id={styles.footerContainer}>
       <div id={styles.footerContent}>

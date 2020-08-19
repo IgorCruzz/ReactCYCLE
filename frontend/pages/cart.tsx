@@ -7,6 +7,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeProduct, incrementAmount, decrementAmount } from '../store/ducks/repositories/cart/actions'
+import PaypalButton from '../components/PaypalButton'
 
 interface rootState {
   cart: {
@@ -97,7 +98,7 @@ const Cart: React.FC = () => {
               </Link>
               <button type="button" onClick={() => {
                 signed ? router.push('/checkout')
-                  : router.push('/cliente')
+                  : router.push('/client')
               }}>Continuar</button>
             </div>
 

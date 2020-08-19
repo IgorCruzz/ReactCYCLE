@@ -28,7 +28,7 @@ interface Props extends RouteComponentProps {
 
 export const getStaticPaths: GetStaticPaths  = async () => {
   const products =  await api.get('/product')
-  
+
   const paths = products.data.map(product => {  
      return {
       params: {
@@ -36,7 +36,7 @@ export const getStaticPaths: GetStaticPaths  = async () => {
       } 
      } 
   })
-
+ 
   return {
     paths,
     fallback: false
@@ -45,11 +45,12 @@ export const getStaticPaths: GetStaticPaths  = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  
   const product = await api.get(`/product/${params.product}`) 
 
   return {
     props: {
-      product: product.data[0]
+      product: product.data
     }
   }
 }
@@ -60,9 +61,7 @@ export const Product: React.FC<Props> = ({ product }) => {
 
   const productData = { id: product.id, avatar_url: product.avatar_data.url, name: product.name, price: product.price, quantity: product.quantity }
 
-  useEffect(() => {
-    console.log(product)
-  }, [])
+ 
 
   const handleCart = () => {
     dispatch(addProct(productData))

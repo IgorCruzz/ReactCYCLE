@@ -172,6 +172,10 @@
       }
       
       #Profile {
+        @media(max-width: 900px) {
+          display: none;
+        }
+
         display: flex;
         background: #00BFFF;
         align-items: center;
@@ -189,7 +193,11 @@
           align-items: center;
           justify-content: center;
           margin-left: 25px;
-      
+          background: none;
+          border: 0;
+          color: #FFFFFF;   
+          
+         
         }
       }
 

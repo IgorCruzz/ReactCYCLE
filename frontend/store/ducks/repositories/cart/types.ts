@@ -10,5 +10,6 @@ export interface Cart {
   avatar_url: string,
   price: number,
   name: string,
-  quantity: number
+  quantity: number,
+  amount?: number
 }

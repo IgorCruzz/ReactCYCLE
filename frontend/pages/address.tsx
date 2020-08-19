@@ -50,7 +50,7 @@ const Client: React.FC = () => {
     <div id={styles.addressContainer}>
       <div id={styles.addressContent}>
         <strong>Cadastrar endereço</strong>
-        <Form onSubmit={handleSubmit} ref={formRef}>
+        <Form onSubmit={handleSubmit} ref={formRef} data-testid="form">
           <label htmlFor="cep">CEP</label>
           <Input name="cep" />
 

@@ -34,7 +34,7 @@ const Register: React.FC = () => {
     window.scrollTo(0, 600)
   }, [])
 
-  const handleSubmit = async (data : SignUp[]) => {
+  const handleSubmit = async (data : SignUp) => {
     try {
       const schema = Yup.object().shape({
         email: Yup.string().email('Insira um e-mail válido').required('Campo obrigatório'),

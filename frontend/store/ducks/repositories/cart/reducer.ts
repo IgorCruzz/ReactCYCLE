@@ -1,15 +1,16 @@
 import produce from 'immer'
 import { RepositoriesTypes, Cart } from './types'
-import { AnyAction } from 'redux'
-interface Teste {
-  cart: any
+ 
+
+interface ICart {
+  cart: Cart[]
 }
 
-const INITIAL_VALUES: Teste = {
+export const INITIAL_VALUES: ICart = {
   cart: []
 }
 
-export default function CartA (state = INITIAL_VALUES, action: AnyAction) {
+export default function CartA (state = INITIAL_VALUES, action: any) {
   return produce(state, draft => {
     switch (action.type) {
       case RepositoriesTypes.ADD_PRODUCT: {

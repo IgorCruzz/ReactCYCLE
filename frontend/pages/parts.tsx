@@ -134,7 +134,7 @@ const Part: React.FC = () => {
           <div id={styles.productGrid}>
             {products?.map(product => (
 
-              <div id="product" key={product.id} onClick={() => {
+              <div id={styles.product} key={product.id} onClick={() => {
                 router.push(`/product/${product.id}`) 
               }}>
 

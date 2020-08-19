@@ -22,7 +22,7 @@ const Login: React.FC<Props> = ({ open, close }: Props) => {
   const dispatch = useDispatch()
   const formRef = useRef<FormHandles>(null)
 
-  const handeSubmit = async (data: SignIn[]) => {
+  const handeSubmit = async (data: SignIn) => {
     try {
       const schema = Yup.object().shape({
         email: Yup.string().email('Insira um e-mail válido').required('Campo obrigatório'),
@@ -45,17 +45,17 @@ const Login: React.FC<Props> = ({ open, close }: Props) => {
   }
 
   return (    
-    <div id={open ? styles.loginContainer : styles.close}>
-      <Form onSubmit={handeSubmit} ref={formRef}>
-        <label htmlFor="email">E-mail: </label>
+    <div id={open ? styles.loginContainer : styles.close} data-testid="login-modal">
+      <Form onSubmit={handeSubmit} ref={formRef} data-testid="form">
+        <label htmlFor="email">E-mail:</label>
         <Input name="email" id="email" type="email" />
 
-        <label htmlFor="pass">Senha: </label>
-        <Input name="password" id="pass" type="password" />
+        <label htmlFor="password">Senha:</label>
+        <Input name="password" id="password" type="password" />
 
         <button type="submit" id={styles.button}>Entrar</button>
       </Form>
-      <button type="button" id={styles.cancel} onClick={close}>Cancelar</button>
+      <button type="button" id={styles.cancel} data-testid="close-modal" onClick={close}>Cancelar</button>
     </div>
   )
 }

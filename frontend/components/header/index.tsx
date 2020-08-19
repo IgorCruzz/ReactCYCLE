@@ -22,7 +22,6 @@ interface RootState {
 interface RootCart {
   cart: {
     cart: any
-
   }
 }
 
@@ -34,7 +33,7 @@ const Header: React.FC = () => {
   const [login, setLogin] = useState(false)
   const [search, setSearch] = useState('')
   const dispatch = useDispatch()
-  const history = useRouter()
+  const router = useRouter()
 
   const handleSearch = () => {
     if (search === '') {
@@ -42,7 +41,7 @@ const Header: React.FC = () => {
     }
 
     dispatch(searchRequest(search))
-    history.push('/busca')
+    router.push('/search')
   }
 
   return (
@@ -53,27 +52,27 @@ const Header: React.FC = () => {
       <div id={styles.NavBar}>
         
         <div id={styles.Mobile}>
-          <button type="button" id={styles.hamburguer} onClick={() => setMain(true)}><BsJustify size={35} color="#FFFFFF"/></button>
+          <button type="button" id={styles.hamburguer} data-testid="hamburguer" onClick={() => setMain(true)}><BsJustify size={35} color="#FFFFFF"/></button>
           <span>{!signed
             ? (
-              <>
-                <button type="button" onClick={() => setLogin(true)}>Entrar</button>
+              <div data-testid="sign-data">
+                <button type="button" data-testid="join" onClick={() => setLogin(true)}>Entrar</button>
                 <Link href="/register"><a>Cadastrar</a></Link>
-              </>
+              </div>
             ) : (
-              <>
+              <div data-testid="profile-data">
                 <strong>Olá, {profile.name}</strong>
-                <button type="button" onClick={() => dispatch(logout())}><AiOutlineLogout /></button>
-              </>
+                <button type="button" data-testid="logout-mobile" onClick={() => dispatch(logout())}><AiOutlineLogout /></button>
+              </div>
             )
           }
           </span>
 
           {main && (
-            <div id={styles.Main}>
-              <button type="button" id={styles.close} onClick={() => setMain(false)}>X</button>
+            <div id={styles.Main} data-testid="mobile-menu">
+              <button type="button"  data-testid="close-mobile-menu" id={styles.close} onClick={() => setMain(false)}>X</button>
               {profile.length !== 0 ? (
-                <p>Olá, {profile.name}</p>
+                <p data-testid="username">Olá, {profile.name}</p>
               )
                 : (
                   <p>Olá, visitante</p>
@@ -81,19 +80,23 @@ const Header: React.FC = () => {
               }
               <span id={styles.search}>
                 <input type="search"
+                  data-testid="search-product-hamburguer"
                   value={search}
                   placeholder="Encontre o produto ideal"
                   onChange={e => setSearch(e.target.value)} />
-                <button type="button" onClick={() => {
+                <button 
+                  type="button" 
+                  data-testid="search-product-button-hamburguer"
+                  onClick={() => {
                   handleSearch()
                   setMain(false)
                 }}><FaSearch color="#1E90FF" size={20}/></button>
               </span>
 
-                <Link href="/equipments"><a onClick={() => setMain(false)}>Equipamentos</a></Link>
-                <Link href="/parts"><a onClick={() => setMain(false)}>Peças</a></Link>
-                <Link href="/bikes"><a onClick={() => setMain(false)}>Bicicletas</a></Link>
-                <Link href="/contact"><a onClick={() => setMain(false)}>Contato</a></Link>
+                <Link href="/equipments" data-testid="equip-link"><a data-testid="equip-link" onClick={() => setMain(false)}>Equipamentos</a></Link>
+                <Link href="/parts"><a data-testid="part-link" onClick={() => setMain(false)}>Peças</a></Link>
+                <Link href="/bikes"><a data-testid="bike-link" onClick={() => setMain(false)}>Bicicletas</a></Link>
+                <Link href="/contact"><a data-testid="contact-link" onClick={() => setMain(false)}>Contato</a></Link>
             </div>
           )}
         </div>
@@ -108,6 +111,7 @@ const Header: React.FC = () => {
         {!signed ? (
           <div id={styles.auth}>
             <button
+              data-testid="open-modal"
               type="button"
               onClick={() => setLogin(true)}
             >Entrar</button>
@@ -118,7 +122,7 @@ const Header: React.FC = () => {
         (
           <div id={styles.Profile}>
             <p>Bem vindo, {profile.name}</p>
-            <button type="button" onClick={() => dispatch(logout())}><AiOutlineLogout /></button>
+            <button type="button" data-testid="logout" onClick={() => dispatch(logout())}><AiOutlineLogout size={27} /></button>
           </div>
         )}      
 
@@ -134,15 +138,16 @@ const Header: React.FC = () => {
     <div id={styles.Bar}>
       <div>
         <input type="search"
+          data-testid="search-product"
           placeholder="Encontre o produto ideal"
           value={search}
           onChange={e => setSearch(e.target.value)} />
-        <button type="button" onClick={handleSearch}><FaSearch color="#FFFFFF" size={20}/></button>
+        <button type="button"  data-testid="search-product-button" onClick={handleSearch}><FaSearch color="#FFFFFF" size={20}/></button>
       </div>
 
       <span>
       <Link href="/cart"><a><p>Ver Carrinho</p><RiShoppingCartLine size={60}/></a></Link>
-        {ProductCounter.length !== 0 ? (<strong>{ProductCounter.length}</strong>) : null }
+        {ProductCounter.length !== 0 ? (<strong data-testid="productCounter">{ProductCounter.length}</strong>) : null }
       </span>
     </div>
   </div>
