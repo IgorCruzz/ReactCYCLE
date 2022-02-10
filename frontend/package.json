@@ -36,7 +36,7 @@
     "immer": "^7.0.5",
     "next": "9.4.4",
     "next-images": "^1.4.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "polished": "^3.6.5",
     "react": "16.13.1",
     "react-async-script-loader": "^0.3.0",
